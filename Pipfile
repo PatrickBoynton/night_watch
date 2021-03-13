@@ -12,6 +12,7 @@ djangorestframework = "*"
 django-allauth = "*"
 django-rest-auth = "*"
 pillow = "*"
+psycopg2-binary = "*"
 
 [dev-packages]
 
