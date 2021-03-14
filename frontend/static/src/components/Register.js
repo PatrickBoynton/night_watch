@@ -1,20 +1,45 @@
-import {Component} from 'react'
+import {Component} from 'react';
 import {Link} from 'react-router-dom';
 
-class Register extends Component{
+class Register extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            username: '',
+            email: '',
+            password1: '',
+            password2: '',
+        };
+        this.handleInput = this.handleInput.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleInput(event) {
+        this.setState({[event.target.name]: event.target.value});
+    }
+
+    handleSubmit(event) {
+        event.preventDefault();
+        console.log(this.state);
+    }
+
     render() {
         return (
             <>
-                <form className="login-register" action="">
+                <form className="login-register" onSubmit={this.handleSubmit}>
                     <label className="form-label" htmlFor="username">Username</label>
-                    <input className="form-control" type="text" name="username"/>
+                    <input onChange={this.handleInput} value={this.state.username} className="form-control" type="text"
+                           name="username"/>
                     <label className="form-label" htmlFor="email">Email</label>
-                    <input className="form-control" type="email" name="email"/>
+                    <input onChange={this.handleInput} value={this.state.email} className="form-control" type="email"
+                           name="email"/>
                     <label className="form-label" htmlFor="password1">Password</label>
-                    <input className="form-control" type="password" name="password1"/>
-                    <label className="form-label" htmlFor="password2">Confirm  Password</label>
-                    <input className="form-control mb-3" ype="password" name="password2"/>
-                    <button className="btn btn-success disabled" type="submit">Register</button>
+                    <input onChange={this.handleInput} value={this.state.password1} className="form-control"
+                           type="password" name="password1"/>
+                    <label className="form-label" htmlFor="password2">Confirm Password</label>
+                    <input onChange={this.handleInput} value={this.state.password2} className="form-control mb-3"
+                           type="password" name="password2"/>
+                    <button className="btn btn-success" type="submit">Register</button>
                     <p>Already have an account? Why don't you <Link to="/login">Login</Link>? </p>
                 </form>
             </>
@@ -22,4 +47,4 @@ class Register extends Component{
     }
 }
 
-export default Register
+export default Register;
