@@ -1,16 +1,36 @@
 import {Component} from 'react';
 import {Link} from 'react-router-dom';
 
-class Login extends Component{
+class Login extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            username: '',
+            password: ''
+        };
+
+        this.handleInput = this.handleInput.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleInput(event) {
+        this.setState({[event.target.name]: event.target.value});
+    }
+
+    handleSubmit(event) {
+        event.preventDefault();
+        console.log(this.state);
+    }
+
     render() {
         return (
             <>
-                <form className="text-center login-register" action="">
+                <form className="text-center login-register" onSubmit={this.handleSubmit}>
                     <label className="form-label" htmlFor="username">Username</label>
-                    <input className="form-control" type="text" name="username"/>
+                    <input onChange={this.handleInput} className="form-control" type="text" name="username"/>
                     <label className="form-label" htmlFor="password">Password</label>
-                    <input className="form-control mb-3" type="password" name="" id=""/>
-                    <button className="btn btn-success disabled">Login</button>
+                    <input onChange={this.handleInput} className="form-control mb-3" type="password" name="password" />
+                    <button className="btn btn-success">Login</button>
                     <p>Don't have an account yet? Why not <Link to="/register">Register</Link> First?</p>
                 </form>
             </>
@@ -18,4 +38,4 @@ class Login extends Component{
     }
 }
 
-export default Login
+export default Login;
