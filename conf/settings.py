@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'api.apps.ApiConfig',
     'ephemeris.apps.EphemerisConfig',
+    'frontend.apps.FrontendConfig',
 ]
 
 MIDDLEWARE = [
