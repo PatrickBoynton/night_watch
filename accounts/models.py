@@ -14,7 +14,9 @@ class Profile(models.Model):
                                 on_delete=models.CASCADE)
     profile_picture = models.ImageField(upload_to='profiles', null=True)
     about_me = models.TextField(null=True, blank=True)
-    my_equipment = ArrayField(null=True, blank=True)
+    my_equipment = ArrayField(models.CharField(max_length=50),
+                              null=True,
+                              blank=True)
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
