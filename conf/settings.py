@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'rest_auth.registration',
     # Installed apps.
     'accounts.apps.AccountsConfig',
+    'api.apps.ApiConfig',
 ]
 
 MIDDLEWARE = [
