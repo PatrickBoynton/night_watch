@@ -23,12 +23,6 @@ class App extends Component {
                 <Switch>
                     <Route path='/register' component={Register}/>
                     <Route path='/login' component={Login}/>
-                    {/*<Route path='/register'>*/}
-                    {/*    {this.state.isLoggedIn ? <Redirect to="/profile"/> :  <Register/>}*/}
-                    {/*</Route>*/}
-                    {/*<Route path='/login'>*/}
-                    {/*    {this.state.isLoggedIn ? <Redirect to="/profile"/> : <Login/>}*/}
-                    {/*</Route>*/}
                     <Route path="/profile" component={Profile} />
                 </Switch>
             </div>
