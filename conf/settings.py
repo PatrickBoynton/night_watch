@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'api.apps.ApiConfig',
     'ephemeris.apps.EphemerisConfig',
     'frontend.apps.FrontendConfig',
+    'events.apps.EventsConfig',
 ]
 
 MIDDLEWARE = [
