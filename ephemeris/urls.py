@@ -5,6 +5,6 @@ from .views import EphemListView, EphemDetailView
 app_name = 'ephemeris'
 
 urlpatterns = [
-    path('<int:pk>/', EphemListView.as_view()),
-    path('', EphemDetailView.as_view())
+    path('<int:pk>/', EphemDetailView.as_view()),
+    path('', EphemListView.as_view()),
 ]
