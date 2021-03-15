@@ -10,11 +10,11 @@ class App extends Component {
         super(props);
         this.state = {
             isLoggedIn: false,
-        }
+        };
     }
 
     handleIsLoggedIn() {
-        this.setState((previousState) => ({isLoggedIn: !previousState.isLoggedIn}))
+        this.setState((previousState) => ({isLoggedIn: !previousState.isLoggedIn}));
     }
 
     render() {
@@ -23,7 +23,7 @@ class App extends Component {
                 <Switch>
                     <Route path='/register' component={Register}/>
                     <Route path='/login' component={Login}/>
-                    <Route path="/profile" component={Profile} />
+                    <Route path="/profile" component={Profile}/>
                 </Switch>
             </div>
         );
