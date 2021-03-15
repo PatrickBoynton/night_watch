@@ -4,6 +4,8 @@ import Login from './components/user/Login';
 import Profile from './components/user/Profile';
 import {Switch, Route} from 'react-router-dom';
 import {Component} from 'react';
+import EphemForm from './components/EphemForm';
+import EphemDisplay from './components/EphemDisplay';
 
 class App extends Component {
     constructor(props) {
@@ -20,11 +22,12 @@ class App extends Component {
     render() {
         return (
             <div className="App">
-                <p>Go to either /register, /login, or /profile.</p>
                 <Switch>
                     <Route path='/register' component={Register}/>
                     <Route path='/login' component={Login}/>
                     <Route path="/profile" component={Profile}/>
+                    <Route path="/ephem/form" component={EphemForm}/>
+                    <Route path="/display" component={EphemDisplay} />
                 </Switch>
             </div>
         );
