@@ -1,6 +1,12 @@
 import {Component} from 'react';
+import Cookies from 'js-cookie';
 
-class Profile extends Component{
+class Profile extends Component {
+
+    handleLogout() {
+        Cookies.remove('Authorization');
+    }
+
     render() {
         return (
             <>
@@ -8,10 +14,10 @@ class Profile extends Component{
                 <img src="#" alt="user"/>
                 <p>About me</p>
                 <p>My equipment</p>
-                <button className="btn btn-danger">Logout</button>
+                <button onClick={this.handleLogout} className="btn btn-danger">Logout</button>
             </>
         );
     }
 }
 
-export default Profile
+export default Profile;
