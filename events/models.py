@@ -7,3 +7,6 @@ class Event(models.Model):
     ephemeris = models.CharField(max_length=30)
     time = models.TimeField()
     description = models.TextField()
+
+    def __str__(self):
+        return self.name
