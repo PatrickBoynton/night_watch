@@ -20,6 +20,7 @@ class App extends Component {
     render() {
         return (
             <div className="App">
+                <p>Go to either /register, /login, or /profile.</p>
                 <Switch>
                     <Route path='/register' component={Register}/>
                     <Route path='/login' component={Login}/>
