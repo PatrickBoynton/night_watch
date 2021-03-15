@@ -20,7 +20,6 @@ class App extends Component {
     render() {
         return (
             <div className="App">
-                <p>Go to: /login, /register or /profile</p>
                 <Switch>
                     <Route path='/register'>
                         {this.state.isLoggedIn ? <Redirect to="/profile"/> :  <Register/>}
