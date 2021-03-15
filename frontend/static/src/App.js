@@ -1,7 +1,7 @@
 import './App.css';
-import Register from './components/Register';
-import Login from './components/Login';
-import Profile from './components/Profile';
+import Register from './components/user/Register';
+import Login from './components/user/Login';
+import Profile from './components/user/Profile';
 import {Switch, Route, Redirect} from 'react-router-dom';
 import {Component} from 'react';
 
