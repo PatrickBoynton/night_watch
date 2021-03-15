@@ -1,5 +1,6 @@
 import {Component} from 'react';
 import {Link} from 'react-router-dom';
+import axios from 'axios';
 
 class Login extends Component {
     constructor(props) {
@@ -19,7 +20,11 @@ class Login extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        console.log(this.state);
+        const user = {
+            username: this.state.username,
+            password: this.state.password
+        }
+        axios.post('/rest-auth/login/', user).then(x => x)
     }
 
     render() {
