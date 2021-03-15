@@ -1,6 +1,6 @@
 import {Component} from 'react';
 import {Link} from 'react-router-dom';
-import axios from 'axios';
+import Cookies from 'js-cookie';
 
 class Login extends Component {
     constructor(props) {
@@ -18,13 +18,34 @@ class Login extends Component {
         this.setState({[event.target.name]: event.target.value});
     }
 
-    handleSubmit(event) {
+    async handleSubmit(event) {
         event.preventDefault();
-        const user = {
-            username: this.state.username,
-            password: this.state.password
+        // const user = {
+        //     username: this.state.username,
+        //     password: this.state.password
+        // }
+        // axios.post('/rest-auth/login/', user).then(x => x)
+
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'Application/Json',
+                'X-CSRFToken': Cookies.get('csrftoken')
+            },
+            body: JSON.stringify({
+                username: this.state.username,
+                password: this.state.password,
+            })
         }
-        axios.post('/rest-auth/login/', user).then(x => x)
+
+        const response = await fetch('/rest-auth/login/', options);
+        const data = await response.json();
+
+        if(data.key) {
+            Cookies.set("Authorization", `Token ${data.key}`)
+        } else {
+            console.log("Did not log in.");
+        }
     }
 
     render() {
