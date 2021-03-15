@@ -2,7 +2,7 @@ import './App.css';
 import Register from './components/user/Register';
 import Login from './components/user/Login';
 import Profile from './components/user/Profile';
-import {Switch, Route, Redirect} from 'react-router-dom';
+import {Switch, Route} from 'react-router-dom';
 import {Component} from 'react';
 
 class App extends Component {
