@@ -5,11 +5,12 @@ from .serializers import EventSerializer
 
 
 # Create your views here.
-class EventView(generics.ListAPIView):
+class EventView(generics.ListCreateAPIView):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
 
 
-class EventDetailView(generics.RetrieveAPIView):
+class EventDetailView(generics.RetrieveUpdateDestroyAPIView):
+    lookup_field = "pk"
     queryset = Event.objects.all()
     serializer_class = EventSerializer
