@@ -1,5 +1,6 @@
 import {Component} from 'react';
 import {Link} from 'react-router-dom';
+import axios from 'axios';
 
 class Register extends Component {
     constructor(props) {
@@ -18,9 +19,16 @@ class Register extends Component {
         this.setState({[event.target.name]: event.target.value});
     }
 
-    handleSubmit(event) {
+    async handleSubmit(event) {
         event.preventDefault();
-        console.log(this.state);
+        const user = {
+            username: this.state.username,
+            email: this.state.email,
+            password1: this.state.password1,
+            password2: this.state.password2
+        }
+
+        axios.post('/rest-auth/registration/', user).then(x => console.log(x))
     }
 
     render() {
