@@ -1,6 +1,7 @@
 import {Component} from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 class Register extends Component {
     constructor(props) {
@@ -21,20 +22,38 @@ class Register extends Component {
 
     async handleSubmit(event) {
         event.preventDefault();
-        const user = {
-            username: this.state.username,
-            email: this.state.email,
-            password1: this.state.password1,
-            password2: this.state.password2
+        // const options = {
+        //     username: this.state.username,
+        //     email: this.state.email,
+        //     password1: this.state.password1,
+        //     password2: this.state.password2,
+        // }
+        // const headers = {
+        //     "X-CSRFToken": Cookies.get("csrftoken")
+        // }
+        // // axios.post('/rest-auth/registration/', user, headers).then(x => x)
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'Application/Json',
+                'X-CSRFToken': Cookies.get('csrftoken')
+            },
+            body: JSON.stringify({
+                username: this.state.username,
+                email: this.state.email,
+                password1: this.state.password1,
+                password2: this.state.password2})
         }
+        const response = await fetch('/rest-auth/registration/', options)
+        const data = await response.json();
 
-        axios.post('/rest-auth/registration/', user).then(x => console.log(x))
+        console.log(data);
     }
 
     render() {
         return (
             <>
-                <form className="login-register" onSubmit={this.handleSubmit}>
+                <form className="login-register" onSubmit={(e) => this.handleSubmit(e)}>
                     <label className="form-label" htmlFor="username">Username</label>
                     <input onChange={this.handleInput} value={this.state.username} className="form-control" type="text"
                            name="username"/>
