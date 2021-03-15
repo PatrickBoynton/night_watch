@@ -29,7 +29,7 @@ class EphemDisplay extends Component{
         </section>);
         return (
             <>
-                {ephems}
+                {ephems[0]}
             </>
         );
     }
