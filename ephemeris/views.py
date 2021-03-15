@@ -5,11 +5,11 @@ from .serializers import EphemSerializer
 
 
 # Create your views here.
-class EphemListView(generics.ListAPIView):
+class EphemListView(generics.ListCreateAPIView):
     queryset = Ephem.objects.all()
     serializer_class = EphemSerializer
 
 
-class EphemDetailView(generics.RetrieveAPIView):
+class EphemDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Ephem.objects.all()
     serializer_class = EphemSerializer
