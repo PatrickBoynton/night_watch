@@ -59,6 +59,7 @@ class Register extends Component {
         return (
             <>
                 <form className="login-register" onSubmit={(e) => this.handleSubmit(e)}>
+                    <h2>Register</h2>
                     {this.state.usernameStatus !== '' ? <div>{this.state.usernameStatus}</div> : null}
                     <label className="form-label" htmlFor="username">Username</label>
                     <input onChange={this.handleInput} value={this.state.username} className="form-control" type="text"
@@ -78,6 +79,16 @@ class Register extends Component {
                     <label className="form-label" htmlFor="password2">Confirm Password</label>
                     <input onChange={this.handleInput} value={this.state.password2} className="form-control mb-3"
                            type="password" name="password2"/>
+
+                    <label className="form-label" htmlFor="equipment">Equipment</label>
+                    <input className="form-control" type="text" name="equipent" placeholder="Your eyes are perfectly valid astronomy tools."/>
+
+                    <label className="form-label" htmlFor="profile_picture">Profile Image</label>
+                    <input className="form-control" type="file" name="profile_picture" id=""/>
+
+                    <label className="form-label" htmlFor="about_me">About Me</label>
+                    <textarea className="form-control" name="about_me" cols="30" rows="10">
+                    </textarea>
                     <button className="btn btn-success" type="submit">Register</button>
                     <p>Already have an account? Why don't you <Link to="/login">Login</Link>? </p>
                 </form>
