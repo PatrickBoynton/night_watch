@@ -8,7 +8,7 @@ class EventForm extends Component {
 
         this.state = {
             name: '',
-            // time: '',
+            time: '',
             // description: '',
         };
 
@@ -25,16 +25,18 @@ class EventForm extends Component {
         const options = {
             method: 'POST',
             headers: {
-                // "Content-Type": "Application/Json",
+                "Content-Type": "Application/Json",
                 'X-CSRFToken': Cookies.get('csrftoken')
             },
             body: JSON.stringify({
                 name: this.state.name,
-                // time: this.state.time,
-                // description: this.state.description
+                time: this.state.time,
+                // description: this.state.descriptions
             })
         };
         const response = await fetch('/api/v1/events/', options);
+        const data = await response.json();
+        console.log(data);
     }
 
     render() {
