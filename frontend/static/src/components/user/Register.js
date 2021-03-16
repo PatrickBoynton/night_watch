@@ -33,10 +33,7 @@ class Register extends Component {
                 password1: this.state.password1,
                 password2: this.state.password2})
         }
-        const response = await fetch('/rest-auth/registration/', options)
-        const data = await response.json();
-
-        console.log(data);
+        await fetch('/rest-auth/registration/', options)
     }
 
     render() {
