@@ -9,6 +9,7 @@ import EphemDisplay from './components/ephem/EphemDisplay';
 import EphemList from './components/ephem/EphemList';
 import EventForm from './components/events/EventForm';
 import EventDisplay from './components/events/EventDisplay';
+import Navigation from './components/Navigation';
 
 class App extends Component {
     constructor(props) {
@@ -25,6 +26,7 @@ class App extends Component {
     render() {
         return (
             <div className="App">
+                <Navigation/>
                 <Switch>
                     <Route path='/register' component={Register}/>
                     <Route path='/login' component={Login}/>
