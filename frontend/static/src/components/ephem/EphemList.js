@@ -17,7 +17,7 @@ class EphemList extends Component {
     render() {
         const list = this.state.ephems.map(item => <section key={item.id} className="row">
             <div className="col">
-                <img src={item.image}/>
+                <img src={item.image} alt="A planet, star or satellite."/>
                 <h2>{item.name}</h2>
                 <p>rise time: {item.rise_time}</p>
                 <p>set time: {item.set_time}</p>
