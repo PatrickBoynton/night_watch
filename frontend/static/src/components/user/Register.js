@@ -1,6 +1,5 @@
 import {Component} from 'react';
 import {Link} from 'react-router-dom';
-import axios from 'axios';
 import Cookies from 'js-cookie';
 
 class Register extends Component {
@@ -22,16 +21,6 @@ class Register extends Component {
 
     async handleSubmit(event) {
         event.preventDefault();
-        // const options = {
-        //     username: this.state.username,
-        //     email: this.state.email,
-        //     password1: this.state.password1,
-        //     password2: this.state.password2,
-        // }
-        // const headers = {
-        //     "X-CSRFToken": Cookies.get("csrftoken")
-        // }
-        // // axios.post('/rest-auth/registration/', user, headers).then(x => x)
         const options = {
             method: 'POST',
             headers: {
