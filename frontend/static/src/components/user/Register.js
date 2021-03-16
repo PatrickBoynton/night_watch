@@ -1,6 +1,7 @@
 import {Component} from 'react';
 import {Link} from 'react-router-dom';
 import Cookies from 'js-cookie';
+import {Redirect} from 'react-router-dom';
 
 class Register extends Component {
     constructor(props) {
@@ -10,6 +11,11 @@ class Register extends Component {
             email: '',
             password1: '',
             password2: '',
+            usernameStatus: '',
+            emailStatus: '',
+            password1Status: '',
+            password2Status: '',
+            redirect: null,
         };
         this.handleInput = this.handleInput.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -31,24 +37,44 @@ class Register extends Component {
                 username: this.state.username,
                 email: this.state.email,
                 password1: this.state.password1,
-                password2: this.state.password2})
+                password2: this.state.password2
+            })
+        };
+        const response = await fetch('/rest-auth/registration/', options);
+        const data = await response.json();
+        console.log(data);
+        if (response.status !== 201) {
+            // Done this way to prevent multiple errors.
+            this.setState({usernameStatus: data.username[0]});
+            this.setState({emailStatus: data.email[0]});
+            this.setState({password1Status: data.password1[0]});
+            this.setState({password2Status: data.password2[0]});
+        } else {
+            this.setState({redirect: '/celestial-list'});
+            return <Redirect to="/celestial-list"/>;
         }
-        await fetch('/rest-auth/registration/', options)
     }
 
     render() {
         return (
             <>
                 <form className="login-register" onSubmit={(e) => this.handleSubmit(e)}>
+                    {this.state.usernameStatus !== '' ? <div>{this.state.usernameStatus}</div> : null}
                     <label className="form-label" htmlFor="username">Username</label>
                     <input onChange={this.handleInput} value={this.state.username} className="form-control" type="text"
                            name="username"/>
+
+                    {this.state.emailStatus !== '' ? <div>{this.state.emailStatus}</div> : null}
                     <label className="form-label" htmlFor="email">Email</label>
                     <input onChange={this.handleInput} value={this.state.email} className="form-control" type="email"
                            name="email"/>
+
+                    {this.password1Status !== '' ? <div>{this.state.password1Status}</div> : null}
                     <label className="form-label" htmlFor="password1">Password</label>
                     <input onChange={this.handleInput} value={this.state.password1} className="form-control"
                            type="password" name="password1"/>
+
+                    {this.password2Status !== '' ? <div>{this.state.password2Status}</div> : null}
                     <label className="form-label" htmlFor="password2">Confirm Password</label>
                     <input onChange={this.handleInput} value={this.state.password2} className="form-control mb-3"
                            type="password" name="password2"/>
