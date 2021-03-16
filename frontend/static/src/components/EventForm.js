@@ -3,9 +3,9 @@ class EventForm extends Component {
 
     render() {
         return (
-            <div>
+            <form>
                 EventForm
-            </div>
+            </form>
         );
     }
 
