@@ -8,6 +8,7 @@ import EphemForm from './components/ephem/EphemForm';
 import EphemDisplay from './components/ephem/EphemDisplay';
 import EphemList from './components/ephem/EphemList';
 import EventForm from './components/EventForm';
+import EventDisplay from './components/EventDisplay';
 
 class App extends Component {
     constructor(props) {
@@ -31,7 +32,8 @@ class App extends Component {
                     <Route path="/ephem/form" component={EphemForm}/>
                     <Route path="/event/form"  component={EventForm}/>
                     <Route path="/display" component={EphemDisplay} />
-                    <Route path="/list" component={EphemList}/>
+                    <Route path="/celestial-list" component={EphemList}/>
+                    <Route path="/events" component={EventDisplay}/>
                 </Switch>
             </div>
         );
