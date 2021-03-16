@@ -7,7 +7,8 @@ class Login extends Component {
         super(props);
         this.state = {
             username: '',
-            password: ''
+            password: '',
+            statusMessage: '',
         };
 
         this.handleInput = this.handleInput.bind(this);
@@ -20,11 +21,6 @@ class Login extends Component {
 
     async handleSubmit(event) {
         event.preventDefault();
-        // const user = {
-        //     username: this.state.username,
-        //     password: this.state.password
-        // }
-        // axios.post('/rest-auth/login/', user).then(x => x)
 
         const options = {
             method: 'POST',
@@ -36,15 +32,19 @@ class Login extends Component {
                 username: this.state.username,
                 password: this.state.password,
             })
-        }
+        };
 
         const response = await fetch('/rest-auth/login/', options);
         const data = await response.json();
 
-        if(data.key) {
-            Cookies.set("Authorization", `Token ${data.key}`)
+        if (data.key) {
+            Cookies.set('Authorization', `Token ${data.key}`);
         } else {
-            console.log("Did not log in.");
+            if (response.status === 400){
+                this.setState({statusMessage: 'The email or password did not match.'});
+            } else if (response.status === 500) {
+                this.setState({statusMessage: "Try again later. Server Error."})
+            }
         }
     }
 
@@ -52,10 +52,17 @@ class Login extends Component {
         return (
             <>
                 <form className="text-center login-register" onSubmit={this.handleSubmit}>
+                    {this.state.statusMessage !== '' ? <div>{this.state.statusMessage}</div> : null}
                     <label className="form-label" htmlFor="username">Username</label>
-                    <input onChange={this.handleInput} className="form-control" type="text" name="username"/>
+                    <input onChange={this.handleInput}
+                           className="form-control"
+                           type="text"
+                           name="username"/>
                     <label className="form-label" htmlFor="password">Password</label>
-                    <input onChange={this.handleInput} className="form-control mb-3" type="password" name="password" />
+                    <input onChange={this.handleInput}
+                           className="form-control mb-3"
+                           type="password"
+                           name="password"/>
                     <button className="btn btn-success">Login</button>
                     <p>Don't have an account yet? Why not <Link to="/register">Register</Link> First?</p>
                 </form>
