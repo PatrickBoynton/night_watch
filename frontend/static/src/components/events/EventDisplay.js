@@ -9,7 +9,7 @@ class EventDisplay extends Component {
             id: 0,
             data: [],
             isEditMode: false,
-            isAdmin: true,
+            isAdmin: false,
             name: '',
             ephemeris: '',
             time: '',
@@ -38,8 +38,6 @@ class EventDisplay extends Component {
                 time: this.state.time
             })
         };
-
-        // await fetch("/api/v1/events/", options);
         await fetch(`/api/v1/events/${this.state.id}/`, options);
     }
 
@@ -56,7 +54,6 @@ class EventDisplay extends Component {
     async componentDidMount() {
         const response = await fetch('/api/v1/events/');
         const data = await response.json();
-        console.log(data);
         this.setState({data});
     }
 
@@ -67,19 +64,22 @@ class EventDisplay extends Component {
                    type="text"
                    onChange={this.handleInput}
                    name="name"
-                   value={this.state.name}/>
+                   value={this.state.name || ''}/>
+
             <label className="form-label" htmlFor="ephemeris">Target</label>
             <input className="form-control"
                    type="text"
                    onChange={this.handleInput}
                    name="ephemeris"
-                   value={this.state.ephemeris}/>
+                   value={this.state.ephemeris || ''}/>
+
             <label className="form-label" htmlFor="time">Time</label>
             <input className="form-control"
                    type="text"
                    onChange={this.handleInput}
                    name="time"
-                   value={this.state.time}/>
+                   value={this.state.time || ''}/>
+
             <label className="form-label" htmlFor="description">Description</label>
             <textarea className="form-control" name="description" value={this.state.description} cols="30" rows="10">
             </textarea>
