@@ -15,6 +15,26 @@ class EventDisplay extends Component {
         };
         this.handleDelete = this.handleDelete.bind(this);
         this.handleEditMode = this.handleEditMode.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleInput = this.handleInput.bind(this);
+    }
+
+    handleInput(event) {
+        this.setState({[event.target.name]: event.target.value})
+    }
+
+    async handleSubmit() {
+        const options = {
+            method: "PUT",
+            headers: {
+                "X-CSRFToken": Cookies.get("csrftoken")
+            },
+            body: JSON.stringify({name: this.state.name,
+                                        ephemeris: this.state.ephemeris,
+                                        time: this.state.time})
+        }
+
+        await fetch("/api/v1/events/", options);
     }
 
     handleDelete(id) {
@@ -35,13 +55,22 @@ class EventDisplay extends Component {
     }
 
     showForm() {
-        return <form action="">
+        return <form onSubmit={this.handleSubmit}>
             <label htmlFor="name">Name</label>
-            <input type="text" name="name" value={this.state.name}/>
+            <input type="text"
+                   onChange={this.handleInput}
+                   name="name"
+                   value={this.state.name}/>
             <label htmlFor="ephemeris">Target</label>
-            <input type="text" name="ephemeris" value={this.state.ephemeris}/>
+            <input type="text"
+                   onChange={this.handleInput}
+                   name="ephemeris"
+                   value={this.state.ephemeris}/>
             <label htmlFor="time">Time</label>
-            <input type="text" name="time" value={this.state.time}/>
+            <input type="text"
+                   onChange={this.handleInput}
+                   name="time"
+                   value={this.state.time}/>
             <label htmlFor="description">Description</label>
             <textarea name="description" value={this.state.description} cols="30" rows="10">
             </textarea>
