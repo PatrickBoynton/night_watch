@@ -6,6 +6,7 @@ class EventDisplay extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            id: 0,
             data: [],
             isEditMode: false,
             isAdmin: true,
@@ -20,21 +21,26 @@ class EventDisplay extends Component {
     }
 
     handleInput(event) {
-        this.setState({[event.target.name]: event.target.value})
+        this.setState({[event.target.name]: event.target.value});
     }
 
-    async handleSubmit() {
+    async handleSubmit(e) {
+        e.preventDefault();
         const options = {
-            method: "PUT",
+            method: 'PUT',
             headers: {
-                "X-CSRFToken": Cookies.get("csrftoken")
+                "Content-Type":"Application/Json",
+                'X-CSRFToken': Cookies.get('csrftoken')
             },
-            body: JSON.stringify({name: this.state.name,
-                                        ephemeris: this.state.ephemeris,
-                                        time: this.state.time})
-        }
+            body: JSON.stringify({
+                name: this.state.name,
+                ephemeris: this.state.ephemeris,
+                time: this.state.time
+            })
+        };
 
-        await fetch("/api/v1/events/", options);
+        // await fetch("/api/v1/events/", options);
+        await fetch(`/api/v1/events/${this.state.id}/`, options);
     }
 
     handleDelete(id) {
@@ -56,37 +62,37 @@ class EventDisplay extends Component {
 
     showForm() {
         return <form onSubmit={this.handleSubmit}>
-            <label htmlFor="name">Name</label>
-            <input type="text"
+            <label className="form-label" htmlFor="name">Name</label>
+            <input className="form-control"
+                   type="text"
                    onChange={this.handleInput}
                    name="name"
                    value={this.state.name}/>
-            <label htmlFor="ephemeris">Target</label>
-            <input type="text"
+            <label className="form-label" htmlFor="ephemeris">Target</label>
+            <input className="form-control"
+                   type="text"
                    onChange={this.handleInput}
                    name="ephemeris"
                    value={this.state.ephemeris}/>
-            <label htmlFor="time">Time</label>
-            <input type="text"
+            <label className="form-label" htmlFor="time">Time</label>
+            <input className="form-control"
+                   type="text"
                    onChange={this.handleInput}
                    name="time"
                    value={this.state.time}/>
-            <label htmlFor="description">Description</label>
-            <textarea name="description" value={this.state.description} cols="30" rows="10">
+            <label className="form-label" htmlFor="description">Description</label>
+            <textarea className="form-control" name="description" value={this.state.description} cols="30" rows="10">
             </textarea>
-            <button type="submit">Edit</button>
+            <button className="btn btn-primary" type="submit">Edit</button>
         </form>;
     }
 
     handleEditMode(e) {
         this.setState((previousState) => ({isEditMode: !previousState.isEditMode}));
-        this.setState({name: e.name,
-                             ephemeris: e.ephemeris, time: e.time})
-    }
-
-    handleSubmit(e) {
-        e.preventDefault();
-        console.log(this.state);
+        this.setState({
+            name: e.name,
+            ephemeris: e.ephemeris, time: e.time, id: e.id
+        });
     }
 
     render() {
