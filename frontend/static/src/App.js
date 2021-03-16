@@ -7,8 +7,8 @@ import {Component} from 'react';
 import EphemForm from './components/ephem/EphemForm';
 import EphemDisplay from './components/ephem/EphemDisplay';
 import EphemList from './components/ephem/EphemList';
-import EventForm from './components/EventForm';
-import EventDisplay from './components/EventDisplay';
+import EventForm from './components/events/EventForm';
+import EventDisplay from './components/events/EventDisplay';
 
 class App extends Component {
     constructor(props) {
