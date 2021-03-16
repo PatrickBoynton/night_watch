@@ -1,4 +1,5 @@
 import {Component} from 'react';
+import Cookies from 'js-cookie';
 
 class EventDisplay extends Component{
 
@@ -9,6 +10,17 @@ class EventDisplay extends Component{
             isEditMode: false,
             isAdmin: true,
         }
+    }
+
+    handleDelete(event, id) {
+        event.preventDefault();
+        const options = {
+            method: "DELETE",
+            headers: {
+                "X-CSRFToken": Cookies.get("csrftoken")
+            }
+        }
+        fetch(`/api/v1/events/${id}/`, options)
     }
 
     async componentDidMount() {
@@ -25,7 +37,7 @@ class EventDisplay extends Component{
             <p>{event.time}</p>
             <p>{event.description}</p>
             <div className="button-group">
-                <button className="btn btn-primary">Edit</button> <button className="btn btn-danger">Delete</button>
+                <button className="btn btn-primary">Edit</button> <button onClick={(e) => this.handleDelete(e, event.id)} className="btn btn-danger">Delete</button>
             </div>
         </section>);
         return (
