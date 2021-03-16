@@ -16,6 +16,7 @@ class EphemForm extends Component {
         };
         this.handleInput = this.handleInput.bind(this);
         this.handleImage = this.handleImage.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleInput(event) {
@@ -78,7 +79,7 @@ class EphemForm extends Component {
                 <input className="form-control"
                        type="text"
                        onChange={this.handleInput}
-                       valu={this.state.set_time}
+                       value={this.state.set_time}
                        name="set_time"/>
                 <label className="form-label" htmlFor="magnitude">Magnitude</label>
                 <input className="form-control"
