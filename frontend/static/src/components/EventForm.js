@@ -9,7 +9,8 @@ class EventForm extends Component {
         this.state = {
             name: '',
             time: '',
-            // description: '',
+            target: '',
+            description: '',
         };
 
         this.handleInput = this.handleInput.bind(this);
@@ -31,7 +32,8 @@ class EventForm extends Component {
             body: JSON.stringify({
                 name: this.state.name,
                 time: this.state.time,
-                // description: this.state.descriptions
+                ephemeris: this.state.target,
+                description: this.state.description
             })
         };
         const response = await fetch('/api/v1/events/', options);
@@ -47,20 +49,24 @@ class EventForm extends Component {
                        onChange={this.handleInput}
                        value={this.state.value}
                        name="name"/>
+                <label className="form-label" htmlFor="target">Target</label>
+                <input type="text"
+                       className="form-control"
+                       onChange={this.handleInput}
+                       value={this.state.value}
+                       name="target"/>
                 <label className="form-label" htmlFor="time">Time</label>
                 <input className="form-control"
                        onChange={this.handleInput}
                        value={this.state.value}
                        name="time"
                        type="text"/>
-                {/*       onChange={this.handleInput}*/}
-                {/*       name="time"/>*/}
-                {/*<label className="form-label" htmlFor="description">Description</label>*/}
-                {/*<textarea className="form-control"*/}
-                {/*          onChange={this.handleInput}*/}
-                {/*          name="description"*/}
-                {/*          value={this.state.description}>*/}
-                {/*</textarea>*/}
+                <label className="form-label" htmlFor="description">Description</label>
+                <textarea className="form-control"
+                          onChange={this.handleInput}
+                          name="description"
+                          value={this.state.value}>
+                </textarea>
                 <button className="btn btn-success" type="submit">Create Event</button>
             </form>
         );
