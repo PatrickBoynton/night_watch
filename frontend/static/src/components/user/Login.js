@@ -37,13 +37,13 @@ class Login extends Component {
         const response = await fetch('/rest-auth/login/', options);
         const data = await response.json();
 
+        console.log(data);
         if (data.key) {
             Cookies.set('Authorization', `Token ${data.key}`);
         } else {
-            if (response.status === 400){
-                this.setState({statusMessage: 'The email or password did not match.'});
-            } else if (response.status === 500) {
-                this.setState({statusMessage: "Try again later. Server Error."})
+            if (response.status !== 200) {
+                // this.setState({statusMessage: data})
+                // if (data.)
             }
         }
     }
