@@ -53,8 +53,8 @@ class Register extends Component {
             console.log('Not logged in!');
         } else {
             Cookies.set('Authorization', `Token ${data.key}`);
-            this.props.history.push("/celestial-list")
-            return <Redirect to="/celestial-list" />
+            this.props.history.push("/create-profile")
+            return <Redirect to="/create-profile" />
         }
     }
 
