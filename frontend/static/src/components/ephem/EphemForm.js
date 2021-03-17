@@ -24,7 +24,6 @@ class EphemForm extends Component {
     }
 
     handleImage(e) {
-        console.dir('test', e.target);
         let file = e.target.files[0];
         this.setState({ image: file });
         let reader = new FileReader();
