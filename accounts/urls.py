@@ -1,9 +1,13 @@
 from django.urls import path
 
-from .views import ProfileListView
+from . import views
 
 app_name = "accounts"
 
 urlpatterns = [
-    path("", ProfileListView.as_view()),
+    path('', views.ProfileListView.as_view()),
+    path('<int:pk>', views.ProfileDetailView.as_view()),
+    path('create/', views.ProfileCreateView.as_view()),
+    path('update/<int:pk>', views.ProfileUpdateView.as_view()),
+    path('delete/<int:pk>', views.ProfileDeleteView)
 ]
