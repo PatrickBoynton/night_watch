@@ -1,5 +1,6 @@
 import {Component} from 'react';
 import Cookies from 'js-cookie';
+import {Redirect} from 'react-router-dom';
 
 class EventForm extends Component {
 
@@ -26,7 +27,7 @@ class EventForm extends Component {
         const options = {
             method: 'POST',
             headers: {
-                "Content-Type": "Application/Json",
+                'Content-Type': 'Application/Json',
                 'X-CSRFToken': Cookies.get('csrftoken')
             },
             body: JSON.stringify({
@@ -39,6 +40,8 @@ class EventForm extends Component {
         const response = await fetch('/api/v1/events/', options);
         const data = await response.json();
         console.log(data);
+        this.props.history.push('/events');
+        return <Redirect to="/events"/>;
     }
 
     render() {

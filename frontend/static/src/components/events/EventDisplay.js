@@ -1,5 +1,6 @@
 import {Component} from 'react';
 import Cookies from 'js-cookie';
+import {Redirect} from 'react-router-dom';
 
 class EventDisplay extends Component {
 
@@ -49,6 +50,8 @@ class EventDisplay extends Component {
             }
         };
         fetch(`/api/v1/events/${id}/`, options);
+        this.props.history.push('/events');
+        window.location.reload();
     }
 
     async componentDidMount() {
