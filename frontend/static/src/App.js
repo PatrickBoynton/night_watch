@@ -11,6 +11,7 @@ import EventForm from './components/events/EventForm';
 import EventDisplay from './components/events/EventDisplay';
 import Navigation from './components/Navigation';
 import Cookies from 'js-cookie';
+import ProfileForm from './components/user/ProfileForm';
 
 class App extends Component {
     constructor(props) {
@@ -34,6 +35,7 @@ class App extends Component {
                     <Route path='/register' component={Register}/>
                     <Route path='/login' render={(props) => (<Login {...props} isLoggedIn={this.state.isLoggedIn} handleIsLoggedIn={this.handleIsLoggedIn} />)} />
                     <Route path="/profile" component={Profile}/>
+                    <Route path="/create-profile" component={ProfileForm}/>
                     <Route path="/ephem/form" component={EphemForm}/>
                     <Route path="/event/form"  component={EventForm}/>
                     <Route path="/display" component={EphemDisplay} />
