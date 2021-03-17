@@ -1,4 +1,5 @@
 import {Component} from 'react';
+import Cookies from 'js-cookie';
 
 class ProfileForm extends Component {
     constructor(props) {
@@ -16,9 +17,23 @@ class ProfileForm extends Component {
         this.setState({[event.target.name]: event.target.value});
     }
 
-    handleSubmit(event) {
+    async handleSubmit(event) {
         event.preventDefault();
-        console.log(this.state);
+
+        const options = {
+            method: 'POST',
+            headers: {
+                'X-CSRFToken': Cookies.get('csrftoken'),
+                "Authorization": Cookies.get("Authorization")
+            },
+            body: {
+                profile_picture: this.state.profile_picture,
+                about_me: this.state.about_me,
+                equipment: this.state.equipment
+            }
+        };
+
+        const response = await fetch('/api/v1/profiles/', options);
     }
 
     render() {
