@@ -77,7 +77,7 @@ class EphemList extends Component {
             </div>
         </section>);
         return (
-            <div className="container">
+            <>
                 {
                     !this.state.isEditMode
                         ?
@@ -85,7 +85,7 @@ class EphemList extends Component {
                         :
                         this.showForm()
                 }
-            </div>
+            </>
         );
     }
 }
