@@ -6,6 +6,7 @@ class EphemList extends Component {
         this.state = {
             ephems: [],
             isEditMode: false,
+            isAdmin: false,
         };
         this.handleEditMode = this.handleEditMode.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -60,8 +61,17 @@ class EphemList extends Component {
                 <h2>{item.name}</h2>
                 <p>rise time: {item.rise_time}</p>
                 <p>set time: {item.set_time}</p>
-                <button onClick={this.handleEditMode} className="btn btn-primary">Edit</button>
-                <button className="btn btn-danger">Delete</button>
+                {
+                    this.state.isAdmin
+                        ?
+                        <>
+                            <button onClick={this.handleEditMode} className="btn btn-primary">Edit</button>
+                            <button className="btn btn-danger">Delete</button>
+                        </>
+                        :
+                        null
+                }
+
             </div>
         </section>);
         return (
