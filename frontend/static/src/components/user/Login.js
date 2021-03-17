@@ -1,5 +1,5 @@
 import {Component} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import Cookies from 'js-cookie';
 
 class Login extends Component {
@@ -40,10 +40,13 @@ class Login extends Component {
         console.log(data);
         if (data.key) {
             Cookies.set('Authorization', `Token ${data.key}`);
+            console.log(this.props.isLoggedIn);
+            return  this.props.isLoggedIn ? <Redirect to="/celestial-list"/> : null;
         } else {
             if (response.status !== 200) {
                 // this.setState({statusMessage: data})
                 // if (data.)
+                console.log('Login unsuccessful.');
             }
         }
     }
@@ -52,6 +55,7 @@ class Login extends Component {
         return (
             <>
                 <form className="text-center login-register" onSubmit={this.handleSubmit}>
+                    <h2>Login</h2>
                     {this.state.statusMessage !== '' ? <div>{this.state.statusMessage}</div> : null}
                     <label className="form-label" htmlFor="username">Username</label>
                     <input onChange={this.handleInput}
