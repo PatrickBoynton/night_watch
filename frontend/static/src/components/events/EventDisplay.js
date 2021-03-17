@@ -58,7 +58,7 @@ class EventDisplay extends Component {
     }
 
     showForm() {
-        return <form onSubmit={this.handleSubmit}>
+        return <form className="login-register" onSubmit={this.handleSubmit}>
             <label className="form-label" htmlFor="name">Name</label>
             <input className="form-control"
                    type="text"
