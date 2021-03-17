@@ -43,7 +43,7 @@ class EventForm extends Component {
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
+            <form className="login-register" onSubmit={this.handleSubmit}>
                 <label className="form-label" htmlFor="name">Event Name</label>
                 <input className="form-control" type="text"
                        onChange={this.handleInput}
