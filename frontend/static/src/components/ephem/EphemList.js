@@ -16,6 +16,7 @@ class EphemList extends Component {
         const response = await fetch('api/v1/ephem/');
         const data = await response.json();
         this.setState({ephems: data});
+        console.log(this.state.ephems);
     }
 
     handleEditMode() {
