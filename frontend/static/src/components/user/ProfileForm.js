@@ -24,7 +24,7 @@ class ProfileForm extends Component {
             method: 'POST',
             headers: {
                 'X-CSRFToken': Cookies.get('csrftoken'),
-                "Authorization": Cookies.get("Authorization")
+                'Authorization': Cookies.get('Authorization')
             },
             body: {
                 profile_picture: this.state.profile_picture,
@@ -33,7 +33,9 @@ class ProfileForm extends Component {
             }
         };
 
-        const response = await fetch('/api/v1/profiles/', options);
+        const response = await fetch('/api/v1/profiles/create/', options);
+        const data = await response.json();
+        console.log(data);
     }
 
     render() {
