@@ -10,13 +10,16 @@ import EphemList from './components/ephem/EphemList';
 import EventForm from './components/events/EventForm';
 import EventDisplay from './components/events/EventDisplay';
 import Navigation from './components/Navigation';
+import Cookies from 'js-cookie';
 
 class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isLoggedIn: false,
+            isLoggedIn: !!Cookies.get("Authorization"),
+            isAdmin: false,
         };
+        this.handleIsLoggedIn = this.handleIsLoggedIn.bind(this);
     }
 
     handleIsLoggedIn() {
@@ -26,7 +29,7 @@ class App extends Component {
     render() {
         return (
             <div className="App">
-                <Navigation/>
+                <Navigation isLoggedIn={this.state.isLoggedIn}/>
                 <Switch>
                     <Route path='/register' component={Register}/>
                     <Route path='/login' component={Login}/>
