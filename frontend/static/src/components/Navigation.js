@@ -17,7 +17,7 @@ class Navigation extends Component {
                 {/*TODO only when logged in*/}
                 <NavLink to="/profile">Profile</NavLink>
                 {/*TODO Only as admin.*/}
-                <NavLink to="/ephem/form">Add Planet</NavLink>
+                {/*<NavLink to="/ephem/form">Add Planet</NavLink>*/}
                 <NavLink to="/event/form">Add Event</NavLink>
                 <NavLink to="/celestial-list">Planets</NavLink>
                 <NavLink to="/events">Upcoming Events</NavLink>
