@@ -36,10 +36,13 @@ class EventDisplay extends Component {
             body: JSON.stringify({
                 name: this.state.name,
                 ephemeris: this.state.ephemeris,
-                time: this.state.time
+                time: this.state.time,
+                description: this.state.description,
             })
         };
         await fetch(`/api/v1/events/${this.state.id}/`, options);
+        // this.props.history.push('/events');
+        return <Redirect to='/events'/>;
     }
 
     handleDelete(id) {
@@ -84,7 +87,10 @@ class EventDisplay extends Component {
                    value={this.state.time || ''}/>
 
             <label className="form-label" htmlFor="description">Description</label>
-            <textarea className="form-control" name="description" value={this.state.description} cols="30" rows="10">
+            <textarea className="form-control"
+                      name="description"
+                      onChange={this.handleInput}
+                      value={this.state.description} cols="30" rows="10">
             </textarea>
             <button className="btn btn-primary" type="submit">Edit</button>
         </form>;
@@ -94,7 +100,10 @@ class EventDisplay extends Component {
         this.setState((previousState) => ({isEditMode: !previousState.isEditMode}));
         this.setState({
             name: e.name,
-            ephemeris: e.ephemeris, time: e.time, id: e.id
+            ephemeris: e.ephemeris,
+            time: e.time,
+            id: e.id,
+            description: e.description
         });
     }
 
