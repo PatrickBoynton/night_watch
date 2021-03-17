@@ -38,22 +38,25 @@ class Register extends Component {
                 username: this.state.username,
                 email: this.state.email,
                 password1: this.state.password1,
-                password2: this.state.password2
+                password2: this.state.password2,
+                equipment: this.state.equipment,
+                profile_picture: this.state.profile_picture,
+                about_me: this.state.about_me
             })
         };
         const response = await fetch('/rest-auth/registration/', options);
         const data = await response.json();
         console.log(data);
-        // if (response.status !== 201) {
-        //     // Done this way to prevent multiple errors.
-        //     this.setState({usernameStatus: data.username[0]});
-        //     this.setState({emailStatus: data.email[0]});
-        //     this.setState({password1Status: data.password1[0]});
-        //     this.setState({password2Status: data.password2[0]});
-        // } else {
-        //     this.setState({redirect: '/celestial-list'});
-        //     return <Redirect to="/celestial-list"/>;
-        // }
+        if (response.status !== 201) {
+            // Done this way to prevent multiple errors.
+            // this.setState({usernameStatus: data.username[0]});
+            // this.setState({emailStatus: data.email[0]});
+            // this.setState({password1Status: data.password1[0]});
+            // this.setState({password2Status: data.password2[0]});
+            console.log('Not logged in!');
+        } else {
+            Cookies.set('Authorization', `Token ${data.key}`);
+        }
     }
 
     render() {
