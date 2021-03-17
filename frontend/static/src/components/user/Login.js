@@ -41,7 +41,9 @@ class Login extends Component {
         if (data.key) {
             Cookies.set('Authorization', `Token ${data.key}`);
             console.log(this.props.isLoggedIn);
-            return  this.props.isLoggedIn ? <Redirect to="/celestial-list"/> : null;
+            if (this.props.isLoggedIn) {
+                return <Redirect from="/login" to="/celestial-list"/>;
+            }
         } else {
             if (response.status !== 200) {
                 // this.setState({statusMessage: data})
