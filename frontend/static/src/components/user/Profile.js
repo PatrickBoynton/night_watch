@@ -1,5 +1,6 @@
 import {Component} from 'react';
 import Cookies from 'js-cookie';
+import {Redirect} from 'react-router-dom';
 
 class Profile extends Component {
     constructor(props) {
@@ -17,6 +18,8 @@ class Profile extends Component {
 
     handleLogout() {
         Cookies.remove('Authorization');
+        this.props.history.push("/login")
+        return <Redirect to="/login" />
     }
 
     render() {
