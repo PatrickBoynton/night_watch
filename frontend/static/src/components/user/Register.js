@@ -1,5 +1,5 @@
 import {Component} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 import Cookies from 'js-cookie';
 
 class Register extends Component {
@@ -56,6 +56,8 @@ class Register extends Component {
             console.log('Not logged in!');
         } else {
             Cookies.set('Authorization', `Token ${data.key}`);
+            this.props.history.push("/celestial-list")
+            return <Redirect to="/celestial-list" />
         }
     }
 
