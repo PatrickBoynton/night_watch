@@ -11,7 +11,13 @@ class ProfileListView(generics.ListAPIView):
     serializer_class = ProfileSerializer
 
 
+class ProfileDetailView(generics.RetrieveAPIView):
+    queryset = Profile.objects.all()
+    serializer_class = ProfileSerializer
+
+
 class ProfileCreateView(generics.CreateAPIView):
+    permission_classes = (permissions.IsAuthenticated, )
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
 
@@ -21,8 +27,16 @@ class ProfileUpdateView(generics.RetrieveUpdateAPIView):
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
 
+    def get_queryset(self):
+        user = self.request.user
+        return Profile.objects.filter(user=user)
+
 
 class ProfileDeleteView(generics.RetrieveDestroyAPIView):
     permission_classes = (permissions.IsAdminUser,)
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
+
+    def get_queryset(self):
+        user = self.request.user
+        return Profile.objects.filter(user=user)
