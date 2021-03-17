@@ -41,7 +41,7 @@ class EventDisplay extends Component {
             })
         };
         await fetch(`/api/v1/events/${this.state.id}/`, options);
-        // this.props.history.push('/events');
+        window.location.reload();
         return <Redirect to='/events'/>;
     }
 
@@ -53,7 +53,7 @@ class EventDisplay extends Component {
             }
         };
         fetch(`/api/v1/events/${id}/`, options);
-        this.props.history.push('/events');
+        // this.props.history.push('/events');
         window.location.reload();
     }
 
