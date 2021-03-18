@@ -15,9 +15,18 @@ textarea {
 }
 .card{
   width: 25%;
+  margin: 5px;
   border: 2px solid #768084;
   margin-bottom: 20px;
-  background-color: #768084;
+  background-color: #c7ced0;
+}
+a{
+  color: white;
+  text-decoration: none;
+}
+a:hover{
+  color: white;
+  text-decoration: underline;
 }
 .card-header{
   background-color: #8e0000;
