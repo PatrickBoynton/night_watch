@@ -60,7 +60,7 @@ class EphemList extends Component {
             <div className="card">
                 <div className="card-header">
                     <img src={item.image} alt="A planet, star or satellite."/>
-                    <h2>{item.name}</h2>
+                    <h2 className="align-self-end">{item.name}</h2>
                 </div>
                 <p>rise time: {item.rise_time}</p>
                 <p>set time: {item.set_time}</p>
