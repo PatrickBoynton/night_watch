@@ -18,8 +18,5 @@ class Profile(models.Model):
                               null=True,
                               blank=True)
 
-    def perform_create(self, serializer):
-        serializer.save(user=self.user)
-
     def __str__(self):
-        return self.user.username
+        return self.user
