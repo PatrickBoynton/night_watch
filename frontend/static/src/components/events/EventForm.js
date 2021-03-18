@@ -34,7 +34,7 @@ class EventForm extends Component {
                 name: this.state.name,
                 time: this.state.time,
                 ephemeris: this.state.target,
-                description: this.state.description
+                description: this.state.description,
             })
         };
         const response = await fetch('/api/v1/events/', options);
