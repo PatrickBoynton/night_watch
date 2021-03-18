@@ -81,7 +81,9 @@ class EphemList extends Component {
                 {
                     !this.state.isEditMode
                         ?
-                        list
+                        <div className="d-flex">
+                            {list}
+                        </div>
                         :
                         this.showForm()
                 }
