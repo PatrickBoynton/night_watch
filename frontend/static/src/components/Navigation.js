@@ -16,18 +16,21 @@ class Navigation extends Component {
                     this.props.isLoggedIn
                         ?
                         <>
+                            <NavLink to='/home' >Home</NavLink>
                             <NavLink to="/profile">Profile</NavLink>
                             <NavLink to="/event/form">Add Event</NavLink>
                             <NavLink to="/celestial-list">Planets</NavLink>
                             <NavLink to="/events">Upcoming Events</NavLink>
+                            <NavLink to='/glossary' >Glossary</NavLink>
+                            <NavLink to='/about' >About</NavLink>
                         </>
                         :
                         <>
+                            <NavLink to='/home' >Home</NavLink>
                             <NavLink to="/register">Register</NavLink>
                             <NavLink to="/login">Login</NavLink>
                         </>
                 }
-                {/*TODO Only as admin.*/}
                 {
                     this.state.isAdmin
                         ?
