@@ -138,8 +138,10 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'frontend/static/build/static'),)
 REACT_APP_DIR = os.path.join(BASE_DIR, 'frontend/static')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 SITE_ID = 1
 
