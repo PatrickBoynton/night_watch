@@ -1,6 +1,6 @@
 import {Component} from 'react';
 import Cookies from 'js-cookie';
-import {Redirect} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
 
 class Profile extends Component {
     constructor(props) {
@@ -43,6 +43,8 @@ class Profile extends Component {
                 </div>
                 <div className="card-footer">
                     <p>My equipment</p>
+
+                  <p>If you haven't yet you can <Link to="/create-profile" className="btn-link">Create Profile</Link> </p>
                 <button onClick={this.handleLogout} className="btn btn-danger">Logout</button>
                 </div>
             </div>
