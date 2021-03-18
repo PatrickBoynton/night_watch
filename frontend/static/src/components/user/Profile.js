@@ -16,8 +16,18 @@ class Profile extends Component {
     }
 
 
-    handleLogout() {
+    async handleLogout() {
+
+        await fetch('/rest-auth/logout/', {
+            method: "POST",
+            headers: {
+                "Content-Type": "Application/Json",
+                "X-CSRFToken": Cookies.get("csrftoken"),
+                "Authorization": Cookies.get("Authorization")
+            }
+        })
         Cookies.remove('Authorization');
+        Cookies.remove("csrftoken");
         this.props.history.push("/login")
         return <Redirect to="/login" />
     }
