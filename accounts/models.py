@@ -19,7 +19,7 @@ class Profile(models.Model):
                               blank=True)
 
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+        serializer.save(user=self.user)
 
     def __str__(self):
         return self.user.username
