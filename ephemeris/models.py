@@ -8,7 +8,7 @@ class Ephem(models.Model):
     set_time = models.TimeField(null=True, blank=True)
     is_visible = models.BooleanField()
     magnitude = models.FloatField()
-    image = models.ImageField()
+    image = models.ImageField(upload_to='ephemeris/')
     description = models.TextField()
 
     def __str__(self):
