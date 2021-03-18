@@ -15,7 +15,12 @@ class Navigation extends Component {
                 {
                     this.props.isLoggedIn
                         ?
-                        <NavLink to="/profile">Profile</NavLink>
+                        <>
+                            <NavLink to="/profile">Profile</NavLink>
+                            <NavLink to="/event/form">Add Event</NavLink>
+                            <NavLink to="/celestial-list">Planets</NavLink>
+                            <NavLink to="/events">Upcoming Events</NavLink>
+                        </>
                         :
                         <>
                             <NavLink to="/register">Register</NavLink>
@@ -30,9 +35,6 @@ class Navigation extends Component {
                         :
                         null
                 }
-                <NavLink to="/event/form">Add Event</NavLink>
-                <NavLink to="/celestial-list">Planets</NavLink>
-                <NavLink to="/events">Upcoming Events</NavLink>
             </nav>
         );
     }
