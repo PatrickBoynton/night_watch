@@ -41,6 +41,7 @@ class Login extends Component {
             Cookies.set('Authorization', `Token ${data.key}`);
             console.log(this.props.isLoggedIn);
             if (Cookies.get("Authorization")) {
+                this.props.handleIsLoggedIn();
                 this.props.history.push('/celestial-list');
                 return <Redirect to="/celestial-list"/>;
             }
