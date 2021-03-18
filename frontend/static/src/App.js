@@ -34,7 +34,7 @@ class App extends Component {
                 <Switch>
                     <Route path='/register' component={Register}/>
                     <Route path='/login' render={(props) => (<Login {...props} isLoggedIn={this.state.isLoggedIn} handleIsLoggedIn={this.handleIsLoggedIn} />)} />
-                    <Route path="/profile" component={Profile}/>
+                    <Route path="/profile" render={(props) => (<Profile {...props} handleIsLoggedIn={this.handleIsLoggedIn} />)} />
                     <Route path="/create-profile" component={ProfileForm}/>
                     <Route path="/ephem/form" component={EphemForm}/>
                     <Route path="/event/form"  component={EventForm}/>
