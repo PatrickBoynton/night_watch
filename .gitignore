@@ -4,3 +4,5 @@
 *.iml
 db.sqlite3
 *.bsp
+.DS_Store
+conf/__pycache__
