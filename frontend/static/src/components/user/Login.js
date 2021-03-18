@@ -37,18 +37,15 @@ class Login extends Component {
         const response = await fetch('/rest-auth/login/', options);
         const data = await response.json();
 
-        console.log(data);
         if (data.key) {
             Cookies.set('Authorization', `Token ${data.key}`);
             console.log(this.props.isLoggedIn);
-            if (this.props.isLoggedIn) {
+            if (Cookies.get("Authorization")) {
                 this.props.history.push('/celestial-list');
                 return <Redirect to="/celestial-list"/>;
             }
         } else {
             if (response.status !== 200) {
-                // this.setState({statusMessage: data})
-                // if (data.)
                 console.log('Login unsuccessful.');
             }
         }
