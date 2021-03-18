@@ -28,6 +28,7 @@ class Profile extends Component {
         })
         Cookies.remove('Authorization');
         Cookies.remove("csrftoken");
+        this.props.handleIsLoggedIn();
         this.props.history.push("/login")
         return <Redirect to="/login" />
     }
