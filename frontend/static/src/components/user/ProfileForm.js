@@ -19,18 +19,18 @@ class ProfileForm extends Component {
 
     async handleSubmit(event) {
         event.preventDefault();
-
         const options = {
             method: 'POST',
             headers: {
+                "Content-Type": "Application/Json",
                 'X-CSRFToken': Cookies.get('csrftoken'),
                 'Authorization': Cookies.get('Authorization')
             },
-            body: {
-                profile_picture: this.state.profile_picture,
+            body: JSON.stringify({
+                // profile_picture: this.state.profile_picture,
                 about_me: this.state.about_me,
                 equipment: this.state.equipment
-            }
+            })
         };
 
         const response = await fetch('/api/v1/profiles/create/', options);
