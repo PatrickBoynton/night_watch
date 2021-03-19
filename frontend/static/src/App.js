@@ -13,6 +13,8 @@ import Navigation from './components/Navigation';
 import Cookies from 'js-cookie';
 import ProfileForm from './components/user/ProfileForm';
 import Home from './components/pages/Home';
+import About from './components/pages/About';
+import Glossary from './components/pages/Glossary';
 
 class App extends Component {
     constructor(props) {
@@ -34,8 +36,8 @@ class App extends Component {
                 <Navigation isLoggedIn={this.state.isLoggedIn}/>
                 <Switch>
                     <Route path='/home' component={Home}/>
-                    <Route path='/about'/>
-                    <Route path='/glossary'/>
+                    <Route path='/about' component={About} />
+                    <Route path='/glossary' component={Glossary}/>
                     <Route path='/register' component={Register}/>
                     <Route path='/login' render={(props) => (<Login {...props} isLoggedIn={this.state.isLoggedIn}
                                                                     handleIsLoggedIn={this.handleIsLoggedIn}/>)}/>
