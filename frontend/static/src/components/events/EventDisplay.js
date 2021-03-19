@@ -109,7 +109,7 @@ class EventDisplay extends Component {
 
     render() {
         let events = this.state.data?.map(event => <section key={event.id}>
-            <div className="card">
+            <div className="card event-card">
                 <div className="card-header">
                     <h2>{event.name}</h2>
                     <p>{event.ephemeris}</p>
@@ -124,7 +124,7 @@ class EventDisplay extends Component {
             </div>
         </section>);
         return (
-            <>
+            <div className="d-flex">
                 {
                     !this.state.isEditMode
                         ?
@@ -132,7 +132,7 @@ class EventDisplay extends Component {
                         :
                         this.showForm()
                 }
-            </>
+            </div>
         );
     }
 
