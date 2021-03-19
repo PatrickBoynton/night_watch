@@ -1,6 +1,6 @@
 import {Component} from 'react';
 
-class Glossary {
+class Glossary extends Component{
     render() {
         return (
             <div>
