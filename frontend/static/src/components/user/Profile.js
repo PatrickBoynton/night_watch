@@ -35,8 +35,7 @@ class Profile extends Component {
 
     render() {
         return (
-            <div style={{border: '2px solid white', height: '100vh'}}
-                 className="container">
+            <div className="container">
                 {/*<div className="card-header">*/}
                 {/*    <h1>Username</h1>*/}
                 {/*    <img src="#" alt="user"/>*/}
