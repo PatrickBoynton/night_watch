@@ -108,8 +108,8 @@ class EventDisplay extends Component {
     }
 
     render() {
-        let events = this.state.data?.map(event => <section key={event.id}>
-            <div className="card event-card">
+        let events = this.state.data?.map(event => <section className="card" key={event.id}>
+            <div className="event-card">
                 <div className="card-header">
                     <h2>{event.name}</h2>
                     <p>{event.ephemeris}</p>
