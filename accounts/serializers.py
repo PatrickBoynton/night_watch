@@ -1,6 +1,6 @@
 from rest_framework import serializers
-
-from .models import Profile, CustomUser
+from rest_auth.models import TokenModel
+from .models import Profile
 
 
 class ProfileSerializer(serializers.ModelSerializer):
@@ -11,7 +11,9 @@ class ProfileSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class UserSerializer(serializers.ModelSerializer):
+class TokenSerializer(serializers.ModelSerializer):
+    user = serializers.ReadOnlyField(source='user.username')
+
     class Meta:
-        models = CustomUser
+        model = TokenModel
         fields = '__all__'
