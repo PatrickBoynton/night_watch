@@ -3,21 +3,25 @@
 }
 .login-register {
   width: 30%;
-  border: 2px solid #242424;
+  border: 2px solid #768084;
+  color: #fff;
   padding: 10px;
   margin: 0 auto;
 }
 input {
-  border: 2px solid #242424!important;
+  color: white!important;
+  border: 2px solid #768084!important;
+  background-color: #181a1b!important;
 }
 textarea {
-  border: 2px solid #242424!important;
+  color: white!important;
+  border: 2px solid #768084!important;
+  background-color: #181a1b!important;
 }
 .card{
   width: 25%;
-  margin: 5px;
   border: 2px solid #768084;
-  margin-bottom: 20px;
+  margin: 5px 5px 20px;
   background-color: #c7ced0;
 }
 a{
@@ -40,5 +44,8 @@ button{
   margin-top: 10px;
 }
 img {
+  width: 100%;
+}
+.event-card{
   width: 100%;
 }
