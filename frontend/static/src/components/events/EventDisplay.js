@@ -109,7 +109,7 @@ class EventDisplay extends Component {
 
     render() {
         let events = this.state.data?.map(event => <section key={event.id}>
-            <div style={{width: '100%'}} className="card event-card">
+            <div className="card event-card">
                 <div className="card-header">
                     <h2>{event.name}</h2>
                     <p>{event.ephemeris}</p>
