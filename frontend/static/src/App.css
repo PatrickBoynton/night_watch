@@ -48,13 +48,12 @@ button{
 img {
   width: 100%;
 }
-.event-card{
-  /*width: 100%;*/
+.event-card, .left-boarder{
+  width: 40%;
 }
 .left-boarder {
   background-color: #8e0000;
-  height: 100%;
-  width: 30%;
+  width: 50%;
 }
 .right-boarder {
   height: 100%;
