@@ -49,16 +49,21 @@ img {
   width: 100%;
 }
 .event-card{
-  width: 100%;
+  /*width: 100%;*/
 }
 .left-boarder {
   background-color: #8e0000;
-  float: left;
   height: 100%;
   width: 30%;
 }
 .right-boarder {
   height: 100%;
   background-color: #181a1b;
+  border-top: 4px solid #c7ced0;
+  border-right: 4px solid #c7ced0;
+  border-bottom: 4px solid #c7ced0;
   color: #181a1b;
+}
+.test{
+  display: flex;
 }
