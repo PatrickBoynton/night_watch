@@ -11,10 +11,6 @@ class EventView(generics.ListCreateAPIView):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
 
-    def get_queryset(self):
-        user = self.request.user
-        return Event.objects.filter(user=user)
-
     def perform_create(self, serializer):
         user = self.request.user
         serializer.save(user=user)
