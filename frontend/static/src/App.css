@@ -44,12 +44,15 @@ a:hover{
 }
 button{
   margin-top: 10px;
+  margin-bottom: 20px;
 }
 img {
   width: 100%;
 }
-.event-card, .left-boarder{
-  width: 40%;
+ section {
+  width: 100%;
+  height: 50%;
+  margin-right: 200px;
 }
 .left-boarder {
   background-color: #8e0000;
