@@ -1,12 +1,18 @@
-from skyfield.api import N, W, load, wgs84
-from skyfield import almanac
+from skyfield.api import N,  W, wgs84, load
+from skyfield.almanac import find_discrete, risings_and_settings
+from pytz import timezone
 
 ts = load.timescale()
-t = ts.now()
+t0 = ts.utc(2021, 3, 18)
+t1 = ts.utc(2021, 3, 19)
+eph = load('de421.bsp')
 
-planets = load('de421.bsp')
-mars = planets['mars']
-earth = planets['earth']
-greenville = earth + wgs84.latlon(34.8526 * N, 82.3940 * W, elevation_m=299.923)
+greenville = wgs84.latlon(34.8526 * N, 82.3940 * W, elevation_m=299.923)
+planet = eph['sun']
 
+f = risings_and_settings(eph, planet, greenville)
+tz = timezone('US/Eastern')
 
+for t, updown in zip(*find_discrete(t0, t1, f)):
+    print(t.astimezone(tz).strftime('%a %d %H:%M'), 'EST',
+          'rises' if updown else 'sets')
