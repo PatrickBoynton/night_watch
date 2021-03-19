@@ -26,7 +26,8 @@ class Login extends Component {
             method: 'POST',
             headers: {
                 'Content-Type': 'Application/Json',
-                'X-CSRFToken': Cookies.get('csrftoken')
+                'X-CSRFToken': Cookies.get('csrftoken'),
+                "Authorization": Cookies.get("Authorization")
             },
             body: JSON.stringify({
                 username: this.state.username,
