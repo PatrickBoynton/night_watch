@@ -69,3 +69,19 @@ img {
 .test{
   display: flex;
 }
+.btn-danger{
+  border: none;
+  background-color: #8e0000;
+}
+.btn-primary{
+  border: none;
+  background-color: #1b1b7c;
+}
+.btn-success{
+  border: none;
+  background-color: #768084;
+}
+.btn-success:hover{
+  border: none;
+  background-color: #5b6265;
+}
