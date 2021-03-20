@@ -11,12 +11,12 @@ class Navigation extends Component {
 
     render() {
         return (
-            <nav className="navbar container-fluid navbar-dark">
+            <nav className="nav navbar container-fluid navbar-dark">
                 {
                     this.props.isLoggedIn
                         ?
                         <>
-                            <NavLink to='/home' >Home</NavLink>
+                            <NavLink className="navbar-brand" to='/home' >Night Watch</NavLink>
                             <NavLink to="/profile">Profile</NavLink>
                             <NavLink to="/event/form">Add Event</NavLink>
                             <NavLink to="/celestial-list">Planets</NavLink>
