@@ -1,6 +1,8 @@
-from django.conf.urls import url
+from django.urls import path, include
 from . import views
 
+app_name = 'broadcast'
+
 urlpatterns = [
-    url('', views.broadcast_sms, name='default')
+    path('', views.broadcast_sms, name='broadcast_sms')
 ]
