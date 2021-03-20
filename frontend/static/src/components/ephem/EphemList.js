@@ -63,6 +63,7 @@ class EphemList extends Component {
                 </div>
                 <p>rise time: {item.rise_time}</p>
                 <p>set time: {item.set_time}</p>
+                <button onClick={() => alert("Clicked!")} className="btn-primary">Remind me</button>
                 {
                     this.state.isAdmin
                         ?
