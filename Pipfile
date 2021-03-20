@@ -16,6 +16,7 @@ psycopg2-binary = "*"
 skyfield = "*"
 pytz = "*"
 celery = "*"
+twilio = "*"
 
 [dev-packages]
 

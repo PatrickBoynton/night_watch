@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "3acc34fac959403d108d4d367239fef5fdacb1ad4d33643c4d47bfde6302a014"
+            "sha256": "00e50c5db31db56be4ce5ea15d4e07a6ae3bd0686d58f410bb766f51f6e0f277"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -364,11 +364,11 @@
                 "crypto"
             ],
             "hashes": [
-                "sha256:a5c70a06e1f33d81ef25eecd50d50bd30e34de1ca8b2b9fa3fe0daaabcf69bf7",
-                "sha256:b70b15f89dc69b993d8a8d32c299032d5355c82f9b5b7e851d1a6d706dffe847"
+                "sha256:5c6eca3c2940464d106b99ba83b00c6add741c9becaec087fb7ccdefea71350e",
+                "sha256:8d59a976fb773f3e6a39c85636357c4f0e242707394cadadd9814f5cbaa20e96"
             ],
             "markers": "python_version >= '3.6'",
-            "version": "==2.0.1"
+            "version": "==1.7.1"
         },
         "python3-openid": {
             "hashes": [
@@ -456,6 +456,13 @@
             ],
             "markers": "python_version >= '3.5'",
             "version": "==0.4.1"
+        },
+        "twilio": {
+            "hashes": [
+                "sha256:016a936061e1c85a879314e5fbf9bf09927b10b33f5b7143ea904ca0a09bfca3"
+            ],
+            "index": "pypi",
+            "version": "==6.54.0"
         },
         "urllib3": {
             "hashes": [
