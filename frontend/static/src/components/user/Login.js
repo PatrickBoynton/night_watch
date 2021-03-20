@@ -37,7 +37,7 @@ class Login extends Component {
 
         const response = await fetch('/rest-auth/login/', options);
         const data = await response.json();
-
+        console.log(data.user.profile);
         if (data.key) {
             Cookies.set('Authorization', `Token ${data.key}`);
             console.log(this.props.isLoggedIn);
