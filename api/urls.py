@@ -7,6 +7,7 @@ urlpatterns = [
     # describes the various things about a celestial body.
     path("ephem/", include("ephemeris.urls", namespace="ephemeris")),
     path("events/", include("events.urls", namespace='events')),
-    path("profiles/", include("accounts.urls", namespace="accounts"))
+    path("profiles/", include("accounts.urls", namespace="accounts")),
+    path('broadcast/', include('broadcast.urls', namespace='broadcast'))
 
 ]
