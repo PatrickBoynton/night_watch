@@ -142,6 +142,10 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+CELERY_TIMEZONE = "US/Eastern"
+CELERY_TASK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 30 * 60
+
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 SITE_ID = 1
 
