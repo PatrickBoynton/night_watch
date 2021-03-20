@@ -12,11 +12,12 @@ input {
   /*color: white!important;*/
   border: 2px solid #768084!important;
   background-color: #181a1b!important;
-  color: #c7ced0!important;
+  color: #c7ced0 !important;
 }
 textarea {
   /*color: white!important;*/
   border: 2px solid #768084!important;
+  color: #C7CED0;
   background-color: #181a1b!important;
 }
 .card{
@@ -82,7 +83,7 @@ img {
   border: none;
   background-color: #768084;
 }
-.btn-success:hover{
+.btn-success:hover, .btn-success:focus{
   border: none;
   background-color: #5b6265;
 }
