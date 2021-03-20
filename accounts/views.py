@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from rest_framework import generics, permissions
 
-from .models import Profile
-from .serializers import ProfileSerializer
+from .models import Profile, CustomUser
+from .serializers import ProfileSerializer, CustomUserSerializer
 
 
 # Create your views here.
@@ -46,3 +46,9 @@ class ProfileDeleteView(generics.RetrieveDestroyAPIView):
     def get_queryset(self):
         user = self.request.user
         return Profile.objects.filter(user=user)
+
+
+class CustomUserView(generics.RetrieveAPIView):
+    permission_classes = (permissions.IsAuthenticated, )
+    queryset = CustomUser.objects.all()
+    serializer_class = CustomUserSerializer
