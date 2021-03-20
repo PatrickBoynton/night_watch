@@ -16,7 +16,6 @@ class EphemList extends Component {
         const response = await fetch('api/v1/ephem/');
         const data = await response.json();
         this.setState({ephems: data});
-        console.log(this.state.ephems);
     }
 
     handleEditMode() {
@@ -57,7 +56,7 @@ class EphemList extends Component {
 
     render() {
         const list = this.state.ephems.map(item =>
-            <div className="card">
+            <div key={item.id} className="card">
                 <div className="card-header">
                     <img src={item.image} alt="A planet, star or satellite."/>
                     <h2 className="align-self-end">{item.name}</h2>
