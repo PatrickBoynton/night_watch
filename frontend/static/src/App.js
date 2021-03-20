@@ -15,6 +15,7 @@ import ProfileForm from './components/user/ProfileForm';
 import Home from './components/pages/Home';
 import About from './components/pages/About';
 import Glossary from './components/pages/Glossary';
+import SMSForm from './components/ephem/SMSForm';
 
 class App extends Component {
     constructor(props) {
@@ -49,6 +50,7 @@ class App extends Component {
                     <Route path="/display" component={EphemDisplay}/>
                     <Route path="/celestial-list" component={EphemList}/>
                     <Route path="/events" component={EventDisplay}/>
+                    <Route path='/sms-form' component={SMSForm} />
                 </Switch>
             </div>
         );
