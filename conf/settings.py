@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'ephemeris.apps.EphemerisConfig',
     'frontend.apps.FrontendConfig',
     'events.apps.EventsConfig',
+    'broadcast.apps.BroadcastConfig',
 ]
 
 MIDDLEWARE = [
