@@ -36,22 +36,11 @@ class Profile extends Component {
     render() {
         return (
             <div className="container test">
-                {/*<div className="card-header">*/}
-                {/*    <h1>Username</h1>*/}
-                {/*    <img src="#" alt="user"/>*/}
-                {/*    <p>About me</p>*/}
-                {/*</div>*/}
-                {/*<div className="card-footer">*/}
-                {/*    <p>My equipment</p>*/}
-
-                {/*  <p>If you haven't yet you can <Link to="/create-profile" className="btn-link">Create Profile</Link> </p>*/}
-                {/*<button onClick={this.handleLogout} className="btn btn-danger">Logout</button>*/}
-                {/*</div>*/}
                 <div className="left-boarder">
                     <h1>Username</h1>
                     <img src="#" alt="username"/>
                     <p>Telescope, binoculars, eyes</p>
-                    <p>If you haven't yet created a profile, why not <Link className="/create-profile">Create a
+                    <p>If you haven't yet created a profile, why not <Link to="/create-profile">Create a
                         Profile</Link></p>
                     <button onClick={this.handleLogout} className="btn btn-danger">Logout</button>
                 </div>
