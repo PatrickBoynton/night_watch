@@ -10,13 +10,11 @@ class Register extends Component {
             email: '',
             password1: '',
             password2: '',
-            usernameStatus: '',
-            emailStatus: '',
-            password1Status: '',
-            password2Status: '',
-            profile_picture: '',
-            equipment: '',
-            about_me: '',
+            formErrors: {
+                email: '',
+                username: '',
+                other: '',
+            }
         };
         this.handleInput = this.handleInput.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -44,58 +42,59 @@ class Register extends Component {
         const response = await fetch('/rest-auth/registration/', options);
         const data = await response.json();
         console.log(data);
-        if (response.status !== 201) {
-            // Done this way to prevent multiple errors.
-            // this.setState({usernameStatus: data.username[0]});
-            // this.setState({emailStatus: data.email[0]});
-            // this.setState({password1Status: data.password1[0]});
-            // this.setState({password2Status: data.password2[0]});
-            console.log('Not logged in!');
-        } else {
+        if (response.status === 201) {
             Cookies.set('Authorization', `Token ${data.key}`);
             this.props.history.push("/create-profile")
             return <Redirect to="/create-profile" />
+        } else {
+            console.log(data);
+            this.setState({formErrors: {username: data.username, email: data.email}})
         }
     }
 
     render() {
         return (
             <>
-                <form className="login-register" onSubmit={(e) => this.handleSubmit(e)}>
+                <form className="login-register needs-validation" onSubmit={(e) => this.handleSubmit(e)}>
                     <h2>Register</h2>
-                    {this.state.usernameStatus !== '' ? <div>{this.state.usernameStatus}</div> : null}
+                    {this.state.formErrors.username !== '' ? <div className="alert-danger" >{this.state.formErrors.username}</div> : null}
                     <label className="form-label" htmlFor="username">Username</label>
                     <input onChange={this.handleInput}
                            value={this.state.username}
-                           className="form-control"
+                           className="form-control needs-validation"
                            type="text"
-                           name="username"/>
+                           name="username"
+                           required/>
 
-                    {this.state.emailStatus !== '' ? <div>{this.state.emailStatus}</div> : null}
+                    {this.state.formErrors.email !== '' ? <div className="alert-danger" >{this.state.formErrors.email}</div> : null }
                     <label className="form-label" htmlFor="email">Email</label>
                     <input onChange={this.handleInput}
                            value={this.state.email}
-                           className="form-control"
+                           className="form-control needs-validation"
                            type="email"
-                           name="email"/>
+                           name="email"
+                           required/>
+
                     <div className="row g-3">
                         <div className="col">
-                            {this.password1Status !== '' ? <div>{this.state.password1Status}</div> : null}
+
                             <label className="form-label" htmlFor="password1">Password</label>
                             <input onChange={this.handleInput}
                                    value={this.state.password1}
-                                   className="form-control"
+                                   className="form-control needs-validation"
                                    type="password"
-                                   name="password1"/>
+                                   name="password1"
+                                   required/>
                         </div>
                         <div className="col">
-                            {this.password2Status !== '' ? <div>{this.state.password2Status}</div> : null}
+
                             <label className="form-label" htmlFor="password2">Confirm Password</label>
                             <input onChange={this.handleInput}
                                    value={this.state.password2}
-                                   className="form-control mb-3"
+                                   className="form-control mb-3 needs-validation"
                                    type="password"
-                                   name="password2"/>
+                                   name="password2"
+                                   required/>
                         </div>
                     </div>
                     <button className="btn btn-success" type="submit">Register</button>
