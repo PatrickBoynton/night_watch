@@ -8,6 +8,7 @@ class ProfileForm extends Component {
             profile_picture: '',
             about_me: '',
             equipment: '',
+            preview: ''
         };
         this.handleInput = this.handleInput.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -43,7 +44,9 @@ class ProfileForm extends Component {
         this.setState({profile_image: file});
 
         let reader = new FileReader();
-
+        reader.onloadend = () => {
+            this.setState({preview: reader.result})
+        }
         reader.readAsDataURL(file);
     }
 
@@ -51,6 +54,9 @@ class ProfileForm extends Component {
         return (
             <form className="login-register" onSubmit={(e) => this.handleSubmit(e)}>
                 <h2>Create Your Profile</h2>
+                {
+                    this.state.profile_picture && <img src={this.state.preview} alt="preview" />
+                }
                 <label className="form-label" htmlFor="profile_picture">Profile Picture</label>
                 <input className="form-control"
                        onChange={this.handleInput}
