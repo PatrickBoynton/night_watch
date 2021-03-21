@@ -25,13 +25,17 @@ class EphemForm extends Component {
 
     handleImage(e) {
         let file = e.target.files[0];
+
         this.setState({image: file});
+
         let reader = new FileReader();
+
         reader.onloadend = () => {
             this.setState({
                 preview: reader.result
             });
         };
+
         reader.readAsDataURL(file);
     }
 
@@ -39,7 +43,7 @@ class EphemForm extends Component {
     async handleSubmit(e) {
         e.preventDefault();
         let formData = new FormData();
-        // TODO for in.
+
         formData.append('image', this.state.image);
         formData.append('name', this.state.name);
         formData.append('rise_time', this.state.rise_time);
@@ -54,9 +58,7 @@ class EphemForm extends Component {
             body: formData
         };
 
-        const response = await fetch('/api/v1/ephem/', options);
-        const data = await response.json();
-        console.log(data);
+        await fetch('/api/v1/ephem/', options);
     }
 
     render() {
@@ -68,18 +70,21 @@ class EphemForm extends Component {
                        onChange={this.handleInput}
                        value={this.state.name}
                        name="name"/>
+
                 <label className="form-label" htmlFor="rise_time">Rise Time</label>
                 <input className="form-control"
                        type="text"
                        onChange={this.handleInput}
                        value={this.state.rise_time}
                        name="rise_time"/>
+
                 <label className="form-label" htmlFor="set_time">Set Time</label>
                 <input className="form-control"
                        type="text"
                        onChange={this.handleInput}
                        value={this.state.set_time}
                        name="set_time"/>
+
                 <label className="form-label" htmlFor="magnitude">Magnitude</label>
                 <input className="form-control"
                        type="number"
@@ -94,6 +99,7 @@ class EphemForm extends Component {
                        type="file"
                        onChange={this.handleImage}
                        name="image"/>
+
                 <label className="form-label" htmlFor="description">Description</label>
                 <textarea className="form-control"
                           onChange={this.handleInput}
