@@ -9,7 +9,7 @@ from rest_framework import generics
 # Create your views here.
 @csrf_exempt
 def broadcast_sms(request):
-    message_to_broadcast = 'Hello world from Twilio back end!'
+    message_to_broadcast = request
 
     client = Client(settings.TWILIO_ACCOUNT_SID, settings.TWILIO_AUTH_TOKEN)
 
