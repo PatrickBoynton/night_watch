@@ -21,11 +21,20 @@ class SMSForm extends Component {
         });
     }
 
-    handleSubmit(event) {
+    async handleSubmit(event) {
         event.preventDefault();
-        alert("Testing!")
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'Application/Json'
+            },
+            body: JSON.stringify(this.state.message)
+        };
+        const response = await fetch('/api/v1/broadcast/', options);
+        const data = await response.json();
+
         this.setState({submitting: true});
-        console.log(this.state);
+        console.log(data);
     }
 
     render() {
