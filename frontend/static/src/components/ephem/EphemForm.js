@@ -25,7 +25,7 @@ class EphemForm extends Component {
 
     handleImage(e) {
         let file = e.target.files[0];
-        this.setState({ image: file });
+        this.setState({image: file});
         let reader = new FileReader();
         reader.onloadend = () => {
             this.setState({
@@ -86,6 +86,9 @@ class EphemForm extends Component {
                        onChange={this.handleInput}
                        value={this.state.magnitude}
                        name="magnitude"/>
+                {
+                    this.state.image && <img src={this.state.preview} alt="preview"/>
+                }
                 <label className="form-label" htmlFor="image">Image</label>
                 <input className="form-control"
                        type="file"
