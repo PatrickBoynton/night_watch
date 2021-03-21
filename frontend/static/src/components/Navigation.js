@@ -5,7 +5,7 @@ class Navigation extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isAdmin: false,
+            isAdmin: true,
         };
     }
 
