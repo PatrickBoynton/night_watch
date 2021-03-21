@@ -46,7 +46,7 @@ class Profile extends Component {
             <div className="container test">
                 <div className="left-boarder">
                     <h1>{this.state.user}</h1>
-                    <img src={this.state.profile_picture} alt="username"/>
+                    <img className="profile-image" src={this.state.profile_picture} alt="username"/>
                     <p>{equipment}</p>
                     <p>If you haven't yet created a profile, why not <Link to="/create-profile">Create a
                         Profile</Link></p>
