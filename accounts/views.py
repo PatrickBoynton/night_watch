@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from rest_framework import generics, permissions
 
 from .models import Profile, CustomUser
@@ -15,8 +15,8 @@ class ProfileDetailView(generics.RetrieveAPIView):
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer
 
-    def get_queryset(self):
-        return Profile.objects.filter(user=self.request.user)
+    def get_object(self):
+        return get_object_or_404(Profile, user=self.request.user)
 
 
 class ProfileCreateView(generics.CreateAPIView):
