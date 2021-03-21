@@ -34,19 +34,22 @@ class ProfileForm extends Component {
             body: formData
         };
 
-        const response = await fetch('/api/v1/profiles/create.', options);
+        const response = await fetch('/api/v1/profiles/create/', options);
         const data = await response.json().catch(error => console.log(error));
         console.log(data);
     }
 
     handleImage(event) {
         let file = event.target.files[0];
-        this.setState({profile_image: file});
+
+        this.setState({profile_picture: file});
 
         let reader = new FileReader();
+
         reader.onloadend = () => {
-            this.setState({preview: reader.result})
-        }
+            this.setState({preview: reader.result});
+        };
+
         reader.readAsDataURL(file);
     }
 
@@ -55,13 +58,19 @@ class ProfileForm extends Component {
             <form className="login-register" onSubmit={(e) => this.handleSubmit(e)}>
                 <h2>Create Your Profile</h2>
                 {
-                    this.state.profile_picture && <img src={this.state.preview} alt="preview" />
+                    this.state.profile_picture && <img src={this.state.preview} alt="preview"/>
                 }
                 <label className="form-label" htmlFor="profile_picture">Profile Picture</label>
                 <input className="form-control"
-                       onChange={this.handleInput}
+                       onChange={this.handleImage}
                        type="file"
                        name="profile_picture"/>
+
+                {/* <label className="form-label" htmlFor="image">Image</label>*/}
+                {/*<input className="form-control"*/}
+                {/*       type="file"*/}
+                {/*       onChange={this.handleImage}*/}
+                {/*       name="image"/>      */}
 
                 <label className="form-label" htmlFor="equipment">My Equipment</label>
                 <input className="form-control"
