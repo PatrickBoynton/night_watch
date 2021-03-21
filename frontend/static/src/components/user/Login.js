@@ -27,7 +27,7 @@ class Login extends Component {
             headers: {
                 'Content-Type': 'Application/Json',
                 'X-CSRFToken': Cookies.get('csrftoken'),
-                "Authorization": Cookies.get("Authorization")
+                'Authorization': Cookies.get('Authorization')
             },
             body: JSON.stringify({
                 username: this.state.username,
@@ -37,18 +37,19 @@ class Login extends Component {
 
         const response = await fetch('/rest-auth/login/', options);
         const data = await response.json();
-        console.log(data.user.profile);
+
         if (data.key) {
             Cookies.set('Authorization', `Token ${data.key}`);
-            console.log(this.props.isLoggedIn);
-            if (Cookies.get("Authorization")) {
+            if (Cookies.get('Authorization')) {
                 this.props.handleIsLoggedIn();
                 this.props.history.push('/celestial-list');
                 return <Redirect to="/celestial-list"/>;
             }
         } else {
             if (response.status !== 200) {
-                console.log('Login unsuccessful.');
+                setInterval(() => {
+                    this.setState({statusMessage: 'Something went wrong. Try again later.'});
+                }, 200);
             }
         }
     }
@@ -58,17 +59,19 @@ class Login extends Component {
             <>
                 <form className="text-center login-register" onSubmit={this.handleSubmit}>
                     <h2>Login</h2>
-                    {this.state.statusMessage !== '' ? <div>{this.state.statusMessage}</div> : null}
+                    {this.state.statusMessage !== '' ?
+                        <div className="alert-danger">{this.state.statusMessage}</div> : null}
                     <label className="form-label" htmlFor="username">Username</label>
                     <input onChange={this.handleInput}
                            className="form-control"
                            type="text"
-                           name="username"/>
-                    <label className="form-label" htmlFor="password">Password</label>
+                           name="username" required/>
+
+                    <label className="form-label" htmlFor="password" >Password</label>
                     <input onChange={this.handleInput}
                            className="form-control mb-3"
                            type="password"
-                           name="password"/>
+                           name="password" required/>
                     <button className="btn btn-success">Login</button>
                     <p>Don't have an account yet? Why not <Link to="/register">Register</Link> First?</p>
                 </form>
