@@ -17,7 +17,7 @@ input {
 textarea {
   /*color: white!important;*/
   border: 2px solid #768084!important;
-  color: #C7CED0;
+  color: #C7CED0!important;
   background-color: #181a1b!important;
 }
 .card{
@@ -83,9 +83,13 @@ img {
   border: none;
   background-color: #768084;
 }
-.btn-success:hover, .btn-success:focus{
+.btn-success:hover{
   border: none;
   background-color: #5b6265;
+}
+.btn-success:focus{
+  border: none!important;
+   background-color: #5b6265;
 }
 .about-text{
   margin-top: 30%;
