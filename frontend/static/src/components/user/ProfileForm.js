@@ -11,6 +11,7 @@ class ProfileForm extends Component {
         };
         this.handleInput = this.handleInput.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleImage = this.handleImage.bind(this);
     }
 
     handleInput(event) {
@@ -19,23 +20,31 @@ class ProfileForm extends Component {
 
     async handleSubmit(event) {
         event.preventDefault();
+        let formData = new FormData();
+        formData.append('profile_picture', this.state.profile_picture);
+        formData.append('about_me', this.state.about_me);
+        formData.append('equipment', this.state.equipment);
+
         const options = {
             method: 'POST',
             headers: {
-                "Content-Type": "Application/Json",
-                'X-CSRFToken': Cookies.get('csrftoken'),
-                'Authorization': Cookies.get('Authorization')
+                'X-CSRFToken': Cookies.get('csrftoken')
             },
-            body: JSON.stringify({
-                // profile_picture: this.state.profile_picture,
-                about_me: this.state.about_me,
-                equipment: this.state.equipment
-            })
+            body: formData
         };
 
-        const response = await fetch('/api/v1/profiles/create/', options);
-        const data = await response.json();
+        const response = await fetch('/api/v1/profiles/create.', options);
+        const data = await response.json().catch(error => console.log(error));
         console.log(data);
+    }
+
+    handleImage(event) {
+        let file = event.target.files[0];
+        this.setState({profile_image: file});
+
+        let reader = new FileReader();
+
+        reader.readAsDataURL(file);
     }
 
     render() {
