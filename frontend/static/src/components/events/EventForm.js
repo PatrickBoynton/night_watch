@@ -13,8 +13,8 @@ class EventForm extends Component {
             target: '',
             description: '',
             message: {
-                to: '',
-                body: ''
+                to: this.props.phone,
+                body: 'Testing 1, 2, 3'
             }
         };
 
@@ -42,17 +42,19 @@ class EventForm extends Component {
             })
         };
 
-
-        await fetch('/api/v1/events/', options);
+        await this.handleSMS(event);
+        const response = await fetch('/api/v1/events/', options);
         this.props.history.push('/events');
-        return <Redirect to="/events"/>;
+
+        if(response.status === 201 || response.status === 200)
+            return <Redirect to="/events"/>;
     }
 
     async handleSMS(event) {
         event.preventDefault();
         let currentState = this.state.message;
-        currentState["body"] = `${this.state.name} rises at ${this.state.rise_time} and sets at ${this.state.set_time} look East.`
-        this.setState({currentState})
+        currentState['body'] = `Your viewing target: ${this.state.name} will rise at ${this.state.time}  ${this.state.description}`;
+        this.setState({currentState});
         const options = {
             method: 'POST',
             headers: {
@@ -67,7 +69,7 @@ class EventForm extends Component {
 
     render() {
         return (
-            <form className="login-register" onSubmit={this.handleSubmit}>
+            <form className="login-register" onSubmit={(e) => this.handleSubmit(e)}>
                 <h2>Create an Event</h2>
                 <label className="form-label" htmlFor="name">Event Name</label>
                 <input className="form-control" type="text"
