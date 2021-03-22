@@ -1,5 +1,6 @@
 import {Component} from 'react';
 
+// This is a test, only a test.
 class SMSForm extends Component {
     constructor(props) {
         super(props);
@@ -30,11 +31,9 @@ class SMSForm extends Component {
             },
             body: JSON.stringify(this.state.message)
         };
-        const response = await fetch('/api/v1/broadcast/', options);
-        const data = await response.json();
+        await fetch('/api/v1/broadcast/', options);
 
         this.setState({submitting: true});
-        console.log(data);
     }
 
     render() {
