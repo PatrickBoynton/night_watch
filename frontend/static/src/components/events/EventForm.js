@@ -12,6 +12,10 @@ class EventForm extends Component {
             time: '',
             target: '',
             description: '',
+            message: {
+                to: '',
+                body: ''
+            }
         };
 
         this.handleInput = this.handleInput.bind(this);
@@ -37,11 +41,28 @@ class EventForm extends Component {
                 description: this.state.description,
             })
         };
-        const response = await fetch('/api/v1/events/', options);
-        const data = await response.json();
-        console.log(data);
+
+
+        await fetch('/api/v1/events/', options);
         this.props.history.push('/events');
         return <Redirect to="/events"/>;
+    }
+
+    async handleSMS(event) {
+        event.preventDefault();
+        let currentState = this.state.message;
+        currentState["body"] = `${this.state.name} rises at ${this.state.rise_time} and sets at ${this.state.set_time} look East.`
+        this.setState({currentState})
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'Application/Json'
+            },
+            body: JSON.stringify(this.state.message.body)
+        };
+        await fetch('/api/v1/broadcast/', options);
+
+        this.setState({submitting: true});
     }
 
     render() {
