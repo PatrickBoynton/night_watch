@@ -5,17 +5,31 @@ class EphemList extends Component {
         super(props);
         this.state = {
             ephems: [],
+            message: {
+                to: '',
+                body: ''
+            },
             isEditMode: false,
             isAdmin: false,
+            submitting: false,
+            error: false
         };
         this.handleEditMode = this.handleEditMode.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleText = this.handleText.bind(this);
     }
 
     async componentDidMount() {
         const response = await fetch('api/v1/ephem/');
         const data = await response.json();
         this.setState({ephems: data});
+
+        const profile = await fetch('api/v1/profiles/details/');
+        const profileData = await profile.json();
+        let currentState = this.state.message;
+
+        currentState["to"] = '+' + profileData.phone
+        this.setState({currentState});
     }
 
     handleEditMode() {
@@ -26,6 +40,26 @@ class EphemList extends Component {
         this.setState({isEditMode: false});
     }
 
+    async handleText(event, id) {
+        event.preventDefault();
+        // const data = await response.json();
+        let currentState = this.state.message;
+
+        currentState['body'] = `Rise time: ${this.state.ephems[id].rise_time} Name: ${this.state.ephems[id].name}`;
+        this.setState({submitting: true});
+        this.setState({currentState});
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'Application/Json'
+            },
+            body: JSON.stringify(this.state.message.body)
+        };
+        const response = await fetch('/api/v1/broadcast/', options);
+        console.log(this.state.message.body);
+        // console.log(data);
+    }
+    // TODO hook up when finished.
     // showForm(item) {
     //     return <form action="" onSubmit={this.handleSubmit}>
     //         <label className="form-label" htmlFor="image">Image</label>
@@ -55,7 +89,7 @@ class EphemList extends Component {
     // }
 
     render() {
-        const list = this.state.ephems.map(item =>
+        const list = this.state.ephems.map((item, index) =>
             <div key={item.id} className="card">
                 <div className="card-header">
                     <img src={item.image} alt="A planet, star or satellite."/>
@@ -63,7 +97,7 @@ class EphemList extends Component {
                 </div>
                 <p>rise time: {item.rise_time}</p>
                 <p>set time: {item.set_time}</p>
-                <button onClick={() => alert("Clicked!")} className="btn-primary">Remind me</button>
+                <button onClick={(event) => this.handleText(event, index)} className="btn-primary">Remind me</button>
                 {
                     this.state.isAdmin
                         ?
