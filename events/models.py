@@ -30,7 +30,7 @@ class Event(models.Model):
     occurrences = models.CharField(choices=times_to_occur,
                                    max_length=50,
                                    default='recurring')
-    phone = models.CharField(max_length=11)
+    phone = models.CharField(max_length=11, null=True, blank=True)
 
     def __str__(self):
         return self.name
