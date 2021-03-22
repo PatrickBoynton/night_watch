@@ -4,12 +4,16 @@ from django.conf import settings
 
 # Create your models here.
 class Event(models.Model):
-    upcoming = 'upc'
-    finished = 'fin'
 
     event_statuses = [
-        (upcoming, 'upcoming'),
-        (finished, 'finished')
+        ('upc', 'upcoming'),
+        ('can', 'cancelled'),
+        ('fin', 'finished')
+    ]
+
+    times_to_occur = [
+        ('one', 'once'),
+        ('rec', 'recurring')
     ]
 
     name = models.CharField(max_length=60)
@@ -21,8 +25,11 @@ class Event(models.Model):
     # Upcoming, finished
     status = models.CharField(choices=event_statuses,
                               max_length=40,
-                              null=True,
-                              default=upcoming)
+                              default='upcoming')
+
+    occurrences = models.CharField(choices=times_to_occur,
+                                   max_length=50,
+                                   default='recurring')
 
     def __str__(self):
         return self.name
