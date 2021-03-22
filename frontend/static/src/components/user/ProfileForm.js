@@ -1,5 +1,6 @@
 import {Component} from 'react';
 import Cookies from 'js-cookie';
+import {Redirect} from 'react-router-dom';
 
 class ProfileForm extends Component {
     constructor(props) {
@@ -37,6 +38,9 @@ class ProfileForm extends Component {
         const response = await fetch('/api/v1/profiles/create/', options);
         const data = await response.json().catch(error => console.log(error));
         console.log(data);
+
+        if (response.status === 201)
+            return <Redirect to="/profile" />
     }
 
     handleImage(event) {
