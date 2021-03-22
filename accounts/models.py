@@ -18,6 +18,7 @@ class Profile(models.Model):
     my_equipment = ArrayField(models.CharField(max_length=50),
                               null=True,
                               blank=True)
+    phone = models.CharField(max_length=11)
 
     def __str__(self):
         return self.user.username
