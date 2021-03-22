@@ -70,12 +70,6 @@ class ProfileForm extends Component {
                        type="file"
                        name="profile_picture"/>
 
-                {/* <label className="form-label" htmlFor="image">Image</label>*/}
-                {/*<input className="form-control"*/}
-                {/*       type="file"*/}
-                {/*       onChange={this.handleImage}*/}
-                {/*       name="image"/>      */}
-
                 <label className="form-label" htmlFor="equipment">My Equipment</label>
                 <input className="form-control"
                        onChange={this.handleInput}
@@ -92,6 +86,14 @@ class ProfileForm extends Component {
                           cols="30"
                           rows="10">
                 </textarea>
+
+                <label className="form-label" htmlFor="phone_number">Phone #</label>
+                <input type="tel"
+                       className="form-control"
+                       name="phone_number"
+                       id="phone_number"
+                       maxLength={12}
+                       placeholder="for alerting you of astro events"/>
 
                 <button className="btn btn-success" type="submit">Create Profile</button>
             </form>
