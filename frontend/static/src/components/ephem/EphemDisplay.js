@@ -20,7 +20,7 @@ class EphemDisplay extends Component{
 
     render() {
         const ephems = this.state.ephem.map(ephem => <section>
-            <img src={ephem.image} alt="The sun."/>
+            <img src={ephem.image} alt={ephem.name}/>
             <h1>{ephem.name}</h1>
             <p>Rise time: </p>
             <h2>{ephem.rise_time}</h2>
