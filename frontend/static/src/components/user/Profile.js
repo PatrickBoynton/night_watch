@@ -17,8 +17,10 @@ class Profile extends Component {
     async componentDidMount() {
         const response = await fetch('api/v1/profiles/details/')
         const data = await response.json();
+        console.log(data);
         this.setState({user: data.user,
                             profile_picture: data.profile_picture,
+                            my_equipment: data.my_equipment,
                             about_me: data.about_me})
     }
 
@@ -41,7 +43,8 @@ class Profile extends Component {
     }
 
     render() {
-        const equipment = this.state.equipment?.map(item => <p>{item}</p>)
+        const equipment = this.state.my_equipment?.map(item => <p>{item}</p>)
+        console.log(equipment);
         return (
             <div className="container test">
                 <div className="left-boarder">
