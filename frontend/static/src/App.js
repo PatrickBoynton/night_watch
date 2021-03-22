@@ -27,7 +27,8 @@ class App extends Component {
                 user: '',
                 profile_picture: '',
                 about_me: '',
-                my_equipment: []
+                my_equipment: [],
+                phone: '',
             }
         };
         this.handleIsLoggedIn = this.handleIsLoggedIn.bind(this);
@@ -43,7 +44,8 @@ class App extends Component {
                 user: data.user,
                 profile_picture: data.profile_picture,
                 about_me: data.about_me,
-                my_equipment: data.my_equipment
+                my_equipment: data.my_equipment,
+                phone: data.phone
             }
         });
     }
@@ -69,7 +71,7 @@ class App extends Component {
                                                         handleIsLoggedIn={this.handleIsLoggedIn}/>)}/>
                     <Route path="/create-profile" component={ProfileForm}/>
                     <Route path="/ephem/form" component={EphemForm}/>
-                    <Route path="/event/form" component={EventForm}/>
+                    <Route path="/event/form" render={(props) => (<EventForm {...props} phone={this.state.user.phone}/>)}/>
                     <Route path="/display" component={EphemDisplay}/>
                     <Route path="/celestial-list" component={EphemList}/>
                     <Route path="/events" component={EventDisplay}/>
