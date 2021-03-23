@@ -21,6 +21,10 @@ class Profile(models.Model):
     receive_notifications = models.BooleanField(null=True,
                                                 blank=True,
                                                 default=False)
+    location = models.CharField(max_length=50,
+                                null=True,
+                                Blank=True,
+                                default='Greenville')
     phone = models.CharField(max_length=11, null=True, blank=True)
 
     def __str__(self):
