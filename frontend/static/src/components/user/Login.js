@@ -72,7 +72,13 @@ class Login extends Component {
                            className="form-control mb-3"
                            type="password"
                            name="password" required/>
-                    <button className="btn btn-success">Login</button>
+                    {
+                        this.state.username !== '' && this.state.password !== ''
+                        ?
+                        <button className="btn btn-success">Login</button>
+                        :
+                            <button className="btn btn-success" disabled>Login</button>
+                    }
                     <p>Don't have an account yet? Why not <Link to="/register">Register</Link> First?</p>
                 </form>
             </>
