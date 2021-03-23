@@ -90,6 +90,9 @@ img {
   border: none;
   background-color: #768084;
 }
+.btn-success:disabled{
+  background-color: #768084;
+}
 .btn-success:hover{
   border: none;
   background-color: #5b6265;
