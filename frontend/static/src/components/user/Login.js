@@ -45,13 +45,13 @@ class Login extends Component {
                 this.props.history.push('/celestial-list');
                 return <Redirect to="/celestial-list"/>;
             }
-        } else {
-            if (response.status !== 200) {
-                setInterval(() => {
-                    this.setState({statusMessage: 'Something went wrong. Try again later.'});
-                }, 200);
-            }
+        } else if (!response.ok) {
+            setTimeout(() => this.setState({statusMessage: 'Something went wrong.'}), 2000);
         }
+    }
+
+    componentWillUnmount() {
+        clearTimeout();
     }
 
     render() {
@@ -67,16 +67,16 @@ class Login extends Component {
                            type="text"
                            name="username" required/>
 
-                    <label className="form-label" htmlFor="password" >Password</label>
+                    <label className="form-label" htmlFor="password">Password</label>
                     <input onChange={this.handleInput}
                            className="form-control mb-3"
                            type="password"
                            name="password" required/>
                     {
                         this.state.username !== '' && this.state.password !== ''
-                        ?
-                        <button className="btn btn-success">Login</button>
-                        :
+                            ?
+                            <button className="btn btn-success">Login</button>
+                            :
                             <button className="btn btn-success" disabled>Login</button>
                     }
                     <p>Don't have an account yet? Why not <Link to="/register">Register</Link> First?</p>
