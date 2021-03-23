@@ -23,6 +23,7 @@ class Navigation extends Component {
                             <NavLink to="/events">Upcoming Events</NavLink>
                             <NavLink to='/glossary' >Glossary</NavLink>
                             <NavLink to='/about' >About</NavLink>
+                            {/*<NavLink>Logout</NavLink>*/}
                         </>
                         :
                         <>
