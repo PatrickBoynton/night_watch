@@ -19,6 +19,7 @@ celery = "*"
 twilio = "*"
 django-celery-results = "*"
 django-celery-beat = "*"
+redis = "*"
 
 [dev-packages]
 
