@@ -18,7 +18,9 @@ class Profile(models.Model):
     my_equipment = ArrayField(models.CharField(max_length=50),
                               null=True,
                               blank=True)
-    receive_notifications = models.BooleanField(null=True, blank=True)
+    receive_notifications = models.BooleanField(null=True,
+                                                blank=True,
+                                                default=False)
     phone = models.CharField(max_length=11, null=True, blank=True)
 
     def __str__(self):
