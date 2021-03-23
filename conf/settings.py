@@ -52,6 +52,8 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'rest_auth.registration',
+    'django_celery_results',
+    'django_celery_beat',
     # Installed apps.
     'accounts.apps.AccountsConfig',
     'api.apps.ApiConfig',
@@ -153,6 +155,8 @@ MEDIA_URL = '/media/'
 CELERY_TIMEZONE = "US/Eastern"
 CELERY_TASK_STARTED = True
 CELERY_TASK_TIME_LIMIT = 30 * 60
+# TODO come back later if doesn't work.
+CELERY_RESULT_BACKEND = 'django-db'
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 SITE_ID = 1
