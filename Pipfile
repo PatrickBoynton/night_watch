@@ -17,6 +17,8 @@ skyfield = "*"
 pytz = "*"
 celery = "*"
 twilio = "*"
+django-celery-results = "*"
+django-celery-beat = "*"
 
 [dev-packages]
 
