@@ -9,10 +9,12 @@ class ProfileForm extends Component {
             profile_picture: '',
             about_me: '',
             equipment: '',
-            preview: ''
+            preview: '',
+            receive_notifications: false,
         };
         this.handleInput = this.handleInput.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleCheck = this.handleCheck.bind(this);
         this.handleImage = this.handleImage.bind(this);
     }
 
@@ -40,7 +42,7 @@ class ProfileForm extends Component {
         console.log(data);
 
         if (response.status === 201)
-            return <Redirect to="/profile" />
+            return <Redirect to="/profile"/>;
     }
 
     handleImage(event) {
@@ -57,6 +59,12 @@ class ProfileForm extends Component {
         reader.readAsDataURL(file);
     }
 
+    handleCheck(event) {
+        this.setState((previousState) => ({
+            receive_notifications: !previousState.receive_notifications
+        }))
+    }
+
     render() {
         return (
             <form className="login-register" onSubmit={(e) => this.handleSubmit(e)}>
@@ -70,13 +78,8 @@ class ProfileForm extends Component {
                        type="file"
                        name="profile_picture"/>
 
-                <label className="form-label" htmlFor="equipment">My Equipment</label>
-                <input className="form-control"
-                       onChange={this.handleInput}
-                       value={this.state.equipment}
-                       type="text"
-                       name="equipment"
-                       placeholder="Whatever you view the night sky with."/>
+                <label className="form-label" htmlFor="location">City</label>
+                <input className="form-control" type="text" name="location" id="location"/>
 
                 <label className="form-label" htmlFor="about_me">About Me</label>
                 <textarea className="form-control"
@@ -87,13 +90,27 @@ class ProfileForm extends Component {
                           rows="10">
                 </textarea>
 
-                <label className="form-label" htmlFor="phone_number">Phone #</label>
-                <input type="tel"
-                       className="form-control"
-                       name="phone_number"
-                       id="phone_number"
-                       maxLength={12}
-                       placeholder="for alerting you of astro events"/>
+                <label className="form-label" htmlFor="receive_notifications">Receive Notifications</label>
+                <input className="form-group"
+                       type="checkbox"
+                       onChange={this.handleCheck}
+                       value={this.state.receive_notifications}
+                       name="receive_notifications"/>
+                {
+                    this.state.receive_notifications
+                        ?
+                        <>
+                            <label className="form-label" htmlFor="phone_number">Phone #</label>
+                            <input type="tel"
+                                   className="form-control"
+                                   name="phone_number"
+                                   id="phone_number"
+                                   maxLength={12}
+                                   placeholder="for alerting you of astro events"/>
+                        </>
+                        :
+                        null
+                }
 
                 <button className="btn btn-success" type="submit">Create Profile</button>
             </form>
