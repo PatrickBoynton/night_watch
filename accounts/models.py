@@ -23,7 +23,7 @@ class Profile(models.Model):
                                                 default=False)
     location = models.CharField(max_length=50,
                                 null=True,
-                                Blank=True,
+                                blank=True,
                                 default='Greenville')
     phone = models.CharField(max_length=11, null=True, blank=True)
 
