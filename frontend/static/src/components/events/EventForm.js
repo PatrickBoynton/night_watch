@@ -75,28 +75,24 @@ class EventForm extends Component {
                 <input className="form-control" type="text"
                        onChange={this.handleInput}
                        value={this.state.value}
-                       name="name"
-                       required/>
+                       name="name"/>
                 <label className="form-label" htmlFor="target">Target</label>
                 <input type="text"
                        className="form-control"
                        onChange={this.handleInput}
                        value={this.state.value}
-                       name="target"
-                       required/>
+                       name="target"/>
                 <label className="form-label" htmlFor="time">Time</label>
                 <input className="form-control"
                        onChange={this.handleInput}
                        value={this.state.value}
                        name="time"
-                       type="text"
-                       required/>
+                       type="text"/>
                 <label className="form-label" htmlFor="description">Description</label>
                 <textarea className="form-control"
                           onChange={this.handleInput}
                           name="description"
-                          value={this.state.value}
-                          required>
+                          value={this.state.value}>
                 </textarea>
                 {
                     this.state.name !== '' && this.state.time !== '' && this.state.target !== '' && this.state.description !== ''
