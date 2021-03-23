@@ -21,9 +21,9 @@ textarea {
   background-color: #181a1b!important;
 }
 .card{
-  width: 30%;
+  /*width: 30%;*/
   border: 2px solid #768084;
-  margin: 5px 5px 20px;
+  /*margin: 5px 5px 20px;*/
   background-color: #181a1b;
   color: #c7ced0;
 }
