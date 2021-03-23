@@ -90,7 +90,7 @@ class EphemList extends Component {
 
     render() {
         const list = this.state.ephems.map((item, index) =>
-            <div key={item.id} className="card align-">
+            <div key={item.id} className="card">
                 <div className="card-header">
                     <img src={item.image} alt="A planet, star or satellite."/>
                     <h2>{item.name}</h2>
@@ -115,7 +115,10 @@ class EphemList extends Component {
                 {
                     !this.state.isEditMode
                         ?
-                        <div className="d-flex flex-wrap justify-content-center align-content-center">
+                        <div className="planet-width
+                                        d-flex
+                                        flex-wrap
+                                        justify-content-around ">
                             {list}
                         </div>
                         :
