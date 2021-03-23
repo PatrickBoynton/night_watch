@@ -44,11 +44,11 @@ class Register extends Component {
         console.log(data);
         if (response.status === 201) {
             Cookies.set('Authorization', `Token ${data.key}`);
-            this.props.history.push("/create-profile")
-            return <Redirect to="/create-profile" />
+            this.props.history.push('/create-profile');
+            return <Redirect to="/create-profile"/>;
         } else {
             console.log(data);
-            this.setState({formErrors: {username: data.username, email: data.email}})
+            this.setState({formErrors: {username: data.username, email: data.email}});
         }
     }
 
@@ -57,7 +57,8 @@ class Register extends Component {
             <>
                 <form className="login-register needs-validation" onSubmit={(e) => this.handleSubmit(e)}>
                     <h2>Register</h2>
-                    {this.state.formErrors.username !== '' ? <div className="alert-danger" >{this.state.formErrors.username}</div> : null}
+                    {this.state.formErrors.username !== '' ?
+                        <div className="alert-danger">{this.state.formErrors.username}</div> : null}
                     <label className="form-label" htmlFor="username">Username</label>
                     <input onChange={this.handleInput}
                            value={this.state.username}
@@ -66,7 +67,8 @@ class Register extends Component {
                            name="username"
                            required/>
 
-                    {this.state.formErrors.email !== '' ? <div className="alert-danger" >{this.state.formErrors.email}</div> : null }
+                    {this.state.formErrors.email !== '' ?
+                        <div className="alert-danger">{this.state.formErrors.email}</div> : null}
                     <label className="form-label" htmlFor="email">Email</label>
                     <input onChange={this.handleInput}
                            value={this.state.email}
@@ -97,7 +99,13 @@ class Register extends Component {
                                    required/>
                         </div>
                     </div>
-                    <button className="btn btn-success" type="submit">Register</button>
+                    {
+                        this.state.username !== '' && this.state.email !== '' && this.state.password1 && this.state.password2
+                            ?
+                            <button className="btn btn-success" type="submit">Register</button>
+                            :
+                            <button className="btn btn-success" type="submit" disabled>Register</button>
+                    }
                     <p>Already have an account? Why don't you <Link to="/login">Login</Link>? </p>
                 </form>
             </>
