@@ -21,7 +21,7 @@ textarea {
   background-color: #181a1b!important;
 }
 .card{
-  width: 25%;
+  width: 30%;
   border: 2px solid #768084;
   margin: 5px 5px 20px;
   background-color: #181a1b;
@@ -104,3 +104,15 @@ img {
 .nav{
   padding: 20px;
 }
+.planet-width{
+  /*max-width: 1000px;*/
+}
+/*@media only screen and (max-width: 640px) {*/
+/*  .card {*/
+/*    width: 100%;*/
+/*  }*/
+/*  .right-border{*/
+/*    visibility: hidden;*/
+/*  }*/
+/*}*/
+
