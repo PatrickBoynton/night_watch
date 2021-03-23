@@ -19,7 +19,7 @@ class Navigation extends Component {
                             <NavLink className="navbar-brand" to='/home' >Night Watch</NavLink>
                             <NavLink to="/profile">Profile</NavLink>
                             <NavLink to="/event/form">Add Event</NavLink>
-                            <NavLink to="/celestial-list">Planets</NavLink>
+                            <NavLink to="/celestial-list">Celestial Events</NavLink>
                             <NavLink to="/events">Upcoming Events</NavLink>
                             <NavLink to='/glossary' >Glossary</NavLink>
                             <NavLink to='/about' >About</NavLink>
