@@ -55,7 +55,7 @@ class EphemList extends Component {
             },
             body: JSON.stringify(this.state.message.body)
         };
-        const response = await fetch('/api/v1/broadcast/', options);
+        await fetch('/api/v1/broadcast/', options);
         console.log(this.state.message.body);
         // console.log(data);
     }
@@ -90,10 +90,10 @@ class EphemList extends Component {
 
     render() {
         const list = this.state.ephems.map((item, index) =>
-            <div key={item.id} className="card">
+            <div key={item.id} className="card align-">
                 <div className="card-header">
                     <img src={item.image} alt="A planet, star or satellite."/>
-                    <h2 className="align-self-end">{item.name}</h2>
+                    <h2>{item.name}</h2>
                 </div>
                 <p>rise time: {item.rise_time}</p>
                 <p>set time: {item.set_time}</p>
@@ -115,7 +115,7 @@ class EphemList extends Component {
                 {
                     !this.state.isEditMode
                         ?
-                        <div className="d-flex flex-wrap justify-content-center">
+                        <div className="d-flex flex-wrap justify-content-center align-content-center">
                             {list}
                         </div>
                         :
