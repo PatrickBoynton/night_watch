@@ -41,7 +41,7 @@ class ProfileForm extends Component {
         const data = await response.json().catch(error => console.log(error));
         console.log(data);
 
-        if (response.status === 201)
+        if (response.ok)
             return <Redirect to="/profile"/>;
     }
 
@@ -70,7 +70,7 @@ class ProfileForm extends Component {
             <form className="login-register" onSubmit={(e) => this.handleSubmit(e)}>
                 <h2>Create Your Profile</h2>
                 {
-                    this.state.profile_picture && <img src={this.state.preview} alt="preview"/>
+                    this.state.profile_picture ? <img src={this.state.preview} alt="preview"/> : null
                 }
                 <label className="form-label" htmlFor="profile_picture">Profile Picture</label>
                 <input className="form-control"
