@@ -26,13 +26,11 @@ class Profile extends Component {
     }
 
     render() {
-        const equipment = this.props.user.my_equipment?.map(item => <p key={item.id}>{item}</p>)
         return (
             <div className="container test">
                 <div className="left-boarder">
                     <h1>{this.props.user.user}</h1>
                     <img className="profile-image" src={this.props.user.profile_picture} alt="username"/>
-                    <div>{equipment}</div>
                     <p>If you haven't yet created a profile, why not <Link to="/create-profile">Create a
                         Profile</Link></p>
                     <button onClick={this.handleLogout} className="btn btn-danger">Logout</button>
