@@ -22,6 +22,7 @@ textarea {
 }
 .card{
   /*width: 30%;*/
+  min-width: 300px;
   border: 2px solid #768084;
   /*margin: 5px 5px 20px;*/
   background-color: #181a1b;
