@@ -58,7 +58,7 @@ class App extends Component {
     render() {
         return (
             <div className="App">
-                <Navigation isLoggedIn={this.state.isLoggedIn}/>
+                <Navigation isLoggedIn={this.state.isLoggedIn} handleIsLoggedIn={this.handleIsLoggedIn}/>
                 <Switch>
                     <Route path='/home' component={Home}/>
                     <Route path='/about' component={About}/>
