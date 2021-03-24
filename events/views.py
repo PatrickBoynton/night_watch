@@ -15,6 +15,10 @@ class EventView(generics.ListCreateAPIView):
         user = self.request.user
         serializer.save(user=user)
 
+    def get_queryset(self):
+        user = self.request.user
+        return Event.objects.filter(user=user)
+
 
 class EventDetailView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (permissions.IsAuthenticated,)
