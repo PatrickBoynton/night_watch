@@ -1,3 +1,4 @@
+from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import ListView
 from rest_framework import generics, permissions
 from .models import Ephem
@@ -16,8 +17,3 @@ class EphemDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Ephem.objects.all()
     serializer_class = EphemSerializer
 
-
-class EphemPartialUpdate(generics.RetrieveUpdateAPIView):
-    permission_classes = (permissions.IsAdminUser,)
-    queryset = Ephem.objects.all()
-    serializer_class = EphemSerializer
