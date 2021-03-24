@@ -1,5 +1,4 @@
 import {Component} from 'react';
-import Search from './Search';
 
 class EphemList extends Component {
     constructor(props) {
@@ -32,7 +31,7 @@ class EphemList extends Component {
         const profileData = await profile.json();
         let currentState = this.state.message;
 
-        currentState["to"] = '+' + profileData.phone
+        currentState['to'] = '+' + profileData.phone;
         this.setState({currentState});
     }
 
@@ -60,16 +59,16 @@ class EphemList extends Component {
         };
         await fetch('/api/v1/broadcast/', options);
         console.log(this.state.message.body);
-        // console.log(data);
     }
 
     handleInput(event) {
-        this.setState({result: event.target.value})
+        this.setState({result: event.target.value});
     }
 
     handleCheck() {
-        console.log(this.state.ephems.filter(name => name.name ===  this.state.result))
+        console.log(this.state.ephems.filter(name => name.name === this.state.result));
     }
+
     // TODO hook up when finished.
     // showForm(item) {
     //     return <form action="" onSubmit={this.handleSubmit}>
@@ -101,37 +100,41 @@ class EphemList extends Component {
 
     render() {
         const list = this.state.ephems.map((item, index) =>
-            <div key={item.id} className="col-sm-4 col-12">
-                <div className="card">
-                <div className="card-header">
-                    <img src={item.image} alt="A planet, star or satellite."/>
-                    <h2>{item.name}</h2>
-                </div>
-                <p>rise time: {item.rise_time}</p>
-                <p>set time: {item.set_time}</p>
-                <button onClick={(event) => this.handleText(event, index)} className="btn-primary">Remind me</button>
-                {
-                    this.state.isAdmin
-                        ?
-                        <div className="card-footer">
-                            <button onClick={this.handleEditMode} className="btn btn-primary">Edit</button>
-                            <button className="btn btn-danger">Delete</button>
-                        </div>
-                        :
-                        null
-                }
+            <div key={item.id} className="col-sm-4 col-12 mb-3">
+                <div className="card h-100">
+                    <div className="card-header">
+                        <img src={item.image} alt="A planet, star or satellite."/>
+                        <h2>{item.name}</h2>
+                    </div>
+                    <p>rise time: {item.rise_time}</p>
+                    <p>set time: {item.set_time}</p>
+                    <button onClick={(event) => this.handleText(event, index)} className="btn-primary">Remind me
+                    </button>
+                    {
+                        this.state.isAdmin
+                            ?
+                            <div className="card-footer">
+                                <button onClick={this.handleEditMode} className="btn btn-primary">Edit</button>
+                                <button className="btn btn-danger">Delete</button>
+                            </div>
+                            :
+                            null
+                    }
                 </div>
             </div>
         );
         return (
             <>
                 <label htmlFor="result">Search</label>
-                <input  className="form-control"
-                        value={this.state.result}
-                        onChange={this.handleInput}
-                        type="text"
-                        name="result" />
-                <button  onClick={this.handleCheck} className="btn btn-primary" >Search</button>
+                <div className="row">
+                    <input className="col-10 mb-5"
+                           value={this.state.result}
+                           onChange={this.handleInput}
+                           type="text"
+                           name="result"/>
+                    <button onClick={this.handleCheck} className="col-2 btn btn-primary mb-5">Search</button>
+                </div>
+
                 {
                     !this.state.isEditMode
                         ?
