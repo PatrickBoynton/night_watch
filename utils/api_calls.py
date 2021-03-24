@@ -8,7 +8,7 @@ t1 = ts.utc(2021, 3, 19)
 eph = load('de421.bsp')
 
 greenville = wgs84.latlon(34.8526 * N, 82.3940 * W, elevation_m=299.923)
-planet = eph['sun']
+planet = eph['andromeda']
 
 f = risings_and_settings(eph, planet, greenville)
 tz = timezone('US/Eastern')
