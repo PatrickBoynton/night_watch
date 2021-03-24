@@ -1,4 +1,5 @@
 import {Component} from 'react';
+import Search from './Search';
 
 class EphemList extends Component {
     constructor(props) {
@@ -12,11 +13,14 @@ class EphemList extends Component {
             isEditMode: false,
             isAdmin: false,
             submitting: false,
-            error: false
+            error: false,
+            result: ''
         };
         this.handleEditMode = this.handleEditMode.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleText = this.handleText.bind(this);
+        this.handleInput = this.handleInput.bind(this);
+        this.handleCheck = this.handleCheck.bind(this);
     }
 
     async componentDidMount() {
@@ -42,7 +46,6 @@ class EphemList extends Component {
 
     async handleText(event, id) {
         event.preventDefault();
-        // const data = await response.json();
         let currentState = this.state.message;
 
         currentState['body'] = `Rise time: ${this.state.ephems[id].rise_time} Name: ${this.state.ephems[id].name}`;
@@ -58,6 +61,14 @@ class EphemList extends Component {
         await fetch('/api/v1/broadcast/', options);
         console.log(this.state.message.body);
         // console.log(data);
+    }
+
+    handleInput(event) {
+        this.setState({result: event.target.value})
+    }
+
+    handleCheck() {
+        console.log(this.state.ephems.filter(name => name.name ===  this.state.result))
     }
     // TODO hook up when finished.
     // showForm(item) {
@@ -114,6 +125,13 @@ class EphemList extends Component {
         );
         return (
             <>
+                <label htmlFor="result">Search</label>
+                <input  className="form-control"
+                        value={this.state.result}
+                        onChange={this.handleInput}
+                        type="text"
+                        name="result" />
+                <button  onClick={this.handleCheck} className="btn btn-primary" >Search</button>
                 {
                     !this.state.isEditMode
                         ?
