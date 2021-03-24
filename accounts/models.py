@@ -15,9 +15,7 @@ class Profile(models.Model):
     profile_picture = models.ImageField(upload_to='profiles/', blank=True,
                                         null=True)
     about_me = models.TextField(null=True, blank=True)
-    my_equipment = ArrayField(models.CharField(max_length=50),
-                              null=True,
-                              blank=True)
+
     receive_notifications = models.BooleanField(null=True,
                                                 blank=True,
                                                 default=False)
