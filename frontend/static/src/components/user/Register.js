@@ -42,7 +42,7 @@ class Register extends Component {
         const response = await fetch('/rest-auth/registration/', options);
         const data = await response.json();
         console.log(data);
-        if (response.status === 201) {
+        if (response.ok) {
             Cookies.set('Authorization', `Token ${data.key}`);
             this.props.history.push('/create-profile');
             return <Redirect to="/create-profile"/>;
