@@ -1,5 +1,5 @@
 import {Component} from 'react';
-import {NavLink, Redirect} from 'react-router-dom';
+import {NavLink, Redirect, withRouter} from 'react-router-dom';
 import Cookies from 'js-cookie';
 
 class Navigation extends Component {
@@ -25,7 +25,8 @@ class Navigation extends Component {
         await fetch('/rest-auth/logout/', options);
         Cookies.remove('csrftoken');
         Cookies.remove('Authorization');
-        this.state.history.push('/login');
+        this.props.history.push('/login');
+        this.props.handleIsLoggedIn();
         return <Redirect to='/login'/>;
     }
 
@@ -64,4 +65,4 @@ class Navigation extends Component {
     }
 }
 
-export default Navigation;
+export default withRouter(Navigation);
