@@ -20,6 +20,7 @@ class EphemList extends Component {
         this.handleText = this.handleText.bind(this);
         this.handleInput = this.handleInput.bind(this);
         this.handleCheck = this.handleCheck.bind(this);
+        this.showResults = this.showResults.bind(this);
     }
 
     async componentDidMount() {
@@ -69,6 +70,14 @@ class EphemList extends Component {
         console.log(this.state.ephems.filter(name => name.name === this.state.result));
     }
 
+    showResults(results){
+        return <div className="card">
+            <div className="card-header">
+                <h1>results.name</h1>
+            </div>
+        </div>
+    }
+
     // TODO hook up when finished.
     // showForm(item) {
     //     return <form action="" onSubmit={this.handleSubmit}>
@@ -99,6 +108,7 @@ class EphemList extends Component {
     // }
 
     render() {
+        const result = this.state.results?.map(x => x)
         const list = this.state.ephems.map((item, index) =>
             <div key={item.id} className="col-sm-4 col-12 mb-3">
                 <div className="card h-100">
@@ -141,7 +151,14 @@ class EphemList extends Component {
                         <div className="planet-width
                                         px-4
                                         row">
-                            {list}
+
+                            {
+                             !this.state.result.includes(list.name)
+                                ?
+                                list
+                                :
+                                 this.showResults(result)
+                            }
                         </div>
                         :
                         this.showForm()
