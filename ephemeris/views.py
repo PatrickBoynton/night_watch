@@ -8,7 +8,7 @@ from .serializers import EphemSerializer
 # Create your views here.
 class EphemListView(generics.ListCreateAPIView):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-    queryset = Ephem.objects.all()
+    queryset = Ephem.objects.all().order_by('name')
     serializer_class = EphemSerializer
 
 
