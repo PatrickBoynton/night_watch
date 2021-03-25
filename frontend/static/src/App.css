@@ -110,6 +110,9 @@ img {
 .planet-width{
   /*max-width: 1000px;*/
 }
+.img-container{
+  height: 300px;
+}
 /*@media only screen and (max-width: 640px) {*/
 /*  .card {*/
 /*    width: 100%;*/
