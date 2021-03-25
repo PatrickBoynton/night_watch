@@ -13,14 +13,12 @@ class EphemList extends Component {
             isAdmin: false,
             submitting: false,
             error: false,
-            result: ''
+            result: '',
         };
         this.handleEditMode = this.handleEditMode.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleText = this.handleText.bind(this);
         this.handleInput = this.handleInput.bind(this);
-        this.handleCheck = this.handleCheck.bind(this);
-        this.showResults = this.showResults.bind(this);
     }
 
     async componentDidMount() {
@@ -66,18 +64,6 @@ class EphemList extends Component {
         this.setState({result: event.target.value});
     }
 
-    handleCheck() {
-        console.log(this.state.ephems.filter(name => name.name === this.state.result));
-    }
-
-    showResults(results){
-        return <div className="card">
-            <div className="card-header">
-                <h1>results.name</h1>
-            </div>
-        </div>
-    }
-
     // TODO hook up when finished.
     // showForm(item) {
     //     return <form action="" onSubmit={this.handleSubmit}>
@@ -107,9 +93,17 @@ class EphemList extends Component {
     //
     // }
 
+
+
     render() {
-        const result = this.state.results?.map(x => x)
-        const list = this.state.ephems.map((item, index) =>
+
+        const list = this.state.ephems.filter((searchItem) => {
+            if (this.state.search === null) {
+                return searchItem
+            } else if(searchItem.name.toLowerCase().includes(this.state.result.toLowerCase())) {
+                return searchItem
+            }
+        }).map((item, index) =>
             <div key={item.id} className="col-sm-4 col-12 mb-3">
                 <div className="card h-100">
                     <div className="card-header">
@@ -144,7 +138,8 @@ class EphemList extends Component {
                            value={this.state.result}
                            onChange={this.handleInput}
                            type="text"
-                           name="result"/>
+                           name="result"
+                           placeholder="Search..."/>
                     <button onClick={this.handleCheck} className="col-2 btn btn-primary mb-5">Search</button>
                 </div>
 
@@ -156,11 +151,7 @@ class EphemList extends Component {
                                         row">
 
                             {
-                             !this.state.result.includes(list.name)
-                                ?
                                 list
-                                :
-                                 this.showResults(result)
                             }
                         </div>
                         :
