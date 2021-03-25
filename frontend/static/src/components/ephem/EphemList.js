@@ -113,8 +113,11 @@ class EphemList extends Component {
             <div key={item.id} className="col-sm-4 col-12 mb-3">
                 <div className="card h-100">
                     <div className="card-header">
-                        <img src={item.image} alt="A planet, star or satellite."/>
+                        <div className="img-container">
+                            <img style={{height: '100%'}} src={item.image} alt="A planet, star or satellite."/>
+                        </div>
                         <h2>{item.name}</h2>
+                        <p>{item.description}</p>
                     </div>
                     <p>rise time: {item.rise_time}</p>
                     <p>set time: {item.set_time}</p>
