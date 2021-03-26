@@ -10,10 +10,19 @@ app.config_from_object('django.conf:settings', namespace='Celery')
 app.autodiscover_tasks()
 
 app.conf.beat_schedule = {
+    'print-testing':{
+      'task': 'ephemeris.tasks.find_stuff',
+      'schedule': 3.0
+    },
+    'print-sent-text': {
+        'task': 'ephemeris.tasks.send_text',
+        'schedule': 50.0,
+    },
     'print-hello-world': {
         'task': 'ephemeris.tasks.hello',
-        'schedule': 5.0,
-    }
+        'schedule': 10.0,
+    },
+
 }
 
 app.conf.timezone = 'UTC'
