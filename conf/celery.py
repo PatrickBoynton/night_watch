@@ -7,18 +7,10 @@ app = Celery('conf', broker='redis://localhost:6379')
 
 app.config_from_object('django.conf:settings', namespace='Celery')
 
-app.autodiscover_tasks()
+app.autodiscover_tasks(['ephemeris.celery_app'])
 
 app.conf.beat_schedule = {
-    'print-testing':{
-      'task': 'ephemeris.tasks.find_stuff',
-      'schedule': 3.0
-    },
-    'print-sent-text': {
-        'task': 'ephemeris.tasks.send_text',
-        'schedule': 50.0,
-    },
-    'print-hello-world': {
+    'print_rise_and_set_times': {
         'task': 'ephemeris.tasks.hello',
         'schedule': 10.0,
     },
