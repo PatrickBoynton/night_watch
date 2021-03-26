@@ -15,11 +15,14 @@ class EventForm extends Component {
             message: {
                 to: this.props.phone,
                 body: 'Testing 1, 2, 3'
-            }
+            },
+            image: null,
+            preview: null,
         };
 
         this.handleInput = this.handleInput.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleImage = this.handleImage.bind(this);
     }
 
     handleInput(event) {
@@ -28,25 +31,26 @@ class EventForm extends Component {
 
     async handleSubmit(event) {
         event.preventDefault();
+        let formData = new FormData();
+
+        formData.append('image', this.state.image);
+        formData.append('name', this.state.name);
+        formData.append('target', this.state.target);
+        formData.append('description', this.state.description);
         const options = {
             method: 'POST',
             headers: {
                 'Content-Type': 'Application/Json',
                 'X-CSRFToken': Cookies.get('csrftoken')
             },
-            body: JSON.stringify({
-                name: this.state.name,
-                time: this.state.time,
-                ephemeris: this.state.target,
-                description: this.state.description,
-            })
+            body: formData,
         };
 
         await this.handleSMS(event);
         const response = await fetch('/api/v1/events/', options);
         this.props.history.push('/events');
 
-        if(response.status === 201 || response.status === 200)
+        if (response.status === 201 || response.status === 200)
             return <Redirect to="/events"/>;
     }
 
@@ -67,10 +71,23 @@ class EventForm extends Component {
         this.setState({submitting: true});
     }
 
+    handleImage(e) {
+        let file = e.target.file[0];
+        this.setState({image: file});
+        let reader = new FileReader();
+        reader.onloadend = () => {
+            this.setState({preview: reader.result});
+        };
+
+        reader.readAsDataURL(file);
+    }
+
     render() {
         return (
             <form className="login-register" onSubmit={(e) => this.handleSubmit(e)}>
                 <h2>Create an Event</h2>
+                <label className="form-label" htmlFor="image">Image</label>
+                <input className="form-control" onChange={this.handleImage} type="file" name="image"/>
                 <label className="form-label" htmlFor="name">Event Name</label>
                 <input className="form-control" type="text"
                        onChange={this.handleInput}
@@ -96,11 +113,11 @@ class EventForm extends Component {
                 </textarea>
                 {
                     this.state.name !== '' && this.state.time !== '' && this.state.target !== '' && this.state.description !== ''
-                    ?
-                    <button className="btn btn-success" type="submit">Create Event</button>
-                    :
+                        ?
+                        <button className="btn btn-success" type="submit">Create Event</button>
+                        :
                         <button className="btn btn-success" type="submit" disabled>Create Event</button>
-                 }
+                }
             </form>
         );
     }
