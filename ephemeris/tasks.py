@@ -40,10 +40,14 @@ planet = eph['sun']
 
 
 @app.shared_task
-def hello():
+def get_ephem_times():
     ts = load.timescale()
     t0 = ts.utc(2021, 3, 26)
     t1 = ts.utc(2021, 3, 27)
+
+    results = []
+    # sun.rise_time = results[0]
+    # sun.save()
 
     greenville = wgs84.latlon(34.8526 * N, 82.3940 * W, elevation_m=299.923)
     global planet
@@ -52,5 +56,6 @@ def hello():
     tz = timezone('US/Eastern')
 
     for t, updown in zip(*find_discrete(t0, t1, f)):
-        print(t.astimezone(tz).strftime('%H:%M'))
-    print(sun.rise_time)
+        results.append(t.astimezone(tz).strftime('%y-%m-%d %H:%M'))
+
+    print(results[0])
