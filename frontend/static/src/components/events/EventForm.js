@@ -72,7 +72,7 @@ class EventForm extends Component {
     }
 
     handleImage(e) {
-        let file = e.target.file[0];
+        let file = e.target.files[0];
         this.setState({image: file});
         let reader = new FileReader();
         reader.onloadend = () => {
@@ -86,6 +86,7 @@ class EventForm extends Component {
         return (
             <form className="login-register" onSubmit={(e) => this.handleSubmit(e)}>
                 <h2>Create an Event</h2>
+                {this.state.image ? <img src={this.state.preview} alt=""/> : null}
                 <label className="form-label" htmlFor="image">Image</label>
                 <input className="form-control" onChange={this.handleImage} type="file" name="image"/>
                 <label className="form-label" htmlFor="name">Event Name</label>
