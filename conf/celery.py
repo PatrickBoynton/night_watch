@@ -11,7 +11,7 @@ app.autodiscover_tasks(['ephemeris.celery_app'])
 
 app.conf.beat_schedule = {
     'print_rise_and_set_times': {
-        'task': 'ephemeris.tasks.hello',
+        'task': 'ephemeris.tasks.get_ephem_times',
         'schedule': 10.0,
     },
 
