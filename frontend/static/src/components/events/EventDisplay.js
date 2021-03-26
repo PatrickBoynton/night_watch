@@ -14,6 +14,7 @@ class EventDisplay extends Component {
             name: '',
             ephemeris: '',
             time: '',
+            image: null,
         };
         this.handleDelete = this.handleDelete.bind(this);
         this.handleEditMode = this.handleEditMode.bind(this);
@@ -60,6 +61,7 @@ class EventDisplay extends Component {
     async componentDidMount() {
         const response = await fetch('/api/v1/events/');
         const data = await response.json();
+        console.log(data);
         this.setState({data});
     }
 
@@ -111,6 +113,7 @@ class EventDisplay extends Component {
         let events = this.state.data?.map(event => <section className="card" key={event.id}>
             <div className="event-card">
                 <div className="card-header">
+                    <img src={event.image} alt="Nothin here."/>
                     <h2>{event.name}</h2>
                     <p>{event.ephemeris}</p>
                 </div>
