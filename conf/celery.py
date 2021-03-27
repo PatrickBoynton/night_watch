@@ -14,7 +14,6 @@ app.conf.beat_schedule = {
         'task': 'ephemeris.tasks.get_ephem_times',
         'schedule': 10.0,
     },
-
 }
 
 app.conf.timezone = 'UTC'
