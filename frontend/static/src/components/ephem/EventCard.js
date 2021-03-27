@@ -6,6 +6,7 @@ class EventCard extends Component {
         this.handleText = this.handleText.bind(this);
         this.handleEditMode = this.handleEditMode.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleUtc = this.handleUtc.bind(this);
     }
 
     async handleText(event, id) {
@@ -32,6 +33,12 @@ class EventCard extends Component {
 
     handleSubmit() {
         this.setState({isEditMode: false});
+    }
+
+    handleUtc(date) {
+        const convert = new Date(date)
+
+        return convert.toDateString();
     }
 
     render() {
