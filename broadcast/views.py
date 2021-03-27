@@ -2,6 +2,8 @@ from django.conf import settings
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from twilio.rest import Client
+from rest_framework import generics, permissions
+from .models import Appointment
 
 
 # Create your views here.
