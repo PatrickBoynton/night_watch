@@ -3,6 +3,7 @@ from ephemeris.models import Ephem
 from skyfield.api import N, W, wgs84, load, Star
 from skyfield.almanac import find_discrete, risings_and_settings
 from pytz import timezone
+from datetime import datetime, timedelta
 
 
 # Planets
@@ -20,15 +21,19 @@ neptune = Ephem.objects.get(name='Neptune')
 
 
 eph = load('de421.bsp')
-planet = eph['moon']
+planet = eph['mercury']
 
 
 @app.shared_task
 def get_ephem_times():
     ts = load.timescale()
 
-    t0 = ts.utc(2021, 3, 26)
-    t1 = ts.utc(2021, 3, 27)
+    # Updates the date.
+    today = datetime.today().strftime('%Y-%m-%d').split('-')
+    tomorrow = (datetime.today() + timedelta(days=1)).strftime('%Y-%m-%d').split('-')
+
+    t0 = ts.utc(int(today[0]), int(today[1]), int(today[2]))
+    t1 = ts.utc(int(tomorrow[0]), int(tomorrow[1]), int(tomorrow[2]))
 
     dates = []
 
@@ -40,7 +45,7 @@ def get_ephem_times():
 
     for t, updown in zip(*find_discrete(t0, t1, f)):
         dates.append(t.astimezone(tz).strftime('%Y-%m-%d %H:%M'))
-    print(dates)
-    moon.rise_time = dates[0]
-    moon.set_time = dates[1]
-    moon.save()
+    print(tomorrow)
+    mercury.rise_time = dates[0]
+    mercury.set_time = dates[1]
+    mercury.save()
