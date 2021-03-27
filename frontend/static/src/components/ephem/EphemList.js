@@ -1,4 +1,5 @@
 import {Component} from 'react';
+import EventCard from './EventCard';
 
 class EphemList extends Component {
     constructor(props) {
@@ -15,9 +16,6 @@ class EphemList extends Component {
             error: false,
             result: '',
         };
-        this.handleEditMode = this.handleEditMode.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleText = this.handleText.bind(this);
         this.handleInput = this.handleInput.bind(this);
     }
 
@@ -34,31 +32,6 @@ class EphemList extends Component {
         this.setState({currentState});
     }
 
-    handleEditMode() {
-        this.setState({isEditMode: true});
-    }
-
-    handleSubmit() {
-        this.setState({isEditMode: false});
-    }
-
-    async handleText(event, id) {
-        event.preventDefault();
-        let currentState = this.state.message;
-
-        currentState['body'] = `Rise time: ${this.state.ephems[id].rise_time} Name: ${this.state.ephems[id].name}`;
-        this.setState({submitting: true});
-        this.setState({currentState});
-        const options = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'Application/Json'
-            },
-            body: JSON.stringify(this.state.message.body)
-        };
-        await fetch('/api/v1/broadcast/', options);
-        console.log(this.state.message.body);
-    }
 
     handleInput(event) {
         this.setState({result: event.target.value});
@@ -104,43 +77,19 @@ class EphemList extends Component {
                 return searchItem
             }
         }).map((item, index) =>
-            <div key={item.id} className="col-sm-4 col-12 mb-3">
-                <div className="card h-100">
-                    <div className="card-header">
-                        <div className="img-container">
-                            <img style={{height: '100%'}} src={item.image} alt="A planet, star or satellite."/>
-                        </div>
-                        <h2>{item.name}</h2>
-                        <p>{item.description}</p>
-                    </div>
-                    <p>rise time: {item.rise_time}</p>
-                    <p>set time: {item.set_time}</p>
-                    <button onClick={(event) => this.handleText(event, index)} className="btn-primary">Remind me
-                    </button>
-                    {
-                        this.state.isAdmin
-                            ?
-                            <div className="card-footer">
-                                <button onClick={this.handleEditMode} className="btn btn-primary">Edit</button>
-                                <button className="btn btn-danger">Delete</button>
-                            </div>
-                            :
-                            null
-                    }
-                </div>
-            </div>
+                <EventCard item={item}
+                           isAdmin={this.state.isAdmin}/>
         );
         return (
             <>
-                <label htmlFor="result">Search</label>
                 <div className="row">
-                    <input className="col-10 mb-5"
+                    <input className="col-12 mb-5"
+                           style={{marginLeft: '30px', marginRight: '40px'}}
                            value={this.state.result}
                            onChange={this.handleInput}
                            type="text"
                            name="result"
                            placeholder="Search..."/>
-                    <button onClick={this.handleCheck} className="col-2 btn btn-primary mb-5">Search</button>
                 </div>
 
                 {
