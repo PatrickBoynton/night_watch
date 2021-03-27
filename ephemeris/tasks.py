@@ -1,9 +1,11 @@
 from celery import app
 from ephemeris.models import Ephem
-from skyfield.api import N, W, wgs84, load
+from skyfield.api import N, W, wgs84, load, Star
 from skyfield.almanac import find_discrete, risings_and_settings
 from pytz import timezone
 
+
+# Planets
 sun = Ephem.objects.get(name='Sun')
 mercury = Ephem.objects.get(name='Mercury')
 venus = Ephem.objects.get(name='Venus')
@@ -14,8 +16,11 @@ saturn = Ephem.objects.get(name='Saturn')
 uranus = Ephem.objects.get(name='Uranus')
 neptune = Ephem.objects.get(name='Neptune')
 
+# Stars
+
+
 eph = load('de421.bsp')
-planet = eph['mars']
+planet = eph['moon']
 
 
 @app.shared_task
@@ -35,7 +40,7 @@ def get_ephem_times():
 
     for t, updown in zip(*find_discrete(t0, t1, f)):
         dates.append(t.astimezone(tz).strftime('%Y-%m-%d %H:%M'))
-
-    sun.rise_time = dates[0]
-    sun.set_time = dates[1]
-    sun.save()
+    print(dates)
+    moon.rise_time = dates[0]
+    moon.set_time = dates[1]
+    moon.save()
