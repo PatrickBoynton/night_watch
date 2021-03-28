@@ -3,11 +3,13 @@ import {Component} from 'react';
 class EventCard extends Component {
     constructor(props) {
         super(props);
+
         this.handleText = this.handleText.bind(this);
         this.handleEditMode = this.handleEditMode.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleUtc = this.handleUtc.bind(this);
     }
+
 
     async handleText(event, id) {
         event.preventDefault();
