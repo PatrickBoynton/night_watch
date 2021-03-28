@@ -33,8 +33,7 @@ a{
   text-decoration: none;
 }
 a:hover{
-  color: #c7ced0;
-  text-decoration: underline;
+  color: #7d7b7b;
 }
 .card-header{
   background-color: #8e0000;
