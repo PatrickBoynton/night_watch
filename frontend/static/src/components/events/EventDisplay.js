@@ -20,6 +20,7 @@ class EventDisplay extends Component {
         this.handleEditMode = this.handleEditMode.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleInput = this.handleInput.bind(this);
+        this.handleImage = this.handleImage.bind(this);
     }
 
     handleInput(event) {
@@ -65,8 +66,25 @@ class EventDisplay extends Component {
         this.setState({data});
     }
 
+    handleImage(e) {
+        let file = e.target.files[0];
+        this.setState({image: file});
+        let reader = new FileReader();
+        reader.onloadend = () => {
+            this.setState({preview: reader.result});
+        };
+        reader.readAsDataURL(file);
+    }
+
     showForm() {
         return <form className="login-register" onSubmit={this.handleSubmit}>
+            {this.state.image ? <img src={this.state.preview} alt=""/> : null}
+            <label className="form-label" htmlFor="image">Image</label>
+            <input className="form-control"
+                   type="file"
+                   onChange={this.handleImage}
+                   name="image"/>
+
             <label className="form-label" htmlFor="name">Name</label>
             <input className="form-control"
                    type="text"
