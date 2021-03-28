@@ -35,23 +35,23 @@ class EventForm extends Component {
 
         formData.append('image', this.state.image);
         formData.append('name', this.state.name);
+        formData.append('time', this.state.time);
         formData.append('target', this.state.target);
         formData.append('description', this.state.description);
         const options = {
             method: 'POST',
             headers: {
-                'Content-Type': 'Application/Json',
                 'X-CSRFToken': Cookies.get('csrftoken')
             },
             body: formData,
         };
 
-        await this.handleSMS(event);
-        const response = await fetch('/api/v1/events/', options);
-        this.props.history.push('/events');
+        // await this.handleSMS(event);
+        await fetch('/api/v1/events/', options);
+        // this.props.history.push('/events');
 
-        if (response.status === 201 || response.status === 200)
-            return <Redirect to="/events"/>;
+        // if (response.status === 201 || response.status === 200)
+        //     return <Redirect to="/events"/>;
     }
 
     async handleSMS(event) {
