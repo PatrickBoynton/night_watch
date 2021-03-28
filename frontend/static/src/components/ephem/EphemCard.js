@@ -56,8 +56,13 @@ class EphemCard extends Component {
                             <h2>{this.props.item.name}</h2>
                             <p>{this.props.item.description}</p>
                         </div>
-                        <p>rise time: {this.props.item.rise_time}</p>
-                        <p>set time: {this.props.item.set_time}</p>
+                        {
+                                <>
+                                    <p>rise time: {this.props.item.rise_time}</p>
+                                    <p>set time: {this.props.item.set_time}</p>
+                                </>
+                        }
+
                         <button onClick={(event) => this.handleText(event, this.props.index)}
                                 className="btn-primary">Remind me
                         </button>
