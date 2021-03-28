@@ -16,6 +16,7 @@ import Home from './components/pages/Home';
 import About from './components/pages/About';
 import Glossary from './components/pages/Glossary';
 import SMSForm from './components/ephem/SMSForm';
+import NotFound from './components/pages/NotFound';
 
 class App extends Component {
     constructor(props) {
@@ -60,7 +61,6 @@ class App extends Component {
             <div className="App">
                 <Navigation isLoggedIn={this.state.isLoggedIn} handleIsLoggedIn={this.handleIsLoggedIn}/>
                 <Switch>
-                    <Route path='/' component={Home}/>
                     <Route path='/about' component={About}/>
                     <Route path='/glossary' component={Glossary}/>
                     <Route path='/register' component={Register}/>
@@ -76,6 +76,8 @@ class App extends Component {
                     <Route path="/celestial-list" component={EphemList}/>
                     <Route path="/events" component={EventDisplay}/>
                     <Route path='/sms-form' component={SMSForm}/>
+                    <Route exact path='/' component={Home}/>
+                    <Route path='*' component={NotFound} />
                 </Switch>
             </div>
         );
