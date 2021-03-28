@@ -110,19 +110,21 @@ class EventDisplay extends Component {
     }
 
     render() {
-        let events = this.state.data?.map(event => <section className="card" key={event.id}>
-            <div className="event-card">
-                <div className="card-header">
-                    <img src={event.image} alt="Nothin here."/>
-                    <h2>{event.name}</h2>
-                    <p>{event.ephemeris}</p>
-                </div>
-                <p>{event.time}</p>
-                <p>{event.description}</p>
-                <div className="button-group card-footer">
-                    <button onClick={() => this.handleEditMode(event)} className="btn btn-primary">Edit</button>
-                    <button onClick={() => this.handleDelete(event.id)} className="btn btn-danger">Delete
-                    </button>
+        let events = this.state.data?.map(event => <section className="row" key={event.id}>
+            <div className="col-sm-4 col-12">
+                <div className="card">
+                    <div className="card-header">
+                        <img src={event.image} alt="Nothin here."/>
+                        <h2>{event.name}</h2>
+                        <p>{event.ephemeris}</p>
+                    </div>
+                    <p>{event.time}</p>
+                    <p>{event.description}</p>
+                    <div className="button-group card-footer">
+                        <button onClick={() => this.handleEditMode(event)} className="btn btn-primary">Edit</button>
+                        <button onClick={() => this.handleDelete(event.id)} className="btn btn-danger">Delete
+                        </button>
+                    </div>
                 </div>
             </div>
         </section>);
