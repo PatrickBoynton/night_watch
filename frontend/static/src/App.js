@@ -75,7 +75,7 @@ class App extends Component {
                     <Route path="/display" component={EphemDisplay}/>
                     <Route path="/celestial-list" component={EphemList}/>
                     <Route path="/events" component={EventDisplay}/>
-                    <Route path='/sms-form' component={SMSForm}/>
+                    {/*<Route path='/sms-form' component={SMSForm}/>*/}
                     <Route exact path='/' component={Home}/>
                     <Route path='*' component={NotFound} />
                 </Switch>
