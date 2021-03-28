@@ -103,21 +103,18 @@ img {
 .about-text{
   margin-top: 15%;
 }
-.nav{
+.nav {
   padding: 20px;
-}
-.planet-width{
-  /*max-width: 1000px;*/
 }
 .img-container{
   height: 300px;
 }
-/*@media only screen and (max-width: 640px) {*/
-/*  .card {*/
-/*    width: 100%;*/
-/*  }*/
-/*  .right-border{*/
-/*    visibility: hidden;*/
-/*  }*/
-/*}*/
+@media only screen and (max-width: 640px) {
+  .login-register {
+    width: 60%;
+  }
+  label {
+    white-space: nowrap;
+  }
+}
 
