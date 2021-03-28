@@ -62,7 +62,6 @@ class EventDisplay extends Component {
     async componentDidMount() {
         const response = await fetch('/api/v1/events/');
         const data = await response.json();
-        console.log(data);
         this.setState({data});
     }
 
@@ -128,26 +127,26 @@ class EventDisplay extends Component {
     }
 
     render() {
-        let events = this.state.data?.map(event => <section className="row" key={event.id}>
-            <div className="col-sm-4 col-12">
-                <div className="card">
-                    <div className="card-header">
-                        <img src={event.image} alt="Nothin here."/>
-                        <h2>{event.name}</h2>
-                        <p>{event.ephemeris}</p>
-                    </div>
-                    <p>{event.time}</p>
-                    <p>{event.description}</p>
-                    <div className="button-group card-footer">
-                        <button onClick={() => this.handleEditMode(event)} className="btn btn-primary">Edit</button>
-                        <button onClick={() => this.handleDelete(event.id)} className="btn btn-danger">Delete
-                        </button>
-                    </div>
+        let events = this.state.data?.map(event => <div className="col-sm-4 col-4 mb-3" key={event.id}>
+                    <div className="card h-100">
+                        <div className="card-header">
+                            <div className="img-container img-responsive">
+                                <img style={{height: '100%'}} src={event.image} alt="Nothin here."/>
+                            </div>
+                            <h2>{event.name}</h2>
+                            <p>{event.ephemeris}</p>
+                        </div>
+                        <p>{event.time}</p>
+                        <p>{event.description}</p>
+                        <div className="button-group card-footer">
+                            <button onClick={() => this.handleEditMode(event)} className="btn btn-primary">Edit</button>
+                            <button onClick={() => this.handleDelete(event.id)} className="btn btn-danger">Delete
+                            </button>
+                        </div>
                 </div>
-            </div>
-        </section>);
+        </div>);
         return (
-            <div className="d-flex">
+            <div className="row">
                 {
                     !this.state.isEditMode
                         ?
