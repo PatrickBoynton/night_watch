@@ -60,7 +60,7 @@ class App extends Component {
             <div className="App">
                 <Navigation isLoggedIn={this.state.isLoggedIn} handleIsLoggedIn={this.handleIsLoggedIn}/>
                 <Switch>
-                    <Route path='/home' component={Home}/>
+                    <Route path='/' component={Home}/>
                     <Route path='/about' component={About}/>
                     <Route path='/glossary' component={Glossary}/>
                     <Route path='/register' component={Register}/>
