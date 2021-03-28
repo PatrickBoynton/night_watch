@@ -1,5 +1,5 @@
 import {Component} from 'react';
-import EventCard from './EventCard';
+import EphemCard from './EphemCard';
 
 class EphemList extends Component {
     constructor(props) {
@@ -77,7 +77,7 @@ class EphemList extends Component {
                 return searchItem
             }
         }).map((item, index) =>
-                <EventCard item={item}
+                <EphemCard item={item}
                            isAdmin={this.state.isAdmin}/>
         );
         return (
