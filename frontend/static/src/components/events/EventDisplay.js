@@ -99,12 +99,13 @@ class EventDisplay extends Component {
                    name="ephemeris"
                    value={this.state.ephemeris || ''}/>
 
-            <label className="form-label" htmlFor="time">Time</label>
+            <label className="form-label" htmlFor="time">Date and Time</label>
             <input className="form-control"
                    type="text"
                    onChange={this.handleInput}
-                   name="time"
-                   value={this.state.date_of_event || ''}/>
+                   name="date_of_event"
+                   value={this.state.date_of_event || ''}
+                   placeholder="2021-06-12 22:33"/>
 
             <label className="form-label" htmlFor="description">Description</label>
             <textarea className="form-control"
@@ -121,7 +122,7 @@ class EventDisplay extends Component {
         this.setState({
             name: e.name,
             ephemeris: e.ephemeris,
-            time: e.time,
+            date_of_event: e.date_of_event,
             id: e.id,
             description: e.description
         });
@@ -137,7 +138,7 @@ class EventDisplay extends Component {
                             <h2>{event.name}</h2>
                             <p>{event.ephemeris}</p>
                         </div>
-                        <p>{event.time}</p>
+                        <p>{event.date_of_event}</p>
                         <p>{event.description}</p>
                         <div className="button-group card-footer">
                             <button onClick={() => this.handleEditMode(event)} className="btn btn-primary">Edit</button>
