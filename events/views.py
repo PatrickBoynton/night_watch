@@ -8,7 +8,7 @@ from rest_framework import permissions
 # Create your views here.
 class EventView(generics.ListCreateAPIView):
     permission_classes = (permissions.IsAuthenticated,)
-    queryset = Event.objects.all()
+    queryset = Event.objects.all().order_by('date_of_event')
     serializer_class = EventSerializer
 
     def perform_create(self, serializer):
