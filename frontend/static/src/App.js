@@ -4,7 +4,6 @@ import Login from './components/user/Login';
 import Profile from './components/user/Profile';
 import {Switch, Route} from 'react-router-dom';
 import {Component} from 'react';
-import EphemForm from './components/ephem/EphemForm';
 import EphemDisplay from './components/ephem/EphemDisplay';
 import EphemList from './components/ephem/EphemList';
 import EventForm from './components/events/EventForm';
@@ -15,7 +14,6 @@ import ProfileForm from './components/user/ProfileForm';
 import Home from './components/pages/Home';
 import About from './components/pages/About';
 import Glossary from './components/pages/Glossary';
-import SMSForm from './components/ephem/SMSForm';
 import NotFound from './components/pages/NotFound';
 
 class App extends Component {
@@ -70,12 +68,10 @@ class App extends Component {
                            render={(props) => (<Profile {...props} user={this.state.user}
                                                         handleIsLoggedIn={this.handleIsLoggedIn}/>)}/>
                     <Route path="/create-profile" component={ProfileForm}/>
-                    {/*<Route path="/ephem/form" component={EphemForm}/>*/}
                     <Route path="/event/form" render={(props) => (<EventForm {...props} phone={this.state.user.phone}/>)}/>
                     <Route path="/display" component={EphemDisplay}/>
                     <Route path="/celestial-list"  component={EphemList}/>
                     <Route path="/events" component={EventDisplay}/>
-                    {/*<Route path='/sms-form' component={SMSForm}/>*/}
                     <Route exact path='/' component={Home}/>
                     <Route exact path='*' component={NotFound} />
                 </Switch>
