@@ -14,7 +14,7 @@ class Event(models.Model):
                              on_delete=models.CASCADE, null=True, blank=True)
     phone = models.CharField(max_length=11, null=True, blank=True)
     image = models.ImageField(upload_to='events/', null=True, blank=True)
-    solar_event = models.BooleanField()
+    solar_event = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
