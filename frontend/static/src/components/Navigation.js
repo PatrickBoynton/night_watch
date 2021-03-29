@@ -39,11 +39,13 @@ class Navigation extends Component {
                             ?
                             <>
                                 <NavLink className="navbar-brand" to='/'>Night Watch</NavLink>
-                                <NavLink to="/profile">Profile</NavLink>
-                                <NavLink to="/event/form">Add Event</NavLink>
-                                <NavLink to="/celestial-list">Celestial Events</NavLink>
-                                <NavLink to="/events">Upcoming Events</NavLink>
+
+
+                                <NavLink to="/celestial-list">Celestial Bodies</NavLink>
+                                <NavLink to="/events">Solar Events</NavLink>
+                                <NavLink to="/event/form">My Events</NavLink>
                                 <NavLink to='/glossary'>Glossary</NavLink>
+                                <NavLink to="/profile">Profile</NavLink>
                                 <NavLink to='/logout' onClick={this.handleLogout}>Logout</NavLink>
                                 {/*<NavLink>Logout</NavLink>*/}
                             </>
