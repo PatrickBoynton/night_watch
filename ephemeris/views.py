@@ -17,3 +17,9 @@ class EphemDetailView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = Ephem.objects.all()
     serializer_class = EphemSerializer
+
+
+class EphemUpdateView(generics.RetrieveUpdateAPIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    queryset = Ephem.objects.all()
+    serializer_class = EphemSerializer
