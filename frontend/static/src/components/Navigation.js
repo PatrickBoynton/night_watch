@@ -47,7 +47,6 @@ class Navigation extends Component {
                                 <NavLink to='/glossary'>Glossary</NavLink>
                                 <NavLink to="/profile">Profile</NavLink>
                                 <NavLink to='/logout' onClick={this.handleLogout}>Logout</NavLink>
-                                {/*<NavLink>Logout</NavLink>*/}
                             </>
                             :
                             <>
