@@ -1,5 +1,6 @@
 import {Component} from 'react';
 import EphemCard from './EphemCard';
+import Cookies from 'js-cookie';
 
 class EphemList extends Component {
     constructor(props) {
@@ -15,8 +16,11 @@ class EphemList extends Component {
             submitting: false,
             error: false,
             result: '',
+            id: 0,
         };
         this.handleInput = this.handleInput.bind(this);
+        this.addSubscriber = this.addSubscriber.bind(this);
+        this.removeSubscriber = this.removeSubscriber.bind(this);
     }
 
     async componentDidMount() {
@@ -27,14 +31,42 @@ class EphemList extends Component {
         const profile = await fetch('api/v1/profiles/details/');
         const profileData = await profile.json();
         let currentState = this.state.message;
-
+        console.log(profileData.id);
         currentState['to'] = '+' + profileData.phone;
-        this.setState({currentState});
+        this.setState({currentState, id: profileData.id});
     }
 
 
     handleInput(event) {
         this.setState({result: event.target.value});
+    }
+
+    async addSubscriber(item) {
+        const options = {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'Application/Json',
+                'X-CSRFToken': Cookies.get('csrftoken')
+            }
+        };
+
+        const response = await fetch(`/api/v1/ephem/${item.id}/subscribe/`, options);
+        const json = await response.json();
+        console.log(json);
+    }
+
+    async removeSubscriber(item) {
+        const options = {
+            method: 'PATCH',
+            headers: {
+                'Content-Type':'Application/Json',
+                'X-CSRFToken': Cookies.get('csrftoken')
+            }
+        }
+
+        const response = await fetch(`/api/v1/ephem/${item.id}/unsubscribe/`, options)
+        const json = await response.json()
+        console.log(json);
     }
 
     // TODO hook up when finished.
@@ -67,18 +99,19 @@ class EphemList extends Component {
     // }
 
 
-
     render() {
 
         const list = this.state.ephems.filter((searchItem) => {
             if (this.state.search === null) {
-                return searchItem
-            } else if(searchItem.name.toLowerCase().includes(this.state.result.toLowerCase())) {
-                return searchItem
+                return searchItem;
+            } else if (searchItem.name.toLowerCase().includes(this.state.result.toLowerCase())) {
+                return searchItem;
             }
         }).map((item, index) =>
-                <EphemCard item={item}
-                           isAdmin={this.state.isAdmin}/>
+            <EphemCard item={item}
+                       addSubscriber={this.addSubscriber}
+                       removeSubscriber={this.removeSubscriber}
+                       isAdmin={this.state.isAdmin}/>
         );
         return (
             <>
