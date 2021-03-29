@@ -7,7 +7,6 @@ from rest_framework import permissions
 
 # Create your views here.
 class SolarEventView(generics.ListCreateAPIView):
-    permission_classes = (permissions.IsAuthenticated,)
     queryset = Event.objects.all().order_by('date_of_event')
     serializer_class = EventSerializer
 
@@ -24,10 +23,14 @@ class SolarEventDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = EventSerializer
 
     def get_queryset(self):
-        user = self.request.user
         return Event.objects.filter(solar_event=True)
 
 
-class EventList(generics.ListAPIView):
-    queryset = Event.objects.all().filter('date_of_event')
+class MyEventsView(generics.ListCreateAPIView):
+    queryset = Event.objects.all()
+    serializer_class = EventSerializer
+
+    def get_queryset(self):
+        user = self.request.user
+        return Event.objects.filter(user=user)
 
