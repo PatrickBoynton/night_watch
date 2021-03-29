@@ -1,4 +1,5 @@
 from django.db import models
+from accounts.models import CustomUser
 
 
 # Create your models here.
@@ -10,6 +11,7 @@ class Ephem(models.Model):
     magnitude = models.FloatField()
     image = models.ImageField(upload_to='ephemeris/')
     description = models.TextField()
+    subscribers = models.ManyToManyField(CustomUser)
 
     def __str__(self):
         return self.name
