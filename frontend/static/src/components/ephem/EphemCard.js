@@ -12,20 +12,20 @@ class EphemCard extends Component {
 
     async handleText(event, id) {
         event.preventDefault();
-        let currentState = this.state.message;
-
-        currentState['body'] = `Rise time: ${this.state.ephems[id].rise_time} Name: ${this.state.ephems[id].name}`;
-        this.setState({submitting: true});
-        this.setState({currentState});
-        const options = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'Application/Json'
-            },
-            body: JSON.stringify(this.state.message.body)
-        };
+        // let currentState = this.state.message;
+        //
+        // currentState['body'] = `Rise time: ${this.state.ephems[id].rise_time} Name: ${this.state.ephems[id].name}`;
+        // this.setState({submitting: true});
+        // this.setState({currentState});
+        // const options = {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'Application/Json'
+        //     },
+        //     body: JSON.stringify(this.state.message.body)
+        // };
         // await fetch('/api/v1/broadcast/', options);
-        console.log(this.state.message.body);
+        alert(this.props.id);
     }
 
     handleEditMode() {
@@ -50,15 +50,23 @@ class EphemCard extends Component {
                             <p>{this.props.item.description}</p>
                         </div>
                         {
-                                <>
-                                    <p>rise time: {this.props.item.rise_time}</p>
-                                    <p>set time: {this.props.item.set_time}</p>
-                                </>
+                            <>
+                                <p>rise time: {this.props.item.rise_time}</p>
+                                <p>set time: {this.props.item.set_time}</p>
+                            </>
                         }
+                        {
+                            this.props.item.is_subscribed
+                                ?
+                                <button type="submit" onClick={() => this.props.removeSubscriber(this.props.item)}
+                                        className="btn-primary">Cancel Reminder
+                                </button>
+                                :
 
-                        <button onClick={(event) => this.handleText(event, this.props.index)}
-                                className="btn-primary">Remind me
-                        </button>
+                                <button type="submit" onClick={() => this.props.addSubscriber(this.props.item)}
+                                        className="btn-primary">Remind me
+                                </button>
+                        }
                         {
                             this.props.isAdmin
                                 ?
