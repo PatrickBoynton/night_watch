@@ -23,3 +23,23 @@ class EphemUpdateView(generics.RetrieveUpdateAPIView):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     queryset = Ephem.objects.all()
     serializer_class = EphemSerializer
+
+
+class EphemAddSubscriber(generics.UpdateAPIView):
+    queryset = Ephem.objects.all()
+    serializer_class = EphemSerializer
+
+    def perform_update(self, serializer):
+        instance = Ephem.objects.get(pk=self.kwargs['pk'])
+        instance.subscribers.add(self.request.user)
+        instance = serializer.save()
+
+
+class EphemRemoveSubscriber(generics.UpdateAPIView):
+    queryset =  Ephem.objects.all()
+    serializer_class = EphemSerializer
+
+    def perform_update(self, serializer):
+        instance = Ephem.objects.get(pk=self.kwargs['pk'])
+        instance.subscribers.remove(self.request.user)
+        instance = serializer.save()
