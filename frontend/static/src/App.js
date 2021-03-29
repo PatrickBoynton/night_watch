@@ -70,14 +70,14 @@ class App extends Component {
                            render={(props) => (<Profile {...props} user={this.state.user}
                                                         handleIsLoggedIn={this.handleIsLoggedIn}/>)}/>
                     <Route path="/create-profile" component={ProfileForm}/>
-                    <Route path="/ephem/form" component={EphemForm}/>
+                    {/*<Route path="/ephem/form" component={EphemForm}/>*/}
                     <Route path="/event/form" render={(props) => (<EventForm {...props} phone={this.state.user.phone}/>)}/>
                     <Route path="/display" component={EphemDisplay}/>
-                    <Route path="/celestial-list" component={EphemList}/>
+                    <Route path="/celestial-list"  component={EphemList}/>
                     <Route path="/events" component={EventDisplay}/>
                     {/*<Route path='/sms-form' component={SMSForm}/>*/}
                     <Route exact path='/' component={Home}/>
-                    <Route path='*' component={NotFound} />
+                    <Route exact path='*' component={NotFound} />
                 </Switch>
             </div>
         );
