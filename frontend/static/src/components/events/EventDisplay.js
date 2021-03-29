@@ -13,7 +13,7 @@ class EventDisplay extends Component {
             isAdmin: false,
             name: '',
             ephemeris: '',
-            time: '',
+            date_of_event: '',
             image: null,
         };
         this.handleDelete = this.handleDelete.bind(this);
@@ -38,7 +38,7 @@ class EventDisplay extends Component {
             body: JSON.stringify({
                 name: this.state.name,
                 ephemeris: this.state.ephemeris,
-                time: this.state.time,
+                date_of_event: this.state.date_of_event,
                 description: this.state.description,
             })
         };
@@ -62,6 +62,7 @@ class EventDisplay extends Component {
     async componentDidMount() {
         const response = await fetch('/api/v1/events/');
         const data = await response.json();
+        console.log(data);
         this.setState({data});
     }
 
@@ -103,7 +104,7 @@ class EventDisplay extends Component {
                    type="text"
                    onChange={this.handleInput}
                    name="time"
-                   value={this.state.time || ''}/>
+                   value={this.state.date_of_event || ''}/>
 
             <label className="form-label" htmlFor="description">Description</label>
             <textarea className="form-control"
