@@ -37,10 +37,10 @@ class EphemCard extends Component {
         this.setState({isEditMode: false});
     }
 
-    handleUtc(date) {
-        const convert = new Date(date);
+    handleUtc() {
+        const convert = this.props.rise_time.toLocaleDateString();
 
-        return convert.toDateString();
+        return convert;
     }
 
     render() {
@@ -58,7 +58,7 @@ class EphemCard extends Component {
                         </div>
                         {
                                 <>
-                                    <p>rise time: {this.props.item.rise_time}</p>
+                                    <p>rise time: {this.handleUtc}</p>
                                     <p>set time: {this.props.item.set_time}</p>
                                 </>
                         }
