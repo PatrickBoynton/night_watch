@@ -50,7 +50,6 @@ class Navigation extends Component {
                             :
                             <>
                                 <NavLink className="navbar-brand" to='/home'>Night Watch</NavLink>
-                                <NavLink to="/celestial-list">Celestial Events</NavLink>
                                 <NavLink to="/register">Register</NavLink>
                                 <NavLink to="/login">Login</NavLink>
                             </>
