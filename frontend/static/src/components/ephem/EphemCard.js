@@ -58,7 +58,7 @@ class EphemCard extends Component {
                         </div>
                         {
                                 <>
-                                    <p>rise time: {this.handleUtc}</p>
+                                    <p>rise time: {this.props.item.rise_time}</p>
                                     <p>set time: {this.props.item.set_time}</p>
                                 </>
                         }
