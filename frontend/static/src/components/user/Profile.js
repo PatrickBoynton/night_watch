@@ -30,10 +30,20 @@ class Profile extends Component {
             <div className="container">
                 <div className="card">
                     <div className="card-header">
-                        <h1>{this.props.user.user}</h1>
-                        <img  style={{height: '200px', width: '200px'}} className="rounded-circle" src={this.props.user.profile_picture} alt="username"/>
-                        <p>{this.props.user.about_me}</p>
-                        <p>If you haven't created a profile, why not <Link to="/create-profile" >Create a profile</Link>?</p>
+                        {
+                            this.props.user.user
+                                ?
+                                <>
+                                    <h1>{this.props.user.user}</h1>
+                                    <img style={{height: '200px', width: '200px'}} className="rounded-circle"
+                                         src={this.props.user.profile_picture} alt="username"/>
+                                    <p>{this.props.user.about_me}</p>
+                                </>
+                                :
+                                    <p>If you haven't created a profile, why not <Link to="/create-profile">Create a
+                                        profile</Link>?
+                                    </p>
+                        }
                         <button onClick={this.handleLogout} className="btn btn-danger">Logout</button>
                     </div>
                 </div>
