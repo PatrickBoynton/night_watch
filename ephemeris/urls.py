@@ -1,10 +1,11 @@
 from django.urls import path
 
-from .views import EphemListView, EphemUpdateView
-
+from . import views
 app_name = 'ephemeris'
 
 urlpatterns = [
-    path('<int:pk>/', EphemUpdateView.as_view()),
-    path('', EphemListView.as_view()),
+    path('<int:pk>/subscribe/', views.EphemAddSubscriber.as_view()),
+    path('<int:pk>/unsubscribe/', views.EphemRemoveSubscriber.as_view()),
+    path('<int:pk>/', views.EphemUpdateView.as_view()),
+    path('', views.EphemListView.as_view()),
 ]
