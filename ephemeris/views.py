@@ -43,3 +43,4 @@ class EphemRemoveSubscriber(generics.UpdateAPIView):
         instance = Ephem.objects.get(pk=self.kwargs['pk'])
         instance.subscribers.remove(self.request.user)
         instance = serializer.save()
+
