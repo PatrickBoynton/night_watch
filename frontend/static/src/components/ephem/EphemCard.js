@@ -7,7 +7,6 @@ class EphemCard extends Component {
         this.handleText = this.handleText.bind(this);
         this.handleEditMode = this.handleEditMode.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleUtc = this.handleUtc.bind(this);
     }
 
 
@@ -25,7 +24,7 @@ class EphemCard extends Component {
             },
             body: JSON.stringify(this.state.message.body)
         };
-        await fetch('/api/v1/broadcast/', options);
+        // await fetch('/api/v1/broadcast/', options);
         console.log(this.state.message.body);
     }
 
@@ -35,12 +34,6 @@ class EphemCard extends Component {
 
     handleSubmit() {
         this.setState({isEditMode: false});
-    }
-
-    handleUtc() {
-        const convert = this.props.rise_time.toLocaleDateString();
-
-        return convert;
     }
 
     render() {
