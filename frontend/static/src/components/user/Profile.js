@@ -38,7 +38,6 @@ class Profile extends Component {
                         <p>If you haven't created a profile, why not <Link to="/create-profile">Create a
                             profile</Link>?
                         </p>
-                        <button onClick={this.handleLogout} className="btn btn-danger">Logout</button>
                     </div>
                 </div>
             </div>
