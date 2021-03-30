@@ -56,16 +56,21 @@ class EphemCard extends Component {
                             </>
                         }
                         {
-                            this.props.item.is_subscribed
+                            !this.props.isLoggedIn
                                 ?
-                                <button type="submit" onClick={() => this.props.removeSubscriber(this.props.item)}
-                                        className="btn-primary">Cancel Reminder
-                                </button>
+                                null
                                 :
 
-                                <button type="submit" onClick={() => this.props.addSubscriber(this.props.item)}
-                                        className="btn-primary">Remind me
-                                </button>
+                                this.props.item.is_subscribed
+                                    ?
+                                    <button type="submit" onClick={() => this.props.removeSubscriber(this.props.item)}
+                                            className="btn-primary">Cancel Reminder
+                                    </button>
+                                    :
+
+                                    <button type="submit" onClick={() => this.props.addSubscriber(this.props.item)}
+                                            className="btn-primary">Remind me
+                                    </button>
                         }
                         {
                             this.props.isAdmin
