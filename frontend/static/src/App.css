@@ -109,6 +109,10 @@ img {
 .img-container{
   height: 300px;
 }
+.modal-content{
+  background-color: #181a1b;
+  text-align: center;
+}
 @media only screen and (max-width: 640px) {
   .login-register {
     width: 60%;
@@ -117,4 +121,5 @@ img {
     white-space: nowrap;
   }
 }
+
 
