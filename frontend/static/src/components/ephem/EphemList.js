@@ -110,6 +110,7 @@ class EphemList extends Component {
         }).map((item, index) =>
             <EphemCard item={item}
                        key={item.id}
+                       isLoggedIn={this.props.isLoggedIn}
                        addSubscriber={this.addSubscriber}
                        removeSubscriber={this.removeSubscriber}
                        isAdmin={this.state.isAdmin}/>
