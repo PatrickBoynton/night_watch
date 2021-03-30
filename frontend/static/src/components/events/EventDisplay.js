@@ -16,6 +16,7 @@ class EventDisplay extends Component {
             date_of_event: '',
             image: null,
         };
+
         this.handleDelete = this.handleDelete.bind(this);
         this.handleEditMode = this.handleEditMode.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -54,7 +55,7 @@ class EventDisplay extends Component {
                 'X-CSRFToken': Cookies.get('csrftoken')
             }
         };
-        fetch(`/api/v1/events/${id}/`, options);
+        fetch(`/api/v1/${id}/my-events/`, options);
         // this.props.history.push('/events');
         window.location.reload();
     }
