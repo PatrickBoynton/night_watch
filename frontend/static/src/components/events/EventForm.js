@@ -1,6 +1,7 @@
 import {Component} from 'react';
 import Cookies from 'js-cookie';
 import EventDisplay from './EventDisplay';
+import {Modal} from 'react-bootstrap';
 
 class EventForm extends Component {
 
@@ -19,11 +20,14 @@ class EventForm extends Component {
             image: null,
             preview: null,
             isStaff: false,
+            isOpen: false,
         };
 
         this.handleInput = this.handleInput.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleImage = this.handleImage.bind(this);
+        this.openModal = this.openModal.bind(this);
+        this.closeModal = this.closeModal.bind(this);
     }
 
     handleInput(event) {
@@ -83,11 +87,16 @@ class EventForm extends Component {
         reader.readAsDataURL(file);
     }
 
+    openModal = () => this.setState({isOpen: true});
+    closeModal = () => this.setState({isOpen: false});
+
     render() {
         return (
             <>
+                <button className="btn btn-success" onClick={() => this.openModal()}>Create Event</button>
                 <EventDisplay/>
-                <form className="login-register" onSubmit={(e) => this.handleSubmit(e)}>
+                <Modal  show={this.state.isOpen} onHide={this.closeModal}>
+                    <form style={{width: '100%'}} className="login-register" onSubmit={(e) => this.handleSubmit(e)}>
                     <h2>Create an Event</h2>
                     {
                         <>
@@ -127,6 +136,7 @@ class EventForm extends Component {
                             <button className="btn btn-success" type="submit" disabled>Create Event</button>
                     }
                 </form>
+                </Modal>
             </>
         );
     }
