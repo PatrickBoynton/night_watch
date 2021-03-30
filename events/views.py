@@ -34,3 +34,8 @@ class MyEventsView(generics.ListCreateAPIView):
         user = self.request.user
         return Event.objects.filter(user=user)
 
+
+class MyEventsDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Event.objects.all()
+    serializer_class = EventSerializer
+
