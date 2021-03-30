@@ -24,7 +24,9 @@ class SolarEvents extends Component {
             <div className="col-sm-4 col-12">
                     <div className="card">
                         <div className="card-header">
-                            <img src={item.image} alt="Some sort of event"/>
+                            <div className="h-100">
+                                <img style={{width: '100%'}} src={item.image} alt="Some sort of event"/>
+                            </div>
                             <h1>{item.name}</h1>
                             <h3>{item.ephemeris}</h3>
                         </div>
