@@ -1,9 +1,11 @@
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import ListView
 from rest_framework import generics, permissions
-from .models import Ephem
+from ephemeris.models import Ephem
+from accounts.models import Profile
 from .serializers import EphemSerializer
-from datetime import date
+from datetime import datetime, timedelta
+from broadcast.views import broadcast_sms
 from django.conf import settings
 
 
@@ -46,12 +48,32 @@ class EphemRemoveSubscriber(generics.UpdateAPIView):
         instance = serializer.save()
 
 
-class EphemListSubscriber(generics.ListAPIView):
-    queryset = Ephem.objects.all()
-    serializer_class = EphemSerializer
 
-    def get_object(self):
-      ephem = Ephem.objects.subscribers.all()
+def message_users_ephems():
+    today = datetime.today()
+    scheduled_time = datetime.now() + timedelta(minutes=60)
 
-      return ephem
+    queryset = Ephem.objects.filter(rise_time__date=today,
+                                    rise_time__hour=scheduled_time.hour,
+                                    rise_time__minute=scheduled_time.minute)
+    serializer = EphemSerializer(queryset, many=True)
+
+
+    for ephem in queryset:
+        # for all the subscribers in the ephem,
+        # get their number and message them
+        import pdb; pdb.set_trace()
+
+        for subscriber in ephem:
+            phone = Profile.objects.get(user=subscriber).phone
+
+        # phone = Profile.objects.get(user=ephems.user).phone
+        # import pdb; pdb.set_trace()
+            message_info = {
+                "phone": phone,
+                "name": ephem.name,
+                "rise_time": ephem.rise_time,
+            }
+            broadcast_sms(message_info)
+
 
