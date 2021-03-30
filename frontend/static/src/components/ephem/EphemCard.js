@@ -39,7 +39,7 @@ class EphemCard extends Component {
     render() {
         return (
             <>
-                <div key={this.props.item.id} className="col-sm-4 col-12 mb-3">
+                <div className="col-sm-4 col-12 mb-3">
                     <div className="card h-100">
                         <div className="card-header">
                             <div className="img-container">
