@@ -27,7 +27,6 @@ class App extends Component {
                 user: '',
                 profile_picture: '',
                 about_me: '',
-                my_equipment: [],
                 phone: '',
             }
         };
@@ -35,7 +34,7 @@ class App extends Component {
     }
 
     async componentDidMount() {
-        const response = await fetch('api/v1/profiles/details');
+        const response = await fetch('/api/v1/profiles/details/');
         const data = await response.json();
 
 
@@ -44,8 +43,7 @@ class App extends Component {
                 user: data.user,
                 profile_picture: data.profile_picture,
                 about_me: data.about_me,
-                my_equipment: data.my_equipment,
-                phone: data.phone
+                phone: data.phone,
             }
         });
     }
