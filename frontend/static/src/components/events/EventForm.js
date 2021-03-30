@@ -10,8 +10,8 @@ class EventForm extends Component {
 
         this.state = {
             name: '',
-            time: '',
-            target: '',
+            date_of_event: '',
+            ephemeris: '',
             description: '',
             message: {
                 to: this.props.phone,
@@ -43,6 +43,7 @@ class EventForm extends Component {
         formData.append('time', this.state.time);
         formData.append('target', this.state.target);
         formData.append('description', this.state.description);
+        formData.append('user', this.props.user);
         const options = {
             method: 'POST',
             headers: {
@@ -52,7 +53,7 @@ class EventForm extends Component {
         };
 
         // await this.handleSMS(event);
-        await fetch('/api/v1/events/', options);
+        await fetch('/api/v1/events/my-events/', options);
         // this.props.history.push('/events');
 
         // if (response.status === 201 || response.status === 200)
@@ -62,7 +63,7 @@ class EventForm extends Component {
     async handleSMS(event) {
         event.preventDefault();
         let currentState = this.state.message;
-        currentState['body'] = `Your viewing target: ${this.state.name} will rise at ${this.state.time}  ${this.state.description}`;
+        currentState['body'] = `Your viewing target: ${this.state.name} will rise at ${this.state.date_of_event}  ${this.state.description}`;
         this.setState({currentState});
         const options = {
             method: 'POST',
@@ -95,47 +96,47 @@ class EventForm extends Component {
             <>
                 <button className="btn btn-success" onClick={() => this.openModal()}>Create Event</button>
                 <EventDisplay/>
-                <Modal  show={this.state.isOpen} onHide={this.closeModal}>
+                <Modal show={this.state.isOpen} onHide={this.closeModal}>
                     <form style={{width: '100%'}} className="login-register" onSubmit={(e) => this.handleSubmit(e)}>
-                    <h2>Create an Event</h2>
-                    {
-                        <>
-                            {this.state.image ? <img src={this.state.preview} alt=""/> : null}
-                            <label className="form-label" htmlFor="image">Image</label>
-                            <input className="form-control" onChange={this.handleImage} type="file" name="image"/>
-                            <label className="form-label" htmlFor="name">Event Name</label>
-                            <input className="form-control" type="text"
-                                   onChange={this.handleInput}
-                                   value={this.state.value}
-                                   name="name"/>
-                        </>
-                    }
-                    <label className="form-label" htmlFor="target">Target</label>
-                    <input type="text"
-                           className="form-control"
-                           onChange={this.handleInput}
-                           value={this.state.value}
-                           name="target"/>
-                    <label className="form-label" htmlFor="time">Time</label>
-                    <input className="form-control"
-                           onChange={this.handleInput}
-                           value={this.state.value}
-                           name="time"
-                           type="text"/>
-                    <label className="form-label" htmlFor="description">Description</label>
-                    <textarea className="form-control"
-                              onChange={this.handleInput}
-                              name="description"
-                              value={this.state.value}>
+                        <h2>Create an Event</h2>
+                        {
+                            <>
+                                {this.state.image ? <img src={this.state.preview} alt=""/> : null}
+                                <label className="form-label" htmlFor="image">Image</label>
+                                <input className="form-control" onChange={this.handleImage} type="file" name="image"/>
+                            </>
+                        }
+                        <label className="form-label" htmlFor="name">Event Name</label>
+                        <input className="form-control" type="text"
+                               onChange={this.handleInput}
+                               value={this.state.value}
+                               name="name"/>
+                        <label className="form-label" htmlFor="ephemeris">Target</label>
+                        <input type="text"
+                               className="form-control"
+                               onChange={this.handleInput}
+                               value={this.state.value}
+                               name="ephemeris"/>
+                        <label className="form-label" htmlFor="date_of_event">Time</label>
+                        <input className="form-control"
+                               onChange={this.handleInput}
+                               value={this.state.value}
+                               name="date_of_event"
+                               type="text"/>
+                        <label className="form-label" htmlFor="description">Description</label>
+                        <textarea className="form-control"
+                                  onChange={this.handleInput}
+                                  name="description"
+                                  value={this.state.value}>
                 </textarea>
-                    {
-                        this.state.name !== '' && this.state.time !== '' && this.state.target !== '' && this.state.description !== ''
-                            ?
-                            <button className="btn btn-success" type="submit">Create Event</button>
-                            :
-                            <button className="btn btn-success" type="submit" disabled>Create Event</button>
-                    }
-                </form>
+                        {
+                            this.state.name !== '' && this.state.time !== '' && this.state.target !== '' && this.state.description !== ''
+                                ?
+                                <button className="btn btn-success" type="submit">Create Event</button>
+                                :
+                                <button className="btn btn-success" type="submit" disabled>Create Event</button>
+                        }
+                    </form>
                 </Modal>
             </>
         );
