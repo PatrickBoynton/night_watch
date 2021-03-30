@@ -15,6 +15,7 @@ import Home from './components/pages/Home';
 import About from './components/pages/About';
 import Glossary from './components/pages/Glossary';
 import NotFound from './components/pages/NotFound';
+import SolarEvents from './components/events/SolarEvents';
 
 class App extends Component {
     constructor(props) {
@@ -71,7 +72,8 @@ class App extends Component {
                     <Route path="/event/form" render={(props) => (<EventForm {...props} phone={this.state.user.phone}/>)}/>
                     <Route path="/display" component={EphemDisplay}/>
                     <Route path="/celestial-list"  component={EphemList}/>
-                    <Route path="/events" component={EventDisplay}/>
+                    <Route path="/events" component={SolarEvents}/>
+                    <Route path="/" />
                     <Route exact path='/' component={Home}/>
                     <Route exact path='*' component={NotFound} />
                 </Switch>
