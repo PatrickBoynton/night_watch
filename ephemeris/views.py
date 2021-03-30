@@ -4,6 +4,7 @@ from rest_framework import generics, permissions
 from .models import Ephem
 from .serializers import EphemSerializer
 from datetime import date
+from django.conf import settings
 
 
 # Create your views here.
@@ -49,5 +50,8 @@ class EphemListSubscriber(generics.ListAPIView):
     queryset = Ephem.objects.all()
     serializer_class = EphemSerializer
 
-    def get_queryset(self):
-        pass
+    def get_object(self):
+      ephem = Ephem.objects.subscribers.all()
+
+      return ephem
+
