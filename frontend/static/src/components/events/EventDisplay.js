@@ -43,7 +43,7 @@ class EventDisplay extends Component {
                 description: this.state.description,
             })
         };
-        await fetch(`/api/v1/events/${this.state.id}/`, options);
+        await fetch(`/api/v1/events/${this.state.id}/my-events/`, options);
         window.location.reload();
         return <Redirect to='/events'/>;
     }

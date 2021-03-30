@@ -36,7 +36,7 @@ class EphemAddSubscriber(generics.UpdateAPIView):
 
 
 class EphemRemoveSubscriber(generics.UpdateAPIView):
-    queryset =  Ephem.objects.all()
+    queryset = Ephem.objects.all()
     serializer_class = EphemSerializer
 
     def perform_update(self, serializer):
@@ -44,3 +44,10 @@ class EphemRemoveSubscriber(generics.UpdateAPIView):
         instance.subscribers.remove(self.request.user)
         instance = serializer.save()
 
+
+class EphemListSubscriber(generics.ListAPIView):
+    queryset = Ephem.objects.all()
+    serializer_class = EphemSerializer
+
+    def get_queryset(self):
+        pass
