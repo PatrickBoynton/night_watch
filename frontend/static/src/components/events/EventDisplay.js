@@ -55,7 +55,7 @@ class EventDisplay extends Component {
                 'X-CSRFToken': Cookies.get('csrftoken')
             }
         };
-        fetch(`/api/v1/${id}/my-events/`, options);
+        fetch(`/api/v1/events/${id}/my-events/`, options);
         // this.props.history.push('/events');
         window.location.reload();
     }
