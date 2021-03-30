@@ -62,18 +62,20 @@ def message_users_ephems():
     for ephem in queryset:
         # for all the subscribers in the ephem,
         # get their number and message them
-        import pdb; pdb.set_trace()
 
-        for subscriber in ephem:
+        for subscriber in ephem.subscribers:
+            print(ephem.subscribers)
+            # import pdb; pdb.set_trace()
             phone = Profile.objects.get(user=subscriber).phone
 
-        # phone = Profile.objects.get(user=ephems.user).phone
-        # import pdb; pdb.set_trace()
+            # phone = Profile.objects.get(user=ephems.user).phone
             message_info = {
                 "phone": phone,
                 "name": ephem.name,
-                "rise_time": ephem.rise_time,
+                # "rise_time": ephem.rise_time,
             }
+
             broadcast_sms(message_info)
+            return phone
 
 
