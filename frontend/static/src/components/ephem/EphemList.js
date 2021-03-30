@@ -59,13 +59,13 @@ class EphemList extends Component {
         const options = {
             method: 'PATCH',
             headers: {
-                'Content-Type':'Application/Json',
+                'Content-Type': 'Application/Json',
                 'X-CSRFToken': Cookies.get('csrftoken')
             }
-        }
+        };
 
-        const response = await fetch(`/api/v1/ephem/${item.id}/unsubscribe/`, options)
-        const json = await response.json()
+        const response = await fetch(`/api/v1/ephem/${item.id}/unsubscribe/`, options);
+        const json = await response.json();
         console.log(json);
     }
 
@@ -109,6 +109,7 @@ class EphemList extends Component {
             }
         }).map((item, index) =>
             <EphemCard item={item}
+                       key={item.id}
                        addSubscriber={this.addSubscriber}
                        removeSubscriber={this.removeSubscriber}
                        isAdmin={this.state.isAdmin}/>
@@ -128,9 +129,7 @@ class EphemList extends Component {
                 {
                     !this.state.isEditMode
                         ?
-                        <div className="planet-width
-                                        px-4
-                                        row">
+                        <div className="row">
 
                             {
                                 list
