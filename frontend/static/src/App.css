@@ -120,6 +120,18 @@ img {
   label {
     white-space: nowrap;
   }
+  nav{
+    width: 50%;
+    margin: 0 auto;
+  }
+  a{
+    font-size: 20px;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    white-space: nowrap;
+  }
 }
 
 @media only screen and (min-width: 2000px){
