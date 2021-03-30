@@ -7,7 +7,6 @@ from rest_framework.decorators import api_view
 from .serializers import EventSerializer
 from rest_framework import permissions
 from broadcast.views import broadcast_sms
-
 from accounts.models import Profile
 
 
@@ -46,8 +45,7 @@ class MyEventsDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = EventSerializer
 
 
-@api_view()
-def message_users(request):
+def message_users():
     today = datetime.today()
     scheduled_time = datetime.now() + timedelta(minutes=60)
 
@@ -76,4 +74,4 @@ def message_users(request):
                 }
                 broadcast_sms(message_info)
 
-    return Response(serializer.data, status=status.HTTP_200_OK)
+    # return Response(serializer.data, status=status.HTTP_200_OK)
