@@ -60,7 +60,7 @@ class EventDisplay extends Component {
     }
 
     async componentDidMount() {
-        const response = await fetch('/api/v1/events/');
+        const response = await fetch('/api/v1/events/my-events/');
         const data = await response.json();
         console.log(data);
         this.setState({data});
