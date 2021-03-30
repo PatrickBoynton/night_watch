@@ -20,7 +20,11 @@ app.conf.beat_schedule = {
     #     'schedule': 121.00
     # },
     'send_sms': {
-        'task': 'events.tasks.message_user',
+        'task': 'events.tasks.run_sms',
+        'schedule': 60.0
+    },
+    'send_ephem_sms': {
+        'task': 'ephemeris.tasks.send_ephem_message',
         'schedule': 60.0
     }
 }
