@@ -1,6 +1,7 @@
 import os
 from celery import Celery
 from celery.schedules import crontab
+
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'conf.settings')
 
 app = Celery('conf', broker='redis://localhost:6379')
@@ -18,6 +19,10 @@ app.conf.beat_schedule = {
     'get_star_rise_and_set_times': {
         'task': 'ephemeris.tasks.get_star_times',
         'schedule': 121.00
+    },
+    'send_sms': {
+        'task': 'broadcasts.tasks.send_sms',
+        'schedule': ''
     }
 }
 
