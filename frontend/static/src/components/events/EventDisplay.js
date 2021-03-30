@@ -1,6 +1,7 @@
 import {Component} from 'react';
 import Cookies from 'js-cookie';
 import {Redirect} from 'react-router-dom';
+import {Modal} from 'react-bootstrap';
 
 class EventDisplay extends Component {
 
@@ -15,6 +16,7 @@ class EventDisplay extends Component {
             ephemeris: '',
             date_of_event: '',
             image: null,
+            isOpen: false,
         };
 
         this.handleDelete = this.handleDelete.bind(this);
@@ -22,12 +24,15 @@ class EventDisplay extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleInput = this.handleInput.bind(this);
         this.handleImage = this.handleImage.bind(this);
+        this.openModal = this.openModal.bind(this);
+        this.closeModal = this.closeModal.bind(this);
     }
 
     handleInput(event) {
         this.setState({[event.target.name]: event.target.value});
     }
-
+    openModal = () => this.setState({isOpen: true});
+    closeModal = () => this.setState({isOpen: false});
     async handleSubmit(e) {
         e.preventDefault();
         const options = {
@@ -79,43 +84,43 @@ class EventDisplay extends Component {
 
     showForm() {
         return <form className="login-register" onSubmit={this.handleSubmit}>
-            {this.state.image ? <img src={this.state.preview} alt=""/> : null}
-            <label className="form-label" htmlFor="image">Image</label>
-            <input className="form-control"
-                   type="file"
-                   onChange={this.handleImage}
-                   name="image"/>
+                {this.state.image ? <img src={this.state.preview} alt=""/> : null}
+                <label className="form-label" htmlFor="image">Image</label>
+                <input className="form-control"
+                       type="file"
+                       onChange={this.handleImage}
+                       name="image"/>
 
-            <label className="form-label" htmlFor="name">Name</label>
-            <input className="form-control"
-                   type="text"
-                   onChange={this.handleInput}
-                   name="name"
-                   value={this.state.name || ''}/>
+                <label className="form-label" htmlFor="name">Name</label>
+                <input className="form-control"
+                       type="text"
+                       onChange={this.handleInput}
+                       name="name"
+                       value={this.state.name || ''}/>
 
-            <label className="form-label" htmlFor="ephemeris">Target</label>
-            <input className="form-control"
-                   type="text"
-                   onChange={this.handleInput}
-                   name="ephemeris"
-                   value={this.state.ephemeris || ''}/>
+                <label className="form-label" htmlFor="ephemeris">Target</label>
+                <input className="form-control"
+                       type="text"
+                       onChange={this.handleInput}
+                       name="ephemeris"
+                       value={this.state.ephemeris || ''}/>
 
-            <label className="form-label" htmlFor="time">Date and Time</label>
-            <input className="form-control"
-                   type="text"
-                   onChange={this.handleInput}
-                   name="date_of_event"
-                   value={this.state.date_of_event || ''}
-                   placeholder="2021-06-12 22:33"/>
+                <label className="form-label" htmlFor="time">Date and Time</label>
+                <input className="form-control"
+                       type="text"
+                       onChange={this.handleInput}
+                       name="date_of_event"
+                       value={this.state.date_of_event || ''}
+                       placeholder="2021-06-12 22:33"/>
 
-            <label className="form-label" htmlFor="description">Description</label>
-            <textarea className="form-control"
-                      name="description"
-                      onChange={this.handleInput}
-                      value={this.state.description} cols="30" rows="10">
+                <label className="form-label" htmlFor="description">Description</label>
+                <textarea className="form-control"
+                          name="description"
+                          onChange={this.handleInput}
+                          value={this.state.description} cols="30" rows="10">
             </textarea>
-            <button className="btn btn-primary" type="submit">Edit</button>
-        </form>;
+                <button className="btn btn-primary" type="submit">Edit</button>
+            </form>
     }
 
     handleEditMode(e) {
@@ -131,22 +136,22 @@ class EventDisplay extends Component {
 
     render() {
         let events = this.state.data?.map(event => <div className="col-sm-4 col-4 mb-3" key={event.id}>
-                    <div className="card h-100">
-                        <div className="card-header">
-                            <div className="img-container img-responsive">
-                                <img style={{height: '100%'}} src={event.image} alt="Nothin here."/>
-                            </div>
-                            <h2>{event.name}</h2>
-                            <p>{event.ephemeris}</p>
-                        </div>
-                        <p>{event.date_of_event}</p>
-                        <p>{event.description}</p>
-                        <div className="button-group card-footer">
-                            <button onClick={() => this.handleEditMode(event)} className="btn btn-primary">Edit</button>
-                            <button onClick={() => this.handleDelete(event.id)} className="btn btn-danger">Delete
-                            </button>
-                        </div>
+            <div className="card h-100">
+                <div className="card-header">
+                    <div className="img-container img-responsive">
+                        <img style={{height: '100%'}} src={event.image} alt="Nothin here."/>
+                    </div>
+                    <h2>{event.name}</h2>
+                    <p>{event.ephemeris}</p>
                 </div>
+                <p>{event.date_of_event}</p>
+                <p>{event.description}</p>
+                <div className="button-group card-footer">
+                    <button onClick={() => this.handleEditMode(event)} className="btn btn-primary">Edit</button>
+                    <button onClick={() => this.handleDelete(event.id)} className="btn btn-danger">Delete
+                    </button>
+                </div>
+            </div>
         </div>);
         return (
             <div className="row">
