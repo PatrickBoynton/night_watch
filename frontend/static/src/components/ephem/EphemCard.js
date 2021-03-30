@@ -56,11 +56,9 @@ class EphemCard extends Component {
                             </>
                         }
                         {
-                            !this.props.isLoggedIn
+                            this.props.isLoggedIn
                                 ?
-                                null
-                                :
-
+/**/
                                 this.props.item.is_subscribed
                                     ?
                                     <button type="submit" onClick={() => this.props.removeSubscriber(this.props.item)}
@@ -71,6 +69,9 @@ class EphemCard extends Component {
                                     <button type="submit" onClick={() => this.props.addSubscriber(this.props.item)}
                                             className="btn-primary">Remind me
                                     </button>
+
+                                :
+                                null
                         }
                         {
                             this.props.isAdmin
