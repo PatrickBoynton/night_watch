@@ -17,6 +17,7 @@ class EphemList extends Component {
             error: false,
             result: '',
             id: 0,
+            isSubscribed: false,
         };
         this.handleInput = this.handleInput.bind(this);
         this.addSubscriber = this.addSubscriber.bind(this);
@@ -41,7 +42,7 @@ class EphemList extends Component {
         this.setState({result: event.target.value});
     }
 
-    async addSubscriber(item) {
+    async addSubscriber(item, state) {
         const options = {
             method: 'PATCH',
             headers: {
@@ -53,6 +54,7 @@ class EphemList extends Component {
         const response = await fetch(`/api/v1/ephem/${item.id}/subscribe/`, options);
         const json = await response.json();
         console.log(json);
+        this.setState({is_subscribed: true})
     }
 
     async removeSubscriber(item) {
@@ -67,6 +69,7 @@ class EphemList extends Component {
         const response = await fetch(`/api/v1/ephem/${item.id}/unsubscribe/`, options);
         const json = await response.json();
         console.log(json);
+        this.setState({is_subscribed: false});
     }
 
     // TODO hook up when finished.
