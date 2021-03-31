@@ -3,7 +3,9 @@ import {Component} from 'react';
 class EphemCard extends Component {
     constructor(props) {
         super(props);
-
+        this.state ={
+            is_subscribed: false,
+        }
         this.handleText = this.handleText.bind(this);
         this.handleEditMode = this.handleEditMode.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -27,6 +29,7 @@ class EphemCard extends Component {
         // await fetch('/api/v1/broadcast/', options);
         alert(this.props.id);
     }
+
 
     handleEditMode() {
         this.setState({isEditMode: true});
