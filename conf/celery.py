@@ -3,22 +3,21 @@ from celery import Celery
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'conf.settings')
 
-app = Celery('conf', broker='redis://localhost:6379')
+app = Celery('conf')
 
-app.config_from_object('django.conf:settings', namespace='Celery')
+app.config_from_object('django.conf:settings', namespace='CELERY')
 
-app.autodiscover_tasks(['ephemeris.celery_app', 'events.celery_app'])
+app.autodiscover_tasks()
 
 app.conf.beat_schedule = {
-    # 'print_rise_and_set_times': {
-    #     'task': 'ephemeris.tasks.get_planet_times',
-    #     # 'schedule': crontab(minute=0, hour=0),
-    #     'schedule': 120.00
-    # },
-    # 'get_star_rise_and_set_times': {
-    #     'task': 'ephemeris.tasks.get_star_times',
-    #     'schedule': 121.00
-    # },
+    'print_rise_and_set_times': {
+        'task': 'ephemeris.tasks.get_planet_times',
+        'schedule': 60.00
+    },
+    'get_star_rise_and_set_times': {
+        'task': 'ephemeris.tasks.get_star_times',
+        'schedule': 61.00
+    },
     'send_sms': {
         'task': 'events.tasks.run_sms',
         'schedule': 60.0
@@ -32,6 +31,6 @@ app.conf.beat_schedule = {
 app.conf.timezone = 'UTC'
 
 
-@app.task(bind=True)
-def debug_task(self):
-    print(f'Request: {self.request!r}')
+# @app.task(bind=True)
+# def debug_task(self):
+#     print(f'Request: {self.request!r}')
