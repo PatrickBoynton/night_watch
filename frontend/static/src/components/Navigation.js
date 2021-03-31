@@ -52,8 +52,6 @@ class Navigation extends Component {
                                         :
                                         null
                                 }
-
-                                <NavLink to="/profile">Profile</NavLink>
                                 <NavLink to='/logout' onClick={this.handleLogout}>Logout</NavLink>
                             </>
                             :
