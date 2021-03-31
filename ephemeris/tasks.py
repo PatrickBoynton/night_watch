@@ -86,8 +86,8 @@ def get_planet_times():
 
     greenville = wgs84.latlon(34.8526 * N, 82.3940 * W, elevation_m=299.923)
     # global planet
-    for i in planets:
-        f = risings_and_settings(eph, i, greenville)
+    for planet in planets:
+        f = risings_and_settings(eph, planet, greenville)
         tz = timezone('US/Eastern')
 
         for t, updown in zip(*find_discrete(t0, t1, f)):
