@@ -13,7 +13,7 @@ def broadcast_sms(data):
     # import pdb; pdb.set_trace()
 
     if 'name' in data:
-        print('name')
+        print(data)
         recipient = data['phone']
         message = data['name']
         # message_to_broadcast = request
@@ -22,7 +22,6 @@ def broadcast_sms(data):
                                from_=settings.TWILIO_NUMBER,
                                body=message)
     if 'event_name' in data:
-        # print('event name')
         recipient = data['phone']
         message = data['event_name']
         # message_to_broadcast = request
@@ -32,10 +31,6 @@ def broadcast_sms(data):
                                body=message)
 
 
-    # import pdb
-    # pdb.set_trace()
-    #
-    #
     # for recipient in settings.SMS_BROADCAST_TO_NUMBERS:
     #     if recipient:
     #         client.messages.create(to=recipient,

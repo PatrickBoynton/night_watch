@@ -52,6 +52,7 @@ def message_users():
     queryset = Event.objects.filter(date_of_event__date=today,
                                     date_of_event__hour=scheduled_time.hour,
                                     date_of_event__minute=scheduled_time.minute)
+
     serializer = EventSerializer(queryset, many=True)
 
     # User events not JS event.
@@ -70,7 +71,7 @@ def message_users():
             for subscriber in subscribers:
                 message_info = {
                     "phone": subscriber.phone,
-                    "event_name": event.name,
+                    "name": event.name,
                 }
                 broadcast_sms(message_info)
 

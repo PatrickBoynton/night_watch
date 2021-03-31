@@ -71,7 +71,7 @@ def message_users_ephems():
             # phone = Profile.objects.get(user=ephems.user).phone
             message_info = {
                 "phone": phone,
-                "name": ephem.rise_time,
+                "ephem_name": ephem.rise_time,
             }
 
             broadcast_sms(message_info)
