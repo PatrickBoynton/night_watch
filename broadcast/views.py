@@ -13,7 +13,6 @@ def broadcast_sms(data):
     # import pdb; pdb.set_trace()
 
     if 'name' in data:
-        print(data)
         recipient = data['phone']
         message = data['name']
         # message_to_broadcast = request
