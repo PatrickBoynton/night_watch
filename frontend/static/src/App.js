@@ -36,16 +36,19 @@ class App extends Component {
 
     async componentDidMount() {
         const response = await fetch('/api/v1/profiles/details/');
+        const user = await fetch('/rest-auth/user');
+        const userData = await user.json();
         const data = await response.json();
 
-        console.log(data);
+        console.log(userData);
         this.setState({
             user: {
+                id: userData.pk,
                 user: data.user,
                 profile_picture: data.profile_picture,
                 about_me: data.about_me,
                 phone: data.phone,
-                isAdmin: data.is_admin,
+                isAdmin: data.isAdmin
             }
         });
     }
