@@ -38,22 +38,35 @@ class Navigation extends Component {
                         this.props.isLoggedIn
                             ?
                             <>
-                                <NavLink className="navbar-brand" to='/'>Night Watch</NavLink>
+                                <NavLink className="navbar-brand" to='/'>NW</NavLink>
+                                <span>
+                                    <NavLink to="/celestial-list">Celestial Bodies</NavLink>
+                                    <NavLink style={{padding: '0 20px 0 20px'}} to="/events">Solar Events</NavLink>
+                                    <NavLink to="/event/form">My Events</NavLink>
+                                </span>
 
+                                {
+                                    this.props.isAdmin
+                                        ?
+                                        <NavLink to='/admin'>Admin Area</NavLink>
+                                        :
+                                        null
+                                }
 
-                                <NavLink to="/celestial-list">Celestial Bodies</NavLink>
-                                <NavLink to="/events">Solar Events</NavLink>
-                                <NavLink to="/event/form">My Events</NavLink>
-                                <NavLink to='/glossary'>Glossary</NavLink>
                                 <NavLink to="/profile">Profile</NavLink>
                                 <NavLink to='/logout' onClick={this.handleLogout}>Logout</NavLink>
                             </>
                             :
                             <>
-                                <NavLink className="navbar-brand" to='/home'>Night Watch</NavLink>
-                                <NavLink to="/celestial-list">Celestial Bodies</NavLink>
-                                <NavLink to="/register">Register</NavLink>
-                                <NavLink to="/login">Login</NavLink>
+                                <span>
+                                    <NavLink className="navbar-brand" to='/home'>NW</NavLink>
+                                    <NavLink style={{paddingLeft: '20px'}}
+                                             to="/celestial-list">Celestial Bodies</NavLink>
+                                </span>
+                                <span>
+                                    <NavLink style={{paddingRight: '20px'}} to="/register">Register</NavLink>
+                                    <NavLink to="/login">Login</NavLink>
+                                </span>
                             </>
                     }
                     {
