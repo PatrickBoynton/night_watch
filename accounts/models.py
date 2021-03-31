@@ -29,5 +29,7 @@ class Profile(models.Model):
                              blank=True,
                              default='18646405680')
 
+    is_admin = models.BooleanField(default=False)
+
     def __str__(self):
         return self.user.username
