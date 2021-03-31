@@ -13,6 +13,7 @@ class EventForm extends Component {
             date_of_event: '',
             ephemeris: '',
             description: '',
+            id: this.props.id,
             message: {
                 to: this.props.phone,
                 body: 'Testing 1, 2, 3'
@@ -33,6 +34,11 @@ class EventForm extends Component {
         this.setState({[event.target.name]: event.target.value});
     }
 
+    componentDidMount() {
+        console.log(this.props);
+    }
+
+
     async handleSubmit(event) {
         event.preventDefault();
         let formData = new FormData();
@@ -42,7 +48,8 @@ class EventForm extends Component {
         formData.append('time', this.state.time);
         formData.append('target', this.state.target);
         formData.append('description', this.state.description);
-        formData.append('user', this.props.user.id);
+        formData.append('user', this.state.id);
+        console.log(this.props);
         const options = {
             method: 'POST',
             headers: {
@@ -50,7 +57,7 @@ class EventForm extends Component {
             },
             body: formData,
         };
-
+        console.log(this.props.id);
         // await this.handleSMS(event);
         await fetch('/api/v1/events/my-events/', options);
         // this.props.history.push('/events');
@@ -95,7 +102,7 @@ class EventForm extends Component {
             <>
                 <button className="btn btn-success" onClick={() => this.openModal()}>Create Event</button>
                 <EventDisplay/>
-                <Modal show={this.state.isOpen} onHide={this.closeModal}>
+                <Modal id={this.props.id} show={this.state.isOpen} onHide={this.closeModal}>
                     <form style={{width: '100%'}} className="login-register" onSubmit={(e) => this.handleSubmit(e)}>
                         <h2>Create an Event</h2>
                         {
