@@ -7,7 +7,6 @@ import {Component} from 'react';
 import EphemDisplay from './components/ephem/EphemDisplay';
 import EphemList from './components/ephem/EphemList';
 import EventForm from './components/events/EventForm';
-import EventDisplay from './components/events/EventDisplay';
 import Navigation from './components/Navigation';
 import Cookies from 'js-cookie';
 import ProfileForm from './components/user/ProfileForm';
@@ -28,7 +27,8 @@ class App extends Component {
                 profile_picture: '',
                 about_me: '',
                 phone: '',
-                isAdmin: false
+                isAdmin: false,
+                id: 0,
             }
         };
         this.handleIsLoggedIn = this.handleIsLoggedIn.bind(this);
@@ -69,7 +69,7 @@ class App extends Component {
                            render={(props) => (<Profile {...props} user={this.state.user}
                                                         handleIsLoggedIn={this.handleIsLoggedIn}/>)}/>
                     <Route path="/create-profile" component={ProfileForm}/>
-                    <Route path="/event/form" render={(props) => (<EventForm {...props} phone={this.state.user.phone}/>)}/>
+                    <Route path="/event/form" render={(props) => (<EventForm {...props} id={this.state.user.id} phone={this.state.user.phone}/>)}/>
                     <Route path="/display" component={EphemDisplay}/>
                     <Route path="/celestial-list"  render={(props) => <EphemList {...props} user={this.state.user} isLoggedIn={this.state.isLoggedIn}/>}/>
                     <Route path="/events" component={SolarEvents}/>
