@@ -16,6 +16,7 @@ import About from './components/pages/About';
 import Glossary from './components/pages/Glossary';
 import NotFound from './components/pages/NotFound';
 import SolarEvents from './components/events/SolarEvents';
+import EphemForm from './components/ephem/EphemForm';
 
 class App extends Component {
     constructor(props) {
@@ -71,7 +72,7 @@ class App extends Component {
                     <Route path="/display" component={EphemDisplay}/>
                     <Route path="/celestial-list"  render={(props) => <EphemList {...props} user={this.state.user} isLoggedIn={this.state.isLoggedIn}/>}/>
                     <Route path="/events" component={SolarEvents}/>
-                    <Route path="/" />
+                    <Route path='/admin' component={EphemForm}/>
                     <Route exact path='/' component={Home}/>
                     <Route exact path='*' component={NotFound} />
                 </Switch>
