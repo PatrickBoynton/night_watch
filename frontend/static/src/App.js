@@ -23,12 +23,12 @@ class App extends Component {
         super(props);
         this.state = {
             isLoggedIn: !!Cookies.get('Authorization'),
-            isAdmin: false,
             user: {
                 user: '',
                 profile_picture: '',
                 about_me: '',
                 phone: '',
+                isAdmin: false
             }
         };
         this.handleIsLoggedIn = this.handleIsLoggedIn.bind(this);
@@ -38,13 +38,14 @@ class App extends Component {
         const response = await fetch('/api/v1/profiles/details/');
         const data = await response.json();
 
-
+        console.log(data);
         this.setState({
             user: {
                 user: data.user,
                 profile_picture: data.profile_picture,
                 about_me: data.about_me,
                 phone: data.phone,
+                isAdmin: data.is_admin,
             }
         });
     }
@@ -57,7 +58,7 @@ class App extends Component {
     render() {
         return (
             <div className="App">
-                <Navigation isLoggedIn={this.state.isLoggedIn} handleIsLoggedIn={this.handleIsLoggedIn}/>
+                <Navigation user={this.state.user} isLoggedIn={this.state.isLoggedIn} handleIsLoggedIn={this.handleIsLoggedIn}/>
                 <Switch>
                     <Route path='/about' component={About}/>
                     <Route path='/glossary' component={Glossary}/>
