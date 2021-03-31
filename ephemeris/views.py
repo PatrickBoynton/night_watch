@@ -52,19 +52,18 @@ class EphemRemoveSubscriber(generics.UpdateAPIView):
 def message_users_ephems():
     today = datetime.today()
     scheduled_time = datetime.now() + timedelta(minutes=60)
-
-    queryset = Ephem.objects.filter(rise_time__date=today,
-                                    rise_time__hour=scheduled_time.hour,
-                                    rise_time__minute=scheduled_time.minute)
+    queryset = Ephem.objects.all()
+    # queryset = Ephem.objects.filter(rise_time__date=today,
+    #                                 rise_time__hour=scheduled_time.hour,
+    #                                 rise_time__minute=scheduled_time.minute)
     serializer = EphemSerializer(queryset, many=True)
 
 
     for ephem in queryset:
         # for all the subscribers in the ephem,
         # get their number and message them
-
-        for subscriber in ephem.subscribers:
-            print(ephem.subscribers)
+        # import pdb; pdb.set_trace()
+        for subscriber in ephem.subscribers.all():
             # import pdb; pdb.set_trace()
             phone = Profile.objects.get(user=subscriber).phone
 
@@ -72,10 +71,10 @@ def message_users_ephems():
             message_info = {
                 "phone": phone,
                 "name": ephem.name,
-                # "rise_time": ephem.rise_time,
+                "rise_time": ephem.rise_time,
             }
 
             broadcast_sms(message_info)
             return phone
 
-
+message_users_ephems()
