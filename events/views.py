@@ -46,6 +46,7 @@ class MyEventsDetailView(generics.RetrieveUpdateDestroyAPIView):
 
 
 def message_users():
+    print('running message users')
     today = datetime.today()
     scheduled_time = datetime.now() + timedelta(minutes=60)
 
@@ -53,7 +54,7 @@ def message_users():
                                     date_of_event__hour=scheduled_time.hour,
                                     date_of_event__minute=scheduled_time.minute)
 
-    serializer = EventSerializer(queryset, many=True)
+    # serializer = EventSerializer(queryset, many=True)
 
     # User events not JS event.
     for event in queryset:
