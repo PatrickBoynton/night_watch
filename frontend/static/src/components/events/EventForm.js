@@ -19,7 +19,6 @@ class EventForm extends Component {
             },
             image: null,
             preview: null,
-            isStaff: false,
             isOpen: false,
         };
 
@@ -43,7 +42,7 @@ class EventForm extends Component {
         formData.append('time', this.state.time);
         formData.append('target', this.state.target);
         formData.append('description', this.state.description);
-        formData.append('user', this.props.user);
+        formData.append('user', this.props.user.id);
         const options = {
             method: 'POST',
             headers: {
