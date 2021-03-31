@@ -25,7 +25,7 @@ andromeda = Ephem.objects.get(name='Andromeda')
 orion_nebula = Ephem.objects.get(name="Orion's Nebula")
 pleadies = Ephem.objects.get(name='The Pleadies')
 
-ephems = [sun, mercury, venus, mars, jupiter, saturn, neptune, uranus]
+ephems = [sun, mercury, venus, mars, jupiter, saturn, neptune, uranus, moon]
 star_ephems = [betelgeuse, sirius, andromeda, orion_nebula, pleadies]
 
 eph = load('de421.bsp')
