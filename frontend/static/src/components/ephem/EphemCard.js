@@ -69,7 +69,7 @@ class EphemCard extends Component {
                                     </button>
                                     :
 
-                                    <button type="submit" onClick={() => this.props.addSubscriber(this.props.item)}
+                                    <button type="submit" onClick={() => this.props.addSubscriber(this.props.item, this.state.is_subscribed)}
                                             className="btn-primary">Remind me
                                     </button>
 
