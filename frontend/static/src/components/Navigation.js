@@ -46,7 +46,7 @@ class Navigation extends Component {
                                 </span>
 
                                 {
-                                    this.props.isAdmin
+                                    this.props.user.isAdmin
                                         ?
                                         <NavLink to='/admin'>Admin Area</NavLink>
                                         :
