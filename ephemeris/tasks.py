@@ -184,6 +184,33 @@ def get_venus_rise_and_set():
     venus.set_time = dates[1]
     venus.save()
 
+@app.shared_task
+def get_venus_rise_and_set():
+    ts = load.timescale()
+
+    # Updates the date.
+    today = datetime.today().strftime('%Y-%m-%d').split('-')
+    tomorrow = (datetime.today() + timedelta(days=1)).strftime(
+        '%Y-%m-%d').split('-')
+
+    t0 = ts.utc(int(today[0]), int(today[1]), int(today[2]))
+    t1 = ts.utc(int(tomorrow[0]), int(tomorrow[1]), int(tomorrow[2]))
+
+    dates = []
+
+    greenville = wgs84.latlon(34.8526 * N, 82.3940 * W, elevation_m=299.923)
+    # global planet
+    f = risings_and_settings(eph, planet9, greenville)
+    tz = timezone('US/Eastern')
+
+    for t, updown in zip(*find_discrete(t0, t1, f)):
+        dates.append(t.astimezone(tz).strftime('%Y-%m-%d %H:%M'))
+
+    moon.rise_time = dates[0]
+    moon.rise_time = dates[0]
+    moon.set_time = dates[1]
+    moon.save()
+
 
 @app.shared_task
 def get_mars_rise_and_set():
@@ -380,7 +407,7 @@ def get_betelgeuse_times():
     betelgeuse.set_time = dates[1]
     betelgeuse.save()
 
-
+@app.shared_task
 def get_sirius_times():
     ts = load.timescale()
 
@@ -406,6 +433,8 @@ def get_sirius_times():
     sirius.set_time = dates[1]
     sirius.save()
 
+
+@app.shared_task
 def get_andromeda_times():
     ts = load.timescale()
 
@@ -431,6 +460,8 @@ def get_andromeda_times():
     andromeda.set_time = dates[1]
     andromeda.save()
 
+
+@app.shared_task
 def get_orion_times():
     ts = load.timescale()
 
@@ -457,6 +488,7 @@ def get_orion_times():
     orion_nebula.save()
 
 
+@app.shared_task
 def get_pleadies_times():
     ts = load.timescale()
 
