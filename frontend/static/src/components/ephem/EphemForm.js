@@ -63,7 +63,7 @@ class EphemForm extends Component {
 
     render() {
         return (
-            <form onSubmit={(e) => this.handleSubmit(e, this.state)}>
+            <form style={{marginTop: '50px'}} className="login-register" onSubmit={(e) => this.handleSubmit(e, this.state)}>
                 <label className="form-label" htmlFor="name">Name</label>
                 <input className="form-control"
                        type="text"
