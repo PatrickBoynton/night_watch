@@ -105,6 +105,7 @@ img {
 }
 .nav {
   padding: 20px;
+  background-color: #8e000077;
 }
 .img-container{
   height: 300px;
@@ -122,7 +123,7 @@ img {
   }
   nav{
     width: 50%;
-    margin: 0 auto;
+    margin: 0 auto 10px;
   }
   a{
     font-size: 20px;
