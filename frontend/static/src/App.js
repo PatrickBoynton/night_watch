@@ -71,7 +71,6 @@ class App extends Component {
                     <Route path="/profile"
                            render={(props) => (<Profile {...props} user={this.state.user}
                                                         handleIsLoggedIn={this.handleIsLoggedIn}/>)}/>
-                    <Route path="/create-profile" component={ProfileForm}/>
                     <Route path="/event/form" render={(props) => (<EventForm {...props} id={this.state.user.id} phone={this.state.user.phone}/>)}/>
                     <Route path="/display" component={EphemDisplay}/>
                     <Route path="/celestial-list"  render={(props) => <EphemList {...props} user={this.state.user} isLoggedIn={this.state.isLoggedIn}/>}/>
