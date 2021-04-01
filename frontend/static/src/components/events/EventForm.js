@@ -100,10 +100,10 @@ class EventForm extends Component {
     render() {
         return (
             <>
-                <button className="btn btn-success" onClick={() => this.openModal()}>Create Event</button>
+                <button style={{marginBottom: '.4rem'}}  className="create btn btn-success d-block m-auto" onClick={() => this.openModal()}>Create Event</button>
                 <EventDisplay/>
                 <Modal id={this.props.id} show={this.state.isOpen} onHide={this.closeModal}>
-                    <form style={{width: '100%'}} className="login-register" onSubmit={(e) => this.handleSubmit(e)}>
+                    <form style={{width: '100%'}} className="modal-content text-center" onSubmit={(e) => this.handleSubmit(e)}>
                         <h2>Create an Event</h2>
                         {
                             <>
