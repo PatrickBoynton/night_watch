@@ -2,6 +2,7 @@
 .card {
     background-color: #4A1915;
     text-align: center;
+    border: 1px solid #b2b2b2;
 }
 
 .card-image {
@@ -13,18 +14,29 @@
     /*padding-top: .5rem;*/
     /*padding-bottom: .5rem;*/
 }
-img{
+
+img {
     width: 100%;
 }
-.create{
+
+.create {
     text-align: center;
 }
-.modal-content{
+
+.modal-content {
     background-color: black;
     color: white;
 }
-.form-control{
+
+.form-control {
     background-color: black;
     color: white;
     border: 1px solid white;
+}
+
+.clearfix {
+    clear: both;
+}
+::selection{
+    background-color: #5b6265;
 }
