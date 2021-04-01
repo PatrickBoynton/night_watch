@@ -1,6 +1,6 @@
 import {Component} from 'react';
 import Cookies from 'js-cookie';
-import {Redirect} from 'react-router-dom';
+import moment from 'moment';
 
 class EventDisplay extends Component {
 
@@ -38,7 +38,7 @@ class EventDisplay extends Component {
         e.preventDefault();
 
         const formData = new FormData();
-        if(typeof(this.state.image) !== "string") {
+        if (typeof (this.state.image) !== 'string') {
             formData.append('image', this.state.image);
         }
         formData.append('name', this.state.name);
@@ -90,8 +90,8 @@ class EventDisplay extends Component {
     }
 
     showForm() {
-        return <form className="login-register" onSubmit={this.handleSubmit}>
-            {this.state.preview ? <img src={this.state.preview} /> : <img src={this.state.image}/>}
+        return <form className="m-auto" onSubmit={this.handleSubmit}>
+            {this.state.preview ? <img src={this.state.preview}/> : <img src={this.state.image}/>}
             <label className="form-label" htmlFor="image">Image</label>
             <input className="form-control"
                    type="file"
@@ -155,7 +155,7 @@ class EventDisplay extends Component {
                     <h2>{event.name}</h2>
                     <p>{event.ephemeris}</p>
                 </div>
-                <p>{event.date_of_event}</p>
+                <p>{moment(event.date_of_event).format}</p>
                 <p>{event.description}</p>
                 <div className="button-group card-footer">
                     <button onClick={() => this.handleEditMode(event)} className="btn btn-primary">Edit</button>
