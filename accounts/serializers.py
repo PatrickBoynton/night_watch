@@ -22,8 +22,9 @@ class CustomUserSerializer(serializers.ModelSerializer):
 
 
 class TokenSerializer(serializers.ModelSerializer):
-    user = serializers.ReadOnlyField(source='user.username')
-    profile = serializers.ReadOnlyField(source='CustomUser.profile')
+    user = serializers.ReadOnlyField(source='user.id')
+    # profile = serializers.ReadOnlyField(source='CustomUser.profile')
+    # phone = serializers.ReadOnlyField(source='user.phone')
 
     class Meta:
         model = TokenModel
