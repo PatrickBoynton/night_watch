@@ -13,3 +13,18 @@
     /*padding-top: .5rem;*/
     /*padding-bottom: .5rem;*/
 }
+img{
+    width: 100%;
+}
+.create{
+    text-align: center;
+}
+.modal-content{
+    background-color: black;
+    color: white;
+}
+.form-control{
+    background-color: black;
+    color: white;
+    border: 1px solid white;
+}
