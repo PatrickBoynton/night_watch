@@ -104,7 +104,7 @@ img {
   margin-top: 15%;
 }
 .nav {
-  padding: 20px;
+  /*padding: 20px;*/
   background-color: #8e000077;
 }
 .img-container{
@@ -121,10 +121,10 @@ img {
   label {
     white-space: nowrap;
   }
-  nav{
-    width: 50%;
-    margin: 0 auto 10px;
-  }
+  /*nav{*/
+  /*  width: 20%;*/
+  /*  margin: 0 auto 10px;*/
+  /*}*/
   a{
     font-size: 20px;
     text-align: center;
