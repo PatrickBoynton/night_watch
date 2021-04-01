@@ -10,6 +10,7 @@ class Register extends Component {
             email: '',
             password1: '',
             password2: '',
+            phone: '',
             formErrors: {
                 email: '',
                 username: '',
@@ -37,6 +38,7 @@ class Register extends Component {
                 email: this.state.email,
                 password1: this.state.password1,
                 password2: this.state.password2,
+                phone: this.state.phone,
             })
         };
         const response = await fetch('/rest-auth/registration/', options);
@@ -44,8 +46,20 @@ class Register extends Component {
         console.log(data);
         if (response.ok) {
             Cookies.set('Authorization', `Token ${data.key}`);
-            this.props.history.push('/create-profile');
-            return <Redirect to="/create-profile"/>;
+            const profileCreateOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'Application/Json',
+                'X-CSRFToken': Cookies.get('csrftoken'),
+            },
+            body: JSON.stringify({
+                username: this.state.username,
+                body: this.state.phone
+            })
+        }
+        await fetch('/api/v1/profiles/create/', profileCreateOptions)
+            this.props.history.push('/celestial-list');
+            return <Redirect to="/celestial-list"/>;
         } else {
             console.log(data);
             this.setState({formErrors: {username: data.username, email: data.email}});
@@ -99,7 +113,11 @@ class Register extends Component {
                                    required/>
 
                             <label className="form-label" htmlFor="phone">Phone</label>
-                            <input className="form-control" type="tel" name="phone"/>
+                            <input className="form-control"
+                                   onChange={this.handleInput}
+                                   value={this.state.phone}
+                                   type="tel"
+                                   name="phone"/>
                         </div>
                     </div>
                     {
