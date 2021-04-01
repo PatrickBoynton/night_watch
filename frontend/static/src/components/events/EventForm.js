@@ -21,7 +21,9 @@ class EventForm extends Component {
             image: null,
             preview: null,
             isOpen: false,
-            createMode: true,
+            createMode: false,
+            formData: '',
+            deleting: false,
         };
 
         this.handleInput = this.handleInput.bind(this);
@@ -62,10 +64,7 @@ class EventForm extends Component {
         // await this.handleSMS(event);
         await fetch('/api/v1/events/my-events/', options);
         // this.props.history.push('/events');
-        this.setState({createMode: false});
         this.closeModal();
-        // if (response.status === 201 || response.status === 200)
-        //     return <Redirect to="/events"/>;
     }
 
     async handleSMS(event) {
@@ -81,8 +80,6 @@ class EventForm extends Component {
             body: JSON.stringify(this.state.message.body)
         };
         await fetch('/api/v1/broadcast/', options);
-
-        this.setState({submitting: true});
     }
 
     handleImage(e) {
@@ -96,13 +93,13 @@ class EventForm extends Component {
         reader.readAsDataURL(file);
     }
 
-    openModal = () => this.setState({isOpen: true});
-    closeModal = () => this.setState({isOpen: false});
+    openModal = () => this.setState({createMode: true, isOpen: true});
+    closeModal = () => this.setState({createMode: false, isOpen: false});
 
     render() {
         return (
             <>
-                <button style={{marginBottom: '.4rem'}}  className="create btn btn-success d-block m-auto" onClick={() => this.openModal()}>Create Event</button>
+                <button style={{marginBottom: '1rem'}}  className="create btn btn-success float-right" onClick={() => this.openModal()}>Create Event</button>
                 <EventDisplay/>
                 <Modal id={this.props.id} show={this.state.isOpen} onHide={this.closeModal}>
                     <form style={{width: '100%'}} className="modal-content text-center" onSubmit={(e) => this.handleSubmit(e)}>
@@ -132,7 +129,7 @@ class EventForm extends Component {
                                name="date_of_event"
                                type="text"/>
                         <label className="form-label" htmlFor="description">Description</label>
-                        <textarea className="form-control"
+                        <textarea className="form-control mb-3"
                                   onChange={this.handleInput}
                                   name="description"
                                   value={this.state.value}>
