@@ -122,7 +122,7 @@ class EphemList extends Component {
             <>
                 <div className="row">
                     <input className="col-12 mb-5"
-                           style={{ marginLeft: '30px', marginRight: '40px'}}
+                           style={{ marginLeft: '30px', width: '95%'}}
                            value={this.state.result}
                            onChange={this.handleInput}
                            type="text"
