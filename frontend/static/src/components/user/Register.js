@@ -59,11 +59,13 @@ class Register extends Component {
         }
         await fetch('/api/v1/profiles/create/', profileCreateOptions)
             this.props.history.push('/celestial-list');
-            return <Redirect to="/celestial-list"/>;
+
         } else {
             console.log(data);
             this.setState({formErrors: {username: data.username, email: data.email}});
         }
+
+        this.props.updateAuth(data.subscriber)
     }
 
     render() {
@@ -76,7 +78,7 @@ class Register extends Component {
                     <label className="form-label" htmlFor="username">Username</label>
                     <input onChange={this.handleInput}
                            value={this.state.username}
-                           className="form-control needs-validation"
+                           className="form-control needs-validation mb-3"
                            type="text"
                            name="username"
                            required/>
@@ -86,13 +88,13 @@ class Register extends Component {
                     <label className="form-label" htmlFor="email">Email</label>
                     <input onChange={this.handleInput}
                            value={this.state.email}
-                           className="form-control needs-validation"
+                           className="form-control needs-validation mb-3"
                            type="email"
                            name="email"
                            required/>
 
                     <div className="row g-3">
-                        <div className="col">
+                        <div className="col-6">
 
                             <label className="form-label" htmlFor="password1">Password</label>
                             <input onChange={this.handleInput}
@@ -102,7 +104,7 @@ class Register extends Component {
                                    name="password1"
                                    required/>
                         </div>
-                        <div className="col">
+                        <div className="col-6">
 
                             <label className="form-label" htmlFor="password2">Confirm Password</label>
                             <input onChange={this.handleInput}
@@ -112,7 +114,10 @@ class Register extends Component {
                                    name="password2"
                                    required/>
 
-                            <label className="form-label" htmlFor="phone">Phone</label>
+
+                        </div>
+                        <div className="col-6 mb-4">
+                              <label className="form-label" htmlFor="phone">Phone</label>
                             <input className="form-control"
                                    onChange={this.handleInput}
                                    value={this.state.phone}
@@ -123,7 +128,7 @@ class Register extends Component {
                     {
                         this.state.username !== '' && this.state.email !== '' && this.state.password1 && this.state.password2
                             ?
-                            <button className="btn btn-success" type="submit">Register</button>
+                            <button className="btn btn-success mb-3" type="submit">Register</button>
                             :
                             <button className="btn btn-success mb-3" type="submit" disabled>Register</button>
                     }
