@@ -16,6 +16,7 @@ class EventDisplay extends Component {
             date_of_event: '',
             image: null,
             isOpen: false,
+            isDeleted: false,
         };
 
         this.handleDelete = this.handleDelete.bind(this);
@@ -25,10 +26,6 @@ class EventDisplay extends Component {
         this.handleImage = this.handleImage.bind(this);
         this.openModal = this.openModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
-    }
-
-    handleInput(event) {
-        this.setState({[event.target.name]: event.target.value});
     }
 
     openModal = () => this.setState({isOpen: true});
@@ -68,8 +65,11 @@ class EventDisplay extends Component {
             }
         };
         fetch(`/api/v1/events/${id}/my-events/`, options);
-        // this.props.history.push('/events');
-        window.location.reload();
+
+        const data = [...this.state.data];
+        const index = data.indexOf(item => item.id === id);
+        data.splice(index, 1);
+        this.setState({data});
     }
 
     async componentDidMount() {
@@ -87,6 +87,10 @@ class EventDisplay extends Component {
             this.setState({preview: reader.result});
         };
         reader.readAsDataURL(file);
+    }
+
+    handleInput(e) {
+        this.setState({[e.target.name]: e.target.value})
     }
 
     showForm() {
@@ -128,7 +132,7 @@ class EventDisplay extends Component {
             </textarea>
             <div className="btn-group">
                 <button className="btn btn-primary" type="submit">Save</button>
-                <button className="btn btn-success"><a href="/event/form">Go Back</a></button>
+                <button className="btn btn-success"><a style={{color: 'white'}} href="/event/form">Go Back</a></button>
             </div>
         </form>;
     }
@@ -155,17 +159,17 @@ class EventDisplay extends Component {
                     <h2>{event.name}</h2>
                     <p>{event.ephemeris}</p>
                 </div>
-                <p>{moment(event.date_of_event).format}</p>
+                <p>{moment(event.date_of_event).format('LLL')}</p>
                 <p>{event.description}</p>
                 <div className="button-group card-footer">
-                    <button onClick={() => this.handleEditMode(event)} className="btn btn-primary">Edit</button>
+                    <button style={{marginRight: '20px'}} onClick={() => this.handleEditMode(event)} className="btn btn-primary">Edit</button>
                     <button onClick={() => this.handleDelete(event.id)} className="btn btn-danger">Delete
                     </button>
                 </div>
             </div>
         </div>);
         return (
-            <div className="row">
+            <div className="row clearfix">
                 {
                     !this.state.isEditMode
                         ?
