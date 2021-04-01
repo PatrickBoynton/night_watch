@@ -1,148 +1,15 @@
-.App {
-  text-align: center;
-}
-.login-register {
-  width: 30%;
-  border: 2px solid #768084;
-  color: #fff;
-  padding: 10px;
-  margin: 0 auto;
-}
-input {
-  /*color: white!important;*/
-  border: 2px solid #768084!important;
-  background-color: #181a1b !important;
-  color: #c7ced0 !important;
-}
-textarea {
-  /*color: white!important;*/
-  border: 2px solid #768084!important;
-  color: #C7CED0!important;
-  background-color: #181a1b!important;
-}
-.card{
-  /*width: 30%;*/
-  min-width: 300px;
-  border: 2px solid #768084;
-  /*margin: 5px 5px 20px;*/
-  background-color: #181a1b;
-  color: #c7ced0;
-}
-a{
-  color: #c7ced0;
-  text-decoration: none;
-}
-a:hover{
-  color: #7d7b7b;
-}
-.card-header{
-  background-color: #8e000077;
-  height: 100%;
-  color: #fff;
-}
-.card-footer{
-  /*background-color: #8e0000!important;*/
-}
-button{
-  margin-top: 10px;
-  margin-bottom: 20px;
-}
-img {
-  width: 100%;
-}
-.profile-image{
-  height: 20%;
-  width: 30%;
-  border-radius: 100px;
-  margin-bottom: 20vw;
-}
- section {
-  width: 100%;
-  height: 50%;
-  margin-right: 200px;
-}
-.left-boarder {
-  background-color: #8e0000;
-  width: 40vw;
-  height: 100vh;
-}
-.right-boarder {
-  height: 100vh;
-  width: 50vw;
-  background-color: #c7ced0;
-  border-top: 4px solid #c7ced0;
-  border-right: 4px solid #c7ced0;
-  border-bottom: 4px solid #c7ced0;
-  color: #181A1B;
-}
-.test{
-  display: flex;
-}
-.btn-danger{
-  border: none;
-  background-color: #ab0303;
-}
-.btn-primary{
-  border: none;
-  background-color: #1b1b7c;
-}
-.btn-success{
-  border: none;
-  background-color: #768084;
-}
-.btn-success:disabled{
-  background-color: #768084;
-}
-.btn-success:hover{
-  border: none;
-  background-color: #5b6265;
-}
-.btn-success:focus{
-   background-color: #5b6265;
-}
-.about-text{
-  margin-top: 15%;
-}
-.nav {
-  /*padding: 20px;*/
-  background-color: #8e000077;
-}
-.img-container{
-  height: 300px;
-}
-.modal-content{
-  background-color: #181a1b;
-  text-align: center;
-}
-@media only screen and (max-width: 640px) {
-  .login-register {
-    width: 60%;
-  }
-  label {
-    white-space: nowrap;
-  }
-  /*nav{*/
-  /*  width: 20%;*/
-  /*  margin: 0 auto 10px;*/
-  /*}*/
-  a{
-    font-size: 20px;
+/*#4A1915*/
+.card {
+    background-color: #4A1915;
     text-align: center;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    margin-left: 20px;
-    white-space: nowrap;
-  }
 }
 
-
-
-
-@media only screen and (min-width: 2000px){
-  .card{
-    width: 30%;
-    margin: 0 auto;
-  }
+.card-image {
+    padding: 20px;
 }
 
-
+.footer {
+    background-color: #181A1B;
+    /*padding-top: .5rem;*/
+    /*padding-bottom: .5rem;*/
+}
