@@ -76,7 +76,7 @@ class App extends Component {
                     <Route path="/celestial-list"  render={(props) => <EphemList {...props} user={this.state.user} isLoggedIn={this.state.isLoggedIn}/>}/>
                     <Route path="/events" component={SolarEvents}/>
                     <Route path='/admin' component={EphemForm}/>
-                    <Route exact path='/' component={Home}/>
+                    <Route exact path='/' component={EphemList}/>
                     <Route exact path='*' component={NotFound} />
                 </Switch>
             </div>
