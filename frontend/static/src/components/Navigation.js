@@ -7,10 +7,12 @@ class Navigation extends Component {
         super(props);
         this.state = {
             isAdmin: false,
+            editPhone: false,
         };
 
 
         this.handleLogout = this.handleLogout.bind(this);
+        this.handleClick = this.handleClick.bind(this);
     }
 
     async handleLogout() {
@@ -30,9 +32,14 @@ class Navigation extends Component {
         return <Redirect to='/login'/>;
     }
 
+
+    handleClick() {
+        this.setState({editPhone: true});
+    }
+
     render() {
         return (
-            <nav className="nav navbar navbar-expand-md navbar-dark">
+            <nav style={{marginBottom: '30px'}} className="nav navbar navbar-expand-md navbar-dark">
                 <div className="container-fluid">
                     {
                         this.props.isLoggedIn
@@ -60,8 +67,17 @@ class Navigation extends Component {
                                     <NavLink className="navbar-brand" to='/home'>NW</NavLink>
                                     <NavLink style={{paddingLeft: '20px'}}
                                              to="/celestial-list">Celestial Bodies</NavLink>
+                                    {
+                                        !this.state.editPhone
+                                            ?
+                                            <button>Phone</button>
+                                            :
+                                            <h1>Test</h1>
+                                    }
                                 </span>
                                 <span>
+                                    {
+                                    }
                                     <NavLink style={{paddingRight: '20px'}} to="/register">Register</NavLink>
                                     <NavLink to="/login">Login</NavLink>
                                 </span>
