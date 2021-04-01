@@ -27,9 +27,9 @@ class Navigation extends Component {
         await fetch('/rest-auth/logout/', options);
         Cookies.remove('csrftoken');
         Cookies.remove('Authorization');
-        this.props.history.push('/login');
+        this.props.history.push('/celestial-list');
         this.props.handleIsLoggedIn();
-        return <Redirect to='/login'/>;
+        return <Redirect to='/celestial-list'/>;
     }
 
 
@@ -59,7 +59,7 @@ class Navigation extends Component {
                                         :
                                         null
                                 }
-                                <NavLink to='/logout' onClick={this.handleLogout}>Logout</NavLink>
+                                <NavLink to='/logout' onClick={this.handleLogout}>Log out</NavLink>
                             </>
                             :
                             <>
@@ -67,13 +67,7 @@ class Navigation extends Component {
                                     <NavLink className="navbar-brand" to='/home'>NW</NavLink>
                                     <NavLink style={{paddingLeft: '20px'}}
                                              to="/celestial-list">Celestial Bodies</NavLink>
-                                    {
-                                        !this.state.editPhone
-                                            ?
-                                            <button>Phone</button>
-                                            :
-                                            <h1>Test</h1>
-                                    }
+
                                 </span>
                                 <span>
                                     {
