@@ -72,6 +72,12 @@ class Navigation extends Component {
                                 <span>
                                     {
                                     }
+                                        <input className="col-4"
+                                            value={this.state.result}
+                                            onChange={this.handleInput}
+                                            type="text"
+                                            name="result"
+                                            placeholder="Search..."/>
                                     <NavLink style={{paddingRight: '20px'}} to="/register">Register</NavLink>
                                     <NavLink to="/login">Login</NavLink>
                                 </span>
