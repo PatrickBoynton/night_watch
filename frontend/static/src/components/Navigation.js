@@ -10,10 +10,10 @@ class Navigation extends Component {
             editPhone: false,
         };
 
-
         this.handleLogout = this.handleLogout.bind(this);
         this.handleClick = this.handleClick.bind(this);
     }
+
 
     async handleLogout() {
         const options = {
@@ -40,17 +40,17 @@ class Navigation extends Component {
     render() {
         return (
             <nav style={{marginBottom: '30px'}} className="nav navbar navbar-expand-md navbar-dark">
-                <div className="container-fluid">
+                <div className="container-fluid justify-content-start">
                     {
                         this.props.isLoggedIn
                             ?
                             <>
                                 <NavLink className="navbar-brand" to='/'>NW</NavLink>
-                                <span>
-                                    <NavLink to="/celestial-list">Celestial Bodies</NavLink>
-                                    <NavLink style={{padding: '0 20px 0 20px'}} to="/events">Solar Events</NavLink>
-                                    <NavLink to="/event/form">My Events</NavLink>
-                                </span>
+
+                                <NavLink to="/celestial-list">Celestial Bodies</NavLink>
+                                <NavLink style={{padding: '0 20px 0 20px'}} to="/events">Solar Events</NavLink>
+                                <NavLink to="/event/form">My Events</NavLink>
+
 
                                 {
                                     this.props.user.isAdmin
@@ -59,6 +59,13 @@ class Navigation extends Component {
                                         :
                                         null
                                 }
+                                {this.props.subscriber
+                                ?
+                                    <button className="ml-auto btn btn-link" onClick={this.unsubscribe}>Unsubscribe</button>
+                                :
+                                    <button className="ml-auto btn btn-link" onClick={this.subscribe}>Subscribe</button>
+                                }
+
                                 <NavLink to='/logout' onClick={this.handleLogout}>Log out</NavLink>
                             </>
                             :
@@ -69,9 +76,8 @@ class Navigation extends Component {
                                              to="/celestial-list">Celestial Bodies</NavLink>
 
                                 </span>
-                                <span>
-                                    {
-                                    }
+                                <span className="ml-auto">
+
                                     <NavLink style={{paddingRight: '20px'}} to="/register">Register</NavLink>
                                     <NavLink to="/login">Login</NavLink>
                                 </span>
