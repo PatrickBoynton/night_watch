@@ -57,7 +57,7 @@ class Login extends Component {
     render() {
         return (
             <>
-                <form className="text-center login-register" onSubmit={this.handleSubmit}>
+                <form className="col-8 mx-auto login-register" onSubmit={this.handleSubmit}>
                     <h2>Login</h2>
                     {this.state.statusMessage !== '' ?
                         <div className="alert-danger">{this.state.statusMessage}</div> : null}
@@ -77,7 +77,7 @@ class Login extends Component {
                             ?
                             <button className="btn btn-success">Login</button>
                             :
-                            <button className="btn btn-success shadow-none" disabled>Login</button>
+                            <button className="btn btn-success shadow-none mb-3" disabled>Login</button>
                     }
                     <p>Don't have an account yet? Why not <Link to="/register">Register</Link> First?</p>
                 </form>
