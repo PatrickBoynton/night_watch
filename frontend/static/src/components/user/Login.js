@@ -39,11 +39,12 @@ class Login extends Component {
         const data = await response.json();
 
         if (data.key) {
+            console.log('data', data)
             Cookies.set('Authorization', `Token ${data.key}`);
             if (Cookies.get('Authorization')) {
-                this.props.handleIsLoggedIn();
+                this.props.handleIsLoggedIn(data.subscriber);
                 this.props.history.push('/celestial-list');
-                return <Redirect to="/celestial-list"/>;
+                // return <Redirect to="/celestial-list"/>;
             }
         } else if (!response.ok) {
             setTimeout(() => this.setState({statusMessage: 'Something went wrong.'}), 2000);
@@ -63,7 +64,7 @@ class Login extends Component {
                         <div className="alert-danger">{this.state.statusMessage}</div> : null}
                     <label className="form-label" htmlFor="username">Username</label>
                     <input onChange={this.handleInput}
-                           className="form-control"
+                           className="form-control mb-3"
                            type="text"
                            name="username" required/>
 
