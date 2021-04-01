@@ -21,6 +21,7 @@ class EventForm extends Component {
             image: null,
             preview: null,
             isOpen: false,
+            createMode: true,
         };
 
         this.handleInput = this.handleInput.bind(this);
@@ -48,7 +49,7 @@ class EventForm extends Component {
         formData.append('time', this.state.time);
         formData.append('target', this.state.target);
         formData.append('description', this.state.description);
-        formData.append('user', this.state.id);
+        formData.append('user', this.props.id);
         console.log(this.props);
         const options = {
             method: 'POST',
@@ -61,7 +62,8 @@ class EventForm extends Component {
         // await this.handleSMS(event);
         await fetch('/api/v1/events/my-events/', options);
         // this.props.history.push('/events');
-
+        this.setState({createMode: false});
+        this.closeModal();
         // if (response.status === 201 || response.status === 200)
         //     return <Redirect to="/events"/>;
     }
