@@ -15,7 +15,7 @@ class CustomUserToken:
 class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL,
                              on_delete=models.CASCADE)
-
+    is_subscribed = models.BooleanField(default=False)
     phone = models.CharField(max_length=11,
                              null=True,
                              blank=True,
