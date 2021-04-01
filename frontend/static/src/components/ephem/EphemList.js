@@ -120,15 +120,15 @@ class EphemList extends Component {
         );
         return (
             <>
-                {/*<div className="text-right">*/}
-                {/*    <input className="col-4 mb-5 ml-auto"*/}
+                <div className="text-right">
+                    <input className="col-4 mb-5 ml-auto"
 
-                {/*           value={this.state.result}*/}
-                {/*           onChange={this.handleInput}*/}
-                {/*           type="text"*/}
-                {/*           name="result"*/}
-                {/*           placeholder="Search..."/>*/}
-                {/*</div>*/}
+                           value={this.state.result}
+                           onChange={this.handleInput}
+                           type="text"
+                           name="result"
+                           placeholder="Search..."/>
+                </div>
 
                 {
                     !this.state.isEditMode
