@@ -30,26 +30,34 @@ class EventDisplay extends Component {
     handleInput(event) {
         this.setState({[event.target.name]: event.target.value});
     }
+
     openModal = () => this.setState({isOpen: true});
     closeModal = () => this.setState({isOpen: false});
+
     async handleSubmit(e) {
         e.preventDefault();
+
+        const formData = new FormData();
+        if(typeof(this.state.image) !== "string") {
+            formData.append('image', this.state.image);
+        }
+        formData.append('name', this.state.name);
+        formData.append('ephemeris', this.state.ephemeris);
+        formData.append('date_of_event', this.state.date_of_event);
+
         const options = {
             method: 'PUT',
             headers: {
-                'Content-Type': 'Application/Json',
                 'X-CSRFToken': Cookies.get('csrftoken')
             },
-            body: JSON.stringify({
-                name: this.state.name,
-                ephemeris: this.state.ephemeris,
-                date_of_event: this.state.date_of_event,
-                description: this.state.description,
-            })
+            body: formData,
         };
-        await fetch(`/api/v1/events/${this.state.id}/my-events/`, options);
-        window.location.reload();
-        return <Redirect to='/events'/>;
+        const response = await fetch(`/api/v1/events/${this.state.id}/my-events/`, options);
+        const json = await response.json();
+        const data = [...this.state.data];
+        const index = this.state.data.findIndex(element => element.id === json.id);
+        data[index] = json;
+        this.setState({data, isEditMode: false});
     }
 
     handleDelete(id) {
@@ -83,43 +91,46 @@ class EventDisplay extends Component {
 
     showForm() {
         return <form className="login-register" onSubmit={this.handleSubmit}>
-                {this.state.image ? <img src={this.state.preview} alt=""/> : null}
-                <label className="form-label" htmlFor="image">Image</label>
-                <input className="form-control"
-                       type="file"
-                       onChange={this.handleImage}
-                       name="image"/>
+            {this.state.preview ? <img src={this.state.preview} /> : <img src={this.state.image}/>}
+            <label className="form-label" htmlFor="image">Image</label>
+            <input className="form-control"
+                   type="file"
+                   onChange={this.handleImage}
+                   name="image"/>
 
-                <label className="form-label" htmlFor="name">Name</label>
-                <input className="form-control"
-                       type="text"
-                       onChange={this.handleInput}
-                       name="name"
-                       value={this.state.name || ''}/>
+            <label className="form-label" htmlFor="name">Name</label>
+            <input className="form-control"
+                   type="text"
+                   onChange={this.handleInput}
+                   name="name"
+                   value={this.state.name || ''}/>
 
-                <label className="form-label" htmlFor="ephemeris">Target</label>
-                <input className="form-control"
-                       type="text"
-                       onChange={this.handleInput}
-                       name="ephemeris"
-                       value={this.state.ephemeris || ''}/>
+            <label className="form-label" htmlFor="ephemeris">Target</label>
+            <input className="form-control"
+                   type="text"
+                   onChange={this.handleInput}
+                   name="ephemeris"
+                   value={this.state.ephemeris || ''}/>
 
-                <label className="form-label" htmlFor="time">Date and Time</label>
-                <input className="form-control"
-                       type="text"
-                       onChange={this.handleInput}
-                       name="date_of_event"
-                       value={this.state.date_of_event || ''}
-                       placeholder="2021-06-12 22:33"/>
+            <label className="form-label" htmlFor="time">Date and Time</label>
+            <input className="form-control"
+                   type="text"
+                   onChange={this.handleInput}
+                   name="date_of_event"
+                   value={this.state.date_of_event || ''}
+                   placeholder="2021-06-12 22:33"/>
 
-                <label className="form-label" htmlFor="description">Description</label>
-                <textarea className="form-control"
-                          name="description"
-                          onChange={this.handleInput}
-                          value={this.state.description} cols="30" rows="10">
+            <label className="form-label" htmlFor="description">Description</label>
+            <textarea className="form-control"
+                      name="description"
+                      onChange={this.handleInput}
+                      value={this.state.description} cols="30" rows="10">
             </textarea>
-                <button className="btn btn-primary" type="submit">Edit</button>
-            </form>
+            <div className="btn-group">
+                <button className="btn btn-primary" type="submit">Save</button>
+                <button className="btn btn-success"><a href="/event/form">Go Back</a></button>
+            </div>
+        </form>;
     }
 
     handleEditMode(e) {
@@ -129,7 +140,8 @@ class EventDisplay extends Component {
             ephemeris: e.ephemeris,
             date_of_event: e.date_of_event,
             id: e.id,
-            description: e.description
+            description: e.description,
+            image: e.image,
         });
     }
 
