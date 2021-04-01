@@ -42,7 +42,7 @@ class EphemList extends Component {
         this.setState({result: event.target.value});
     }
 
-    async addSubscriber(item, state) {
+    async addSubscriber(item) {
         const options = {
             method: 'PATCH',
             headers: {
@@ -53,8 +53,18 @@ class EphemList extends Component {
 
         const response = await fetch(`/api/v1/ephem/${item.id}/subscribe/`, options);
         const json = await response.json();
-        console.log(json);
-        this.setState({is_subscribed: true})
+        console.log('json', json);
+        const ephems = [...this.state.ephems];
+        const index = ephems.findIndex(ephem => ephem.id === item.id);
+        ephems[index].is_subscribed = true;
+
+        this.setState({ephems});
+        console.log(ephems)
+        // console.log(json.subscribers);
+        // const index = json.subscribers.indexOf(item => item.id === id);
+        // json.subscribers.push(index, 1);]
+
+        // this.setState({isSubscribed: true});
     }
 
     async removeSubscriber(item) {
@@ -68,8 +78,12 @@ class EphemList extends Component {
 
         const response = await fetch(`/api/v1/ephem/${item.id}/unsubscribe/`, options);
         const json = await response.json();
-        console.log(json);
-        this.setState({is_subscribed: false});
+        // this.setState({isSubscribed: false});
+         const ephems = [...this.state.ephems];
+        const index = ephems.findIndex(ephem => ephem.id === item.id);
+        ephems[index].is_subscribed = false;
+
+        this.setState({ephems});
     }
 
     // TODO hook up when finished.
@@ -138,11 +152,6 @@ class EphemList extends Component {
                         <div className="card-columns">
                             {list}
                         </div>
-
-
-
-
-
                         :
                         this.showForm()
                 }
