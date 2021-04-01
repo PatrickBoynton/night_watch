@@ -1,4 +1,5 @@
 import {Component} from 'react';
+import moment from 'moment';
 
 class EphemCard extends Component {
     constructor(props) {
@@ -41,54 +42,52 @@ class EphemCard extends Component {
 
     render() {
         return (
-            <>
-                <div className="col-sm-4 col-12 mb-3">
-                    <div className="card h-100">
-                        <div className="card-header">
-                            <div className="img-container">
-                                <img style={{height: '100%'}} src={this.props.item.image}
-                                     alt="A planet, star or satellite."/>
-                            </div>
-                            <h2>{this.props.item.name}</h2>
-                            <p>{this.props.item.description}</p>
+
+                    <div className="card mb-3">
+                        <div className="card-image">
+                            <img width="255" className="card-img-top" src={this.props.item.image} alt={this.props.item.name}/>
                         </div>
-                        {
-                            <>
-                                <p>rise time: {this.props.item.rise_time}</p>
-                                <p>set time: {this.props.item.set_time}</p>
-                            </>
-                        }
-                        {
-                            this.props.isLoggedIn
-                                ?
-/**/
-                                this.props.item.is_subscribed
+                        <div className="card-body">
+                            <h2 className="mb-4">{this.props.item.name}</h2>
+                            <p>{this.props.item.description}</p>
+
+
+                             {
+                                this.props.isLoggedIn
                                     ?
-                                    <button type="submit" onClick={() => this.props.removeSubscriber(this.props.item)}
-                                            className="btn-primary">Cancel Reminder
-                                    </button>
+    /**/
+                                    this.props.item.is_subscribed
+                                        ?
+                                        <button type="submit" onClick={() => this.props.removeSubscriber(this.props.item)}
+                                                className="btn-primary">Cancel Reminder
+                                        </button>
+                                        :
+
+                                        <button type="submit" onClick={() => this.props.addSubscriber(this.props.item, this.state.is_subscribed)}
+                                                className="btn-primary">Remind me
+                                        </button>
+
                                     :
+                                    null
+                            }
 
-                                    <button type="submit" onClick={() => this.props.addSubscriber(this.props.item, this.state.is_subscribed)}
-                                            className="btn-primary">Remind me
-                                    </button>
+                            {
+                                this.props.isAdmin
+                                    ?
+                                        <div className="card-footer">
+                                            <button onClick={this.handleEditMode} className="btn btn-primary">Edit</button>
+                                            <button className="btn btn-danger">Delete</button>
+                                        </div>
+                                    :
+                                        null
+                            }
 
-                                :
-                                null
-                        }
-                        {
-                            this.props.isAdmin
-                                ?
-                                <div className="card-footer">
-                                    <button onClick={this.handleEditMode} className="btn btn-primary">Edit</button>
-                                    <button className="btn btn-danger">Delete</button>
-                                </div>
-                                :
-                                null
-                        }
+                        </div>
+                        <div className="footer">
+                            <p className="pt-2">rises at <span>{moment(this.props.item.rise_time).format('LLL')}</span></p>
+                            <p className="pb-2">sets at <span>{moment(this.props.item.set_time).format('LLL')}</span></p>
+                        </div>
                     </div>
-                </div>
-            </>
         );
     }
 
