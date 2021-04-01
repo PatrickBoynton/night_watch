@@ -14,7 +14,6 @@ class SolarEvents extends Component {
         const response = await fetch('/api/v1/events/solar-events/');
         const data = await response.json();
 
-        console.log(data);
         this.setState({events: data});
     }
 
@@ -22,9 +21,9 @@ class SolarEvents extends Component {
     render() {
         const solarEvent = this.state.events.map(item =>
             <div className="col-sm-4 col-12">
-                    <div className="card">
+                    <div className="card h-100">
                         <div className="card-header">
-                            <div className="h-100">
+                            <div>
                                 <img style={{width: '100%'}} src={item.image} alt="Some sort of event"/>
                             </div>
                             <h1>{item.name}</h1>
