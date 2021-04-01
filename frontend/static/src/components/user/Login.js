@@ -77,7 +77,7 @@ class Login extends Component {
                             ?
                             <button className="btn btn-success">Login</button>
                             :
-                            <button className="btn btn-success" disabled>Login</button>
+                            <button className="btn btn-success shadow-none" disabled>Login</button>
                     }
                     <p>Don't have an account yet? Why not <Link to="/register">Register</Link> First?</p>
                 </form>
