@@ -55,7 +55,7 @@ class Register extends Component {
     render() {
         return (
             <>
-                <form className="login-register needs-validation" onSubmit={(e) => this.handleSubmit(e)}>
+                <form className="col-8 mx-auto login-register needs-validation" onSubmit={(e) => this.handleSubmit(e)}>
                     <h2>Register</h2>
                     {this.state.formErrors.username !== '' ?
                         <div className="alert-danger">{this.state.formErrors.username}</div> : null}
@@ -97,6 +97,9 @@ class Register extends Component {
                                    type="password"
                                    name="password2"
                                    required/>
+
+                            <label className="form-label" htmlFor="phone">Phone</label>
+                            <input className="form-control" type="tel" name="phone"/>
                         </div>
                     </div>
                     {
@@ -104,7 +107,7 @@ class Register extends Component {
                             ?
                             <button className="btn btn-success" type="submit">Register</button>
                             :
-                            <button className="btn btn-success" type="submit" disabled>Register</button>
+                            <button className="btn btn-success mb-3" type="submit" disabled>Register</button>
                     }
                     <p>Already have an account? Why don't you <Link to="/login">Login</Link>? </p>
                 </form>
