@@ -120,9 +120,9 @@ class EphemList extends Component {
         );
         return (
             <>
-                <div className="row">
-                    <input className="col-12 mb-5"
-                           style={{ marginLeft: '30px', width: '95%'}}
+                <div className="text-right">
+                    <input className="col-4 mb-5 ml-auto"
+
                            value={this.state.result}
                            onChange={this.handleInput}
                            type="text"
@@ -133,12 +133,16 @@ class EphemList extends Component {
                 {
                     !this.state.isEditMode
                         ?
-                        <div className="row">
 
-                            {
-                                list
-                            }
+
+                        <div className="card-columns">
+                            {list}
                         </div>
+
+
+
+
+
                         :
                         this.showForm()
                 }
