@@ -31,7 +31,12 @@ class App extends Component {
                 id: 0,
             }
         };
+        this.updateAuth = this.updateAuth.bind(this);
         this.handleIsLoggedIn = this.handleIsLoggedIn.bind(this);
+    }
+
+    updateAuth(subscriber) {
+        this.setState({isLoggedIn:!!Cookies.get('Authorization'), subscriber});
     }
 
     async componentDidMount() {
@@ -54,18 +59,19 @@ class App extends Component {
     }
 
 
-    handleIsLoggedIn() {
-        this.setState((previousState) => ({isLoggedIn: !previousState.isLoggedIn}));
+    handleIsLoggedIn(subscriber) {
+        this.setState((previousState) => ({isLoggedIn: !previousState.isLoggedIn, subscriber}));
     }
 
     render() {
         return (
             <div className="App">
-                <Navigation user={this.state.user} isLoggedIn={this.state.isLoggedIn} handleIsLoggedIn={this.handleIsLoggedIn}/>
+                <Navigation user={this.state.user} isLoggedIn={this.state.isLoggedIn} subscriber={this.state.subscriber} handleIsLoggedIn={this.handleIsLoggedIn}/>
                 <Switch>
                     <Route path='/about' component={About}/>
                     <Route path='/glossary' component={Glossary}/>
-                    <Route path='/register' component={Register}/>
+                    <Route path='/register' render={(props) => (<Register {...props} isLoggedIn={this.state.isLoggedIn}
+                                                                    updateAuth={this.updateAuth}/>)}/>
                     <Route path='/login' render={(props) => (<Login {...props} isLoggedIn={this.state.isLoggedIn}
                                                                     handleIsLoggedIn={this.handleIsLoggedIn}/>)}/>
                     <Route path="/profile"
