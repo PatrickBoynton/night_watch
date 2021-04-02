@@ -76,8 +76,8 @@ class EphemList extends Component {
             }
         };
 
-        const response = await fetch(`/api/v1/ephem/${item.id}/unsubscribe/`, options);
-        const json = await response.json();
+        await fetch(`/api/v1/ephem/${item.id}/unsubscribe/`, options);
+        // const json = await response.json();
         // this.setState({isSubscribed: false});
          const ephems = [...this.state.ephems];
         const index = ephems.findIndex(ephem => ephem.id === item.id);
