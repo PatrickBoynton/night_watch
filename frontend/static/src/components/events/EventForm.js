@@ -24,6 +24,7 @@ class EventForm extends Component {
             createMode: false,
             formData: '',
             deleting: false,
+            lastItem: null,
         };
 
         this.handleInput = this.handleInput.bind(this);
@@ -62,7 +63,11 @@ class EventForm extends Component {
         };
         console.log(this.props.id);
         // await this.handleSMS(event);
-        await fetch('/api/v1/events/my-events/', options);
+        const response = await fetch('/api/v1/events/my-events/', options);
+
+        const json = await response.json();
+        console.log(json);
+        this.setState({lastItem: json});
         // this.props.history.push('/events');
         this.closeModal();
     }
@@ -100,7 +105,7 @@ class EventForm extends Component {
         return (
             <>
                 <button style={{marginBottom: '1rem'}}  className="create btn btn-success float-right" onClick={() => this.openModal()}>Create Event</button>
-                <EventDisplay/>
+                <EventDisplay lastItem={this.state.lastItem}/>
                 <Modal id={this.props.id} show={this.state.isOpen} onHide={this.closeModal}>
                     <form style={{width: '100%'}} className="modal-content text-center" onSubmit={(e) => this.handleSubmit(e)}>
                         <h2>Create an Event</h2>
