@@ -9,8 +9,6 @@ import EphemList from './components/ephem/EphemList';
 import EventForm from './components/events/EventForm';
 import Navigation from './components/Navigation';
 import Cookies from 'js-cookie';
-import ProfileForm from './components/user/ProfileForm';
-import Home from './components/pages/Home';
 import About from './components/pages/About';
 import Glossary from './components/pages/Glossary';
 import NotFound from './components/pages/NotFound';
@@ -29,6 +27,8 @@ class App extends Component {
                 phone: '',
                 isAdmin: false,
                 id: 0,
+                subscriber: false,
+                profileId: 0,
             }
         };
         this.updateAuth = this.updateAuth.bind(this);
@@ -41,7 +41,7 @@ class App extends Component {
 
     async componentDidMount() {
         const response = await fetch('/api/v1/profiles/details/');
-        const user = await fetch('/rest-auth/user');
+        const user = await fetch('/rest-auth/user/');
         const userData = await user.json();
         const data = await response.json();
 
@@ -49,12 +49,14 @@ class App extends Component {
         this.setState({
             user: {
                 id: userData.pk,
+                profileId: data.id,
                 user: data.user,
                 profile_picture: data.profile_picture,
                 about_me: data.about_me,
                 phone: data.phone,
-                isAdmin: data.isAdmin
-            }
+                isAdmin: data.isAdmin,
+                subscriber: data.is_subscribed
+            },
         });
     }
 
@@ -83,7 +85,7 @@ class App extends Component {
                     <Route path="/events" component={SolarEvents}/>
                     <Route path='/admin' component={EphemForm}/>
                     <Route exact path='/' component={EphemList}/>
-                    <Route exact path='*' component={NotFound} />
+                    {/*<Route exact path='*' component={NotFound} />*/}
                 </Switch>
             </div>
         );
