@@ -11,7 +11,6 @@ import Navigation from './components/Navigation';
 import Cookies from 'js-cookie';
 import About from './components/pages/About';
 import Glossary from './components/pages/Glossary';
-import NotFound from './components/pages/NotFound';
 import SolarEvents from './components/events/SolarEvents';
 import EphemForm from './components/ephem/EphemForm';
 
