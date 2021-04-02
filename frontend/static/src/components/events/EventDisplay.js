@@ -26,11 +26,22 @@ class EventDisplay extends Component {
         this.handleImage = this.handleImage.bind(this);
         this.openModal = this.openModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
+        this.addEvent = this.addEvent.bind(this);
     }
 
     openModal = () => this.setState({isOpen: true});
     closeModal = () => this.setState({isOpen: false});
 
+
+    componentDidUpdate(prevProps) {
+        console.log(this.props.lastItem)
+        if(prevProps.lastItem !== this.props.lastItem && this.props.lastItem !== null) {
+            const data = [...this.state.data];
+            data.push(this.props.lastItem);
+            this.setState({data});
+
+        }
+    }
     async handleSubmit(e) {
         e.preventDefault();
 
@@ -52,10 +63,15 @@ class EventDisplay extends Component {
         };
         const response = await fetch(`/api/v1/events/${this.state.id}/my-events/`, options);
         const json = await response.json();
+
         const data = [...this.state.data];
         const index = this.state.data.findIndex(element => element.id === json.id);
         data[index] = json;
         this.setState({data, isEditMode: false});
+    }
+
+    addEvent(event){
+
     }
 
     handleDelete(id) {
