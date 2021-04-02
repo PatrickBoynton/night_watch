@@ -1,4 +1,5 @@
 import {Component} from 'react'
+import moment from 'moment';
 
 class SolarEvents extends Component {
     constructor(props) {
@@ -20,7 +21,7 @@ class SolarEvents extends Component {
 
     render() {
         const solarEvent = this.state.events.map(item =>
-            <div className="col-sm-4 col-12">
+            <div className="col-sm-4 col-12 mb-3">
                     <div className="card h-100">
                         <div className="card-header">
                             <div>
@@ -30,7 +31,7 @@ class SolarEvents extends Component {
                             <h3>{item.ephemeris}</h3>
                         </div>
                         <div className="card-footer">
-                            <p>{item.date_of_event}</p>
+                            <p>{moment(item.date_of_event).format('LLL')}</p>
                             <p>{item.description}</p>
                         </div>
                     </div>
