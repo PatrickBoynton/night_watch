@@ -8,10 +8,60 @@ class Navigation extends Component {
         this.state = {
             isAdmin: false,
             editPhone: false,
+            subscriber: 0,
+            is_subscribed: false
         };
 
         this.handleLogout = this.handleLogout.bind(this);
         this.handleClick = this.handleClick.bind(this);
+        this.subscribe = this.subscribe.bind(this);
+        this.unsubscribe = this.unsubscribe.bind(this);
+    }
+
+    async componentDidMount() {
+        const profile = await fetch('api/v1/profiles/details/');
+        const data = await profile.json();
+        console.log(data);
+        this.setState({subscriber: data.id, is_subscribed: data.is_subscribed})
+    }
+
+
+    async subscribe(id) {
+        const options = {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'Application/Json',
+                'X-CSRFToken': Cookies.get('csrftoken'),
+                'Authorizations': Cookies.get('Authorization')
+            },
+            body: JSON.stringify({
+                is_subscribed: true,
+            })
+        };
+
+        console.log();
+
+        await fetch(`/api/v1/profiles/update/${id}/`, options)
+        this.setState({is_subscribed: true})
+    }
+
+    async unsubscribe(id) {
+        const options = {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'Application/Json',
+                'X-CSRFToken': Cookies.get('csrftoken'),
+                'Authorizations': Cookies.get('Authorization')
+            },
+            body: JSON.stringify({
+                is_subscribed: false,
+            })
+        };
+
+        console.log(`Proflie id: ${id}`);
+
+        await fetch(`/api/v1/profiles/update/${id}/`, options)
+        this.setState({is_subscribed: false})
     }
 
 
@@ -59,11 +109,12 @@ class Navigation extends Component {
                                         :
                                         null
                                 }
-                                {this.props.subscriber
-                                ?
-                                    <button className="ml-auto btn btn-link" onClick={this.unsubscribe}>Unsubscribe</button>
-                                :
-                                    <button className="ml-auto btn btn-link" onClick={this.subscribe}>Subscribe</button>
+                                {this.state.is_subscribed
+                                    ?
+                                    <button className="ml-auto btn btn-link"
+                                            onClick={() => this.unsubscribe(this.state.subscriber)}>Unsubscribe</button>
+                                    :
+                                    <button className="ml-auto btn btn-link" onClick={() => this.subscribe(this.state.subscriber)}>Subscribe</button>
                                 }
 
                                 <NavLink to='/logout' onClick={this.handleLogout}>Log out</NavLink>
