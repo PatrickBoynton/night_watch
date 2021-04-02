@@ -1,6 +1,7 @@
 import {Component} from 'react';
 import {NavLink, Redirect, withRouter} from 'react-router-dom';
 import Cookies from 'js-cookie';
+import {Modal} from 'react-bootstrap';
 
 class Navigation extends Component {
     constructor(props) {
@@ -8,21 +9,26 @@ class Navigation extends Component {
         this.state = {
             isAdmin: false,
             editPhone: false,
-            subscriber: 0,
-            is_subscribed: false
+            subscriber: null,
+            is_subscribed: false,
+            isOpen: false,
+            editMode: false,
+            phone: ''
         };
 
         this.handleLogout = this.handleLogout.bind(this);
         this.handleClick = this.handleClick.bind(this);
         this.subscribe = this.subscribe.bind(this);
         this.unsubscribe = this.unsubscribe.bind(this);
+        this.handleInput = this.handleInput.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     async componentDidMount() {
         const profile = await fetch('api/v1/profiles/details/');
         const data = await profile.json();
         console.log(data);
-        this.setState({subscriber: data.id, is_subscribed: data.is_subscribed})
+        this.setState({subscriber: data.id, is_subscribed: data.is_subscribed, phone: data.phone});
     }
 
 
@@ -39,10 +45,10 @@ class Navigation extends Component {
             })
         };
 
-        console.log();
+        console.log(id);
 
-        await fetch(`/api/v1/profiles/update/${id}/`, options)
-        this.setState({is_subscribed: true})
+        await fetch(`/api/v1/profiles/update/${id}/`, options);
+        this.setState({is_subscribed: true});
     }
 
     async unsubscribe(id) {
@@ -60,10 +66,27 @@ class Navigation extends Component {
 
         console.log(`Proflie id: ${id}`);
 
-        await fetch(`/api/v1/profiles/update/${id}/`, options)
-        this.setState({is_subscribed: false})
+        await fetch(`/api/v1/profiles/update/${id}/`, options);
+        this.setState({is_subscribed: false});
     }
 
+    handleInput(e) {
+        this.setState({[e.target.name]: e.target.value});
+    }
+
+    async handleSubmit(e, id) {
+        e.preventDefault();
+        const options = {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'Application/Json',
+                'Authorization': Cookies.get('Authorization'),
+                'X-CSRFToken': Cookies.get('csrftoken'),
+            },
+            body: JSON.stringify({phone: this.state.phone})
+        }
+        await fetch(`/api/v1/profiles/update/${id}/`,options);
+    }
 
     async handleLogout() {
         const options = {
@@ -86,6 +109,10 @@ class Navigation extends Component {
     handleClick() {
         this.setState({editPhone: true});
     }
+
+    openModal = () => this.setState({editMode: false, isOpen: true});
+
+    closeModal = () => this.setState({editMode: false, isOpen: false});
 
     render() {
         return (
@@ -114,9 +141,26 @@ class Navigation extends Component {
                                     <button className="ml-auto btn btn-link"
                                             onClick={() => this.unsubscribe(this.state.subscriber)}>Unsubscribe</button>
                                     :
-                                    <button className="ml-auto btn btn-link" onClick={() => this.subscribe(this.state.subscriber)}>Subscribe</button>
+                                    <button className="ml-auto btn btn-link"
+                                            onClick={() => this.subscribe(this.state.subscriber)}>Subscribe</button>
                                 }
-
+                                {/*Modal*/}
+                                <button onClick={this.openModal} className="mr-3 btn btn-link">Settings</button>
+                                <Modal className="modal" show={this.state.isOpen} onHide={this.closeModal}>
+                                    <form onSubmit={(e) => this.handleSubmit(e, this.state.subscriber)}>
+                                        <label className="form-label" htmlFor="subscribed">Subscription</label>
+                                        <input className="checkbox"
+                                               value={this.state.is_subscribed}
+                                               type="checkbox"/>
+                                        <label className="form-label mt-1" htmlFor="phone">Phone</label>
+                                        <input className="form-control"
+                                              type="tel"
+                                               onChange={this.handleInput}
+                                               name="phone"
+                                               value={this.state.phone}/>
+                                        <button className="btn btn-success mt-3">Save</button>
+                                    </form>
+                                </Modal>
                                 <NavLink to='/logout' onClick={this.handleLogout}>Log out</NavLink>
                             </>
                             :
