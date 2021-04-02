@@ -41,6 +41,7 @@ class EventDisplay extends Component {
         formData.append('name', this.state.name);
         formData.append('ephemeris', this.state.ephemeris);
         formData.append('date_of_event', this.state.date_of_event);
+        formData.append('description', this.state.description);
 
         const options = {
             method: 'PUT',
@@ -95,7 +96,7 @@ class EventDisplay extends Component {
 
     showForm() {
         return <form className="m-auto" onSubmit={this.handleSubmit}>
-            {this.state.preview ? <img src={this.state.preview}/> : <img src={this.state.image}/>}
+            {this.state.preview ? <img src={this.state.preview} alt="Preview"/> : <img src={this.state.image} alt="Preview"/>}
             <label className="form-label" htmlFor="image">Image</label>
             <input className="form-control"
                    type="file"
@@ -121,7 +122,7 @@ class EventDisplay extends Component {
                    type="text"
                    onChange={this.handleInput}
                    name="date_of_event"
-                   value={this.state.date_of_event || ''}
+                   value={this.state.date_of_event}
                    placeholder="2021-06-12 22:33"/>
 
             <label className="form-label" htmlFor="description">Description</label>
