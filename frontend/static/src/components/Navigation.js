@@ -102,6 +102,7 @@ class Navigation extends Component {
         Cookies.remove('Authorization');
         this.props.history.push('/celestial-list');
         this.props.handleIsLoggedIn();
+        this.setState({phone: ''})
         return <Redirect to='/celestial-list'/>;
     }
 
@@ -148,10 +149,6 @@ class Navigation extends Component {
                                 <button onClick={this.openModal} className="mr-3 btn btn-link">Settings</button>
                                 <Modal className="modal" show={this.state.isOpen} onHide={this.closeModal}>
                                     <form onSubmit={(e) => this.handleSubmit(e, this.state.subscriber)}>
-                                        <label className="form-label" htmlFor="subscribed">Subscription</label>
-                                        <input className="checkbox"
-                                               value={this.state.is_subscribed}
-                                               type="checkbox"/>
                                         <label className="form-label mt-1" htmlFor="phone">Phone</label>
                                         <input className="form-control"
                                               type="tel"
