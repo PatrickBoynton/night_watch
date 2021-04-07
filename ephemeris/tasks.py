@@ -128,7 +128,6 @@ def get_sun_rise_and_set():
     sun.save()
 
 
-
 @app.shared_task
 def get_mercury_rise_and_set():
     ts = load.timescale()
@@ -183,6 +182,7 @@ def get_venus_rise_and_set():
     venus.rise_time = dates[0]
     venus.set_time = dates[1]
     venus.save()
+
 
 @app.shared_task
 def get_venus_rise_and_set():
@@ -346,10 +346,38 @@ def get_neptune_rise_and_set():
     for t, updown in zip(*find_discrete(t0, t1, f)):
         dates.append(t.astimezone(tz).strftime('%Y-%m-%d %H:%M'))
 
-    jupiter.rise_time = dates[0]
-    jupiter.rise_time = dates[0]
-    jupiter.set_time = dates[1]
-    jupiter.save()
+    neptune.rise_time = dates[0]
+    neptune.rise_time = dates[0]
+    neptune.set_time = dates[1]
+    neptune.save()
+
+
+@app.shared_task
+def get_moon_rise_and_set():
+    ts = load.timescale()
+
+    # Updates the date.
+    today = datetime.today().strftime('%Y-%m-%d').split('-')
+    tomorrow = (datetime.today() + timedelta(days=1)).strftime(
+        '%Y-%m-%d').split('-')
+
+    t0 = ts.utc(int(today[0]), int(today[1]), int(today[2]))
+    t1 = ts.utc(int(tomorrow[0]), int(tomorrow[1]), int(tomorrow[2]))
+
+    dates = []
+
+    greenville = wgs84.latlon(34.8526 * N, 82.3940 * W, elevation_m=299.923)
+    # global planet
+    f = risings_and_settings(eph, planet7, greenville)
+    tz = timezone('US/Eastern')
+
+    for t, updown in zip(*find_discrete(t0, t1, f)):
+        dates.append(t.astimezone(tz).strftime('%Y-%m-%d %H:%M'))
+
+    moon.rise_time = dates[0]
+    moon.rise_time = dates[0]
+    moon.set_time = dates[1]
+    moon.save()
 
 
 # @app.shared_task
@@ -406,6 +434,7 @@ def get_betelgeuse_times():
     betelgeuse.rise_time = dates[0]
     betelgeuse.set_time = dates[1]
     betelgeuse.save()
+
 
 @app.shared_task
 def get_sirius_times():
@@ -513,7 +542,6 @@ def get_pleadies_times():
     pleadies.rise_time = dates[0]
     pleadies.set_time = dates[1]
     pleadies.save()
-
 
 
 @app.shared_task
