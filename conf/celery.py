@@ -32,7 +32,7 @@ app.conf.beat_schedule = {
         'schedule': 60.00
     },
     'get_saturn_rise_and_set_time': {
-        'task': 'ephemeris.tasks.get_jupiter_rise_and_set',
+        'task': 'ephemeris.tasks.get_saturn_rise_and_set',
         'schedule': 60.00
     },
     'get_neptune_rise_and_set_time': {
