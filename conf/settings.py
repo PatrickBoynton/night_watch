@@ -29,9 +29,7 @@ REDIS_URL = os.environ.get("REDIS_URL")
 TWILIO_ACCOUNT_SID = os.environ.get("TWILIO_ACCOUNT_SID")
 TWILIO_AUTH_TOKEN = os.environ.get("TWILIO_AUTH_TOKEN")
 TWILIO_NUMBER = os.environ.get("TWILIO_NUMBER")
-SMS_BROADCAST_TO_NUMBERS = [
-    "1-(864)-640-5680",
-]
+SMS_BROADCAST_TO_NUMBERS = os.environ.get("SMS_BROADCAST_TO_NUMBERS")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
