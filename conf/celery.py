@@ -7,6 +7,9 @@ app = Celery('conf')
 
 app.config_from_object('django.conf:settings', namespace='CELERY')
 
+app.conf.update(BROKER_URL=os.environ['REDIS_URL'],
+                CELERY_RESULT_BACKEND=os.environ['REDIS_URL'])
+
 app.autodiscover_tasks()
 
 app.conf.beat_schedule = {
@@ -83,7 +86,3 @@ app.conf.beat_schedule = {
 }
 
 app.conf.timezone = 'UTC'
-
-# @app.task(bind=True)
-# def debug_task(self):
-#     print(f'Request: {self.request!r}')
