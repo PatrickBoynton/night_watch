@@ -117,13 +117,13 @@ def get_sun_rise_and_set():
     greenville = wgs84.latlon(34.8526 * N, 82.3940 * W, elevation_m=299.923)
     # global planet
     f = risings_and_settings(eph, planet1, greenville)
-    tz = timezone('US/Eastern')
+    tz = timezone('UTC')
 
     for t, updown in zip(*find_discrete(t0, t1, f)):
         dates.append(t.astimezone(tz).strftime('%Y-%m-%d %H:%M'))
 
     sun.rise_time = dates[0]
-    sun.rise_time = dates[0]
+    # sun.rise_time = dates[0]
     sun.set_time = dates[1]
     sun.save()
 
