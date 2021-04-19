@@ -71,10 +71,6 @@ app.conf.beat_schedule = {
         'task': 'ephemeris.tasks.get_andromeda_times',
         'schedule': 60.00
     },
-    # 'get_star_rise_and_set_times': {
-    #     'task': 'ephemeris.tasks.get_star_times',
-    #     'schedule': 61.00
-    # },
     'send_sms': {
         'task': 'events.tasks.run_sms',
         'schedule': 60.0
