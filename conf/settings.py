@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("SECRET_KEY")
 DATABASE_URL = os.environ.get("DATABASE_URL")
 
-REDIS_TLS_URL = os.environ.get("REDIS_TLS_URL")
-REDIS_URL = os.environ.get("REDIS_URL")
-
+# REDIS_TLS_URL = os.environ.get("REDIS_TLS_URL")
+# REDIS_URL = os.environ.get("REDIS_URL")
+REDIS_URL = 'redis://localhost:6379/0'
 TWILIO_ACCOUNT_SID = os.environ.get("TWILIO_ACCOUNT_SID")
 TWILIO_AUTH_TOKEN = os.environ.get("TWILIO_AUTH_TOKEN")
 TWILIO_NUMBER = os.environ.get("TWILIO_NUMBER")
@@ -134,6 +134,8 @@ LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'America/New_York'
 
+# TIME_ZONE = 'UTC'
+
 USE_I18N = True
 
 USE_L10N = True
@@ -154,8 +156,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 # Celery
-CELERY_BROKER_URL = os.environ.get('REDIS_URL')
-CELERY_RESULT_BACKEND = os.environ.get('REDIS_URL')
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TASK_SERIALIZER = 'json'
