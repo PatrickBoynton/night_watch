@@ -111,7 +111,7 @@ def get_mercury_rise_and_set():
 
     dates = []
 
-    greenville = wgs84.latlon(34.8526, -82.3940, elevation_m=299.923)
+    greenville = wgs84.latlon(34.8526, -82.3940)
     # global planet
     f = risings_and_settings(eph, planet2, greenville)
     tz = timezone('US/Eastern')
@@ -138,7 +138,7 @@ def get_venus_rise_and_set():
 
     dates = []
 
-    greenville = wgs84.latlon(34.8526 * N, 82.3940 * W, elevation_m=299.923)
+    greenville = wgs84.latlon(34.8526, -82.3940)
     # global planet
     f = risings_and_settings(eph, planet3, greenville)
     tz = timezone('US/Eastern')
@@ -165,7 +165,7 @@ def get_moon_rise_and_set():
 
     dates = []
 
-    greenville = wgs84.latlon(34.8526 * N, 82.3940 * W, elevation_m=299.923)
+    greenville = wgs84.latlon(34.8526, -82.3940)
     # global planet
     f = risings_and_settings(eph, planet9, greenville)
     tz = timezone('US/Eastern')
@@ -192,7 +192,7 @@ def get_mars_rise_and_set():
 
     dates = []
 
-    greenville = wgs84.latlon(34.8526 * N, 82.3940 * W, elevation_m=299.923)
+    greenville = wgs84.latlon(34.8526, -82.3940)
     # global planet
     f = risings_and_settings(eph, planet4, greenville)
     tz = timezone('US/Eastern')
@@ -219,7 +219,7 @@ def get_jupiter_rise_and_set():
 
     dates = []
 
-    greenville = wgs84.latlon(34.8526 * N, 82.3940 * W, elevation_m=299.923)
+    greenville = wgs84.latlon(34.8526, -82.3940)
     # global planet
     f = risings_and_settings(eph, planet5, greenville)
     tz = timezone('US/Eastern')
@@ -246,7 +246,7 @@ def get_saturn_rise_and_set():
 
     dates = []
 
-    greenville = wgs84.latlon(34.8526 * N, 82.3940 * W, elevation_m=299.923)
+    greenville = wgs84.latlon(34.8526, -82.3940)
     # global planet
     f = risings_and_settings(eph, planet6, greenville)
     tz = timezone('US/Eastern')
@@ -273,7 +273,7 @@ def get_uranus_rise_and_set():
 
     dates = []
 
-    greenville = wgs84.latlon(34.8526 * N, 82.3940 * W, elevation_m=299.923)
+    greenville = wgs84.latlon(34.8526, -82.3940)
     # global planet
     f = risings_and_settings(eph, planet7, greenville)
     tz = timezone('US/Eastern')
@@ -300,7 +300,7 @@ def get_neptune_rise_and_set():
 
     dates = []
 
-    greenville = wgs84.latlon(34.8526 * N, 82.3940 * W, elevation_m=299.923)
+    greenville = wgs84.latlon(34.8526, -82.3940)
     # global planet
     f = risings_and_settings(eph, planet5, greenville)
     tz = timezone('US/Eastern')
@@ -327,7 +327,7 @@ def get_betelgeuse_times():
 
     dates = []
 
-    greenville = wgs84.latlon(34.8526 * N, 82.3940 * W, elevation_m=299.923)
+    greenville = wgs84.latlon(34.8526, -82.3940)
     # global planet
     f = risings_and_settings(eph, bet, greenville)
     tz = timezone('US/Eastern')
@@ -354,7 +354,7 @@ def get_sirius_times():
 
     dates = []
 
-    greenville = wgs84.latlon(34.8526 * N, 82.3940 * W, elevation_m=299.923)
+    greenville = wgs84.latlon(34.8526, -82.3940)
     # global planet
     f = risings_and_settings(eph, sir, greenville)
     tz = timezone('US/Eastern')
@@ -381,7 +381,7 @@ def get_andromeda_times():
 
     dates = []
 
-    greenville = wgs84.latlon(34.8526 * N, 82.3940 * W, elevation_m=299.923)
+    greenville = wgs84.latlon(34.8526, -82.3940)
     # global planet
     f = risings_and_settings(eph, androm, greenville)
     tz = timezone('US/Eastern')
@@ -408,7 +408,7 @@ def get_orion_times():
 
     dates = []
 
-    greenville = wgs84.latlon(34.8526 * N, 82.3940 * W, elevation_m=299.923)
+    greenville = wgs84.latlon(34.8526, -82.3940)
     # global planet
     f = risings_and_settings(eph, orion, greenville)
     tz = timezone('US/Eastern')
@@ -435,7 +435,7 @@ def get_pleadies_times():
 
     dates = []
 
-    greenville = wgs84.latlon(34.8526 * N, 82.3940 * W, elevation_m=299.923)
+    greenville = wgs84.latlon(34.8526, -82.3940)
     # global planet
     f = risings_and_settings(eph, plead, greenville)
     tz = timezone('US/Eastern')
