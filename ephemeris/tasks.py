@@ -70,36 +70,6 @@ stars = [bet,
          plead]
 
 
-# @app.shared_task
-# def get_planet_times():
-#     ts = load.timescale()
-#
-#     # Updates the date.
-#     today = datetime.today().strftime('%Y-%m-%d').split('-')
-#     tomorrow = (datetime.today() + timedelta(days=1)).strftime(
-#         '%Y-%m-%d').split('-')
-#
-#     t0 = ts.utc(int(today[0]), int(today[1]), int(today[2]))
-#     t1 = ts.utc(int(tomorrow[0]), int(tomorrow[1]), int(tomorrow[2]))
-#
-#     dates = []
-#
-#     greenville = wgs84.latlon(34.8526 * N, 82.3940 * W, elevation_m=299.923)
-#     # global planet
-#     for planet in planets:
-#         f = risings_and_settings(eph, planet, greenville)
-#         tz = timezone('US/Eastern')
-#
-#         for t, updown in zip(*find_discrete(t0, t1, f)):
-#             dates.append(t.astimezone(tz).strftime('%Y-%m-%d %H:%M'))
-#
-#     for ephem in ephems:
-#         ephem.rise_time = dates[0]
-#         ephem.rise_time = dates[0]
-#         ephem.set_time = dates[1]
-#         ephem.save()
-
-
 @app.shared_task
 def get_sun_rise_and_set():
     ts = load.timescale()
@@ -114,16 +84,16 @@ def get_sun_rise_and_set():
 
     dates = []
 
-    greenville = wgs84.latlon(34.8526, 82.3940, elevation_m=299.923)
+    greenville = wgs84.latlon(34.8526, -82.3940)
 
-    f = risings_and_settings(eph, planet1, greenville)
+    f = risings_and_settings(eph, eph['sun'], greenville)
     tz = timezone('US/Eastern')
 
     for t, updown in zip(*find_discrete(t0, t1, f)):
         dates.append(t.astimezone(tz).strftime('%Y-%m-%d %H:%M'))
 
-    sun.rise_time = dates[0]
-    sun.set_time = dates[1]
+    sun.rise_time = dates[1]
+    sun.set_time = dates[0]
     sun.save()
 
 
@@ -141,7 +111,7 @@ def get_mercury_rise_and_set():
 
     dates = []
 
-    greenville = wgs84.latlon(34.8526 * N, 82.3940 * W, elevation_m=299.923)
+    greenville = wgs84.latlon(34.8526, -82.3940, elevation_m=299.923)
     # global planet
     f = risings_and_settings(eph, planet2, greenville)
     tz = timezone('US/Eastern')
@@ -149,8 +119,8 @@ def get_mercury_rise_and_set():
     for t, updown in zip(*find_discrete(t0, t1, f)):
         dates.append(t.astimezone(tz).strftime('%Y-%m-%d %H:%M'))
 
-    mercury.rise_time = dates[0]
-    mercury.set_time = dates[1]
+    mercury.rise_time = dates[1]
+    mercury.set_time = dates[0]
     mercury.save()
 
 
@@ -177,8 +147,7 @@ def get_venus_rise_and_set():
         dates.append(t.astimezone(tz).strftime('%Y-%m-%d %H:%M'))
 
     venus.rise_time = dates[0]
-    venus.rise_time = dates[0]
-    venus.set_time = dates[1]
+    venus.rise_time = dates[1]
     venus.save()
 
 
@@ -205,8 +174,7 @@ def get_moon_rise_and_set():
         dates.append(t.astimezone(tz).strftime('%Y-%m-%d %H:%M'))
 
     moon.rise_time = dates[0]
-    moon.rise_time = dates[0]
-    moon.set_time = dates[1]
+    moon.rise_time = dates[1]
     moon.save()
 
 
@@ -232,9 +200,8 @@ def get_mars_rise_and_set():
     for t, updown in zip(*find_discrete(t0, t1, f)):
         dates.append(t.astimezone(tz).strftime('%Y-%m-%d %H:%M'))
 
+    mars.rise_time = dates[1]
     mars.rise_time = dates[0]
-    mars.rise_time = dates[0]
-    mars.set_time = dates[1]
     mars.save()
 
 
@@ -260,9 +227,8 @@ def get_jupiter_rise_and_set():
     for t, updown in zip(*find_discrete(t0, t1, f)):
         dates.append(t.astimezone(tz).strftime('%Y-%m-%d %H:%M'))
 
+    jupiter.rise_time = dates[1]
     jupiter.rise_time = dates[0]
-    jupiter.rise_time = dates[0]
-    jupiter.set_time = dates[1]
     jupiter.save()
 
 
@@ -288,9 +254,8 @@ def get_saturn_rise_and_set():
     for t, updown in zip(*find_discrete(t0, t1, f)):
         dates.append(t.astimezone(tz).strftime('%Y-%m-%d %H:%M'))
 
+    saturn.rise_time = dates[1]
     saturn.rise_time = dates[0]
-    saturn.rise_time = dates[0]
-    saturn.set_time = dates[1]
     saturn.save()
 
 
@@ -316,9 +281,8 @@ def get_uranus_rise_and_set():
     for t, updown in zip(*find_discrete(t0, t1, f)):
         dates.append(t.astimezone(tz).strftime('%Y-%m-%d %H:%M'))
 
+    uranus.rise_time = dates[1]
     uranus.rise_time = dates[0]
-    uranus.rise_time = dates[0]
-    uranus.set_time = dates[1]
     uranus.save()
 
 
@@ -344,67 +308,9 @@ def get_neptune_rise_and_set():
     for t, updown in zip(*find_discrete(t0, t1, f)):
         dates.append(t.astimezone(tz).strftime('%Y-%m-%d %H:%M'))
 
+    neptune.rise_time = dates[1]
     neptune.rise_time = dates[0]
-    neptune.rise_time = dates[0]
-    neptune.set_time = dates[1]
     neptune.save()
-
-
-# @app.shared_task
-# def get_moon_rise_and_set():
-#     ts = load.timescale()
-#
-#     # Updates the date.
-#     today = datetime.today().strftime('%Y-%m-%d').split('-')
-#     tomorrow = (datetime.today() + timedelta(days=1)).strftime(
-#         '%Y-%m-%d').split('-')
-#
-#     t0 = ts.utc(int(today[0]), int(today[1]), int(today[2]))
-#     t1 = ts.utc(int(tomorrow[0]), int(tomorrow[1]), int(tomorrow[2]))
-#
-#     dates = []
-#
-#     greenville = wgs84.latlon(34.8526 * N, 82.3940 * W, elevation_m=299.923)
-#     # global planet
-#     f = risings_and_settings(eph, planet7, greenville)
-#     tz = timezone('US/Eastern')
-#
-#     for t, updown in zip(*find_discrete(t0, t1, f)):
-#         dates.append(t.astimezone(tz).strftime('%Y-%m-%d %H:%M'))
-#
-#     moon.rise_time = dates[0]
-#     moon.rise_time = dates[0]
-#     moon.set_time = dates[1]
-#     moon.save()
-
-
-# @app.shared_task
-# def get_star_times():
-#     ts = load.timescale()
-#
-#     # Updates the date.
-#     today = datetime.today().strftime('%Y-%m-%d').split('-')
-#     tomorrow = (datetime.today() + timedelta(days=1)).strftime(
-#         '%Y-%m-%d').split('-')
-#
-#     t0 = ts.utc(int(today[0]), int(today[1]), int(today[2]))
-#     t1 = ts.utc(int(tomorrow[0]), int(tomorrow[1]), int(tomorrow[2]))
-#
-#     dates = []
-#
-#     greenville = wgs84.latlon(34.8526 * N, 82.3940 * W, elevation_m=299.923)
-#     # global planet
-#     for ep in stars:
-#         f = risings_and_settings(eph, ep, greenville)
-#         tz = timezone('US/Eastern')
-#
-#         for t, updown in zip(*find_discrete(t0, t1, f)):
-#             dates.append(t.astimezone(tz).strftime('%Y-%m-%d %H:%M'))
-#
-#         for star in star_ephems:
-#             star.rise_time = dates[0]
-#             star.set_time = dates[1]
-#             star.save()
 
 
 @app.shared_task
@@ -429,8 +335,8 @@ def get_betelgeuse_times():
     for t, updown in zip(*find_discrete(t0, t1, f)):
         dates.append(t.astimezone(tz).strftime('%Y-%m-%d %H:%M'))
 
-    betelgeuse.rise_time = dates[0]
-    betelgeuse.set_time = dates[1]
+    betelgeuse.rise_time = dates[1]
+    betelgeuse.set_time = dates[0]
     betelgeuse.save()
 
 
@@ -456,8 +362,8 @@ def get_sirius_times():
     for t, updown in zip(*find_discrete(t0, t1, f)):
         dates.append(t.astimezone(tz).strftime('%Y-%m-%d %H:%M'))
 
-    sirius.rise_time = dates[0]
-    sirius.set_time = dates[1]
+    sirius.rise_time = dates[1]
+    sirius.set_time = dates[0]
     sirius.save()
 
 
@@ -483,8 +389,8 @@ def get_andromeda_times():
     for t, updown in zip(*find_discrete(t0, t1, f)):
         dates.append(t.astimezone(tz).strftime('%Y-%m-%d %H:%M'))
 
-    andromeda.rise_time = dates[0]
-    andromeda.set_time = dates[1]
+    andromeda.rise_time = dates[1]
+    andromeda.set_time = dates[0]
     andromeda.save()
 
 
@@ -510,8 +416,8 @@ def get_orion_times():
     for t, updown in zip(*find_discrete(t0, t1, f)):
         dates.append(t.astimezone(tz).strftime('%Y-%m-%d %H:%M'))
 
-    orion_nebula.rise_time = dates[0]
-    orion_nebula.set_time = dates[1]
+    orion_nebula.rise_time = dates[1]
+    orion_nebula.set_time = dates[0]
     orion_nebula.save()
 
 
@@ -537,8 +443,8 @@ def get_pleadies_times():
     for t, updown in zip(*find_discrete(t0, t1, f)):
         dates.append(t.astimezone(tz).strftime('%Y-%m-%d %H:%M'))
 
-    pleadies.rise_time = dates[0]
-    pleadies.set_time = dates[1]
+    pleadies.rise_time = dates[1]
+    pleadies.set_time = dates[0]
     pleadies.save()
 
 
